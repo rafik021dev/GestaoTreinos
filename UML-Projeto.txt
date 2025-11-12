@@ -1,0 +1,91 @@
+@startuml
+class Usuario {
+  - int : usucodigo
+  - String : nome
+  - String : sexo
+  - int : idade
+  - double : peso
+  - double : altura
+  - double : metaPeso
+  + double : calcularIMC()
+  + double : calcularTMB()
+  + void : atualizarPeso()
+}
+
+class Treino {
+  - int : trecodigo
+  - LocalDate : data
+  - String : tipo
+}
+
+class Refeição {
+  - int : refcodigo
+  - LocalDate : data
+  - String : tipoRefeição
+  + void : adicionarAlimento()
+  + double : calcularCalorias()
+}
+
+class Alimento {
+  - int : alicodigo
+  - String : nomeAlimento
+  - double : quantidade
+  - double : calorias
+  - String : macroNutriente
+}
+
+class Sono {
+  - int : soncodigo
+  - LocalDate : data
+  - double : horasDormidas
+  - int : qualidade
+}
+
+class Desempenho {
+  - int : descodigo
+  - LocalDate inicioPeriodo
+  - LocalDate fimPeriodo
+  - double : mediaTreinos
+  - double : mediaSono
+  - double : mediaCalorias
+  - double : indiceDesempenho
+  + void : calcularMedias()
+}
+
+class Relatorio {
+  - int : relcodigo
+  - LocalDate : dataInicio
+  - LocalDate : dataFim
+  - String : tipo
+  + void : gerarRelatorio()
+}
+class Exercicio
+  - int : execodigo
+  - double : carga
+  - int : repeticoes
+  - int : series
+  + registrarExercicio()
+}
+
+class Alerta {
+  - int : alecodigo
+  - LocalDate : data
+  - String : tipo
+  - String : mensagem
+}
+
+Usuario "1" *-- "0..*" Treino
+Usuario "1" *-- "0..*" Refeição 
+Usuario "1" *-- "0..*" Sono
+Refeição "1" *-- "1..*" Alimento
+Usuario "1" *-- "0..*" Alerta
+
+Desempenho ..> Treino
+Desempenho ..> Sono  
+Relatorio ..> Treino
+Relatorio ..> Sono
+Relatorio ..> Refeição
+Treino"1" *-- "0..*"Exercícios
+@enduml
+
+
