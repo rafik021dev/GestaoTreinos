@@ -176,11 +176,11 @@ CREATE TABLE IF NOT EXISTS `gestaotreino`.`relatorio` (
   `datainicio` DATE NOT NULL,
   `datafim` DATE NOT NULL,
   `tipo` ENUM('SEMANAL', 'MENSAL', 'PERSONALIZADO') NULL,
-  `usuario_usucodigo` INT NOT NULL,
+  `usucodigo` INT NOT NULL,
   PRIMARY KEY (`relcodigo`),
-  INDEX `fk_relatorio_usuario1_idx` (`usuario_usucodigo` ASC) VISIBLE,
+  INDEX `fk_relatorio_usuario1_idx` (`usucodigo` ASC) VISIBLE,
   CONSTRAINT `fk_relatorio_usuario1`
-    FOREIGN KEY (`usuario_usucodigo`)
+    FOREIGN KEY (`usucodigo`)
     REFERENCES `gestaotreino`.`usuario` (`usucodigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
