@@ -49,11 +49,11 @@ public class Exercicio {
 	public void setTreino(Treino treino) {
 		this.treino = treino;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Exercicios [idExercicio=");
+		builder.append("Exercicio [idExercicio=");
 		builder.append(idExercicio);
 		builder.append(", carga=");
 		builder.append(carga);
@@ -66,6 +66,5 @@ public class Exercicio {
 		builder.append("]");
 		return builder.toString();
 	}
-	
 	
 }
