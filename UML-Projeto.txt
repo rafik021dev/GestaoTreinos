@@ -1,6 +1,6 @@
 @startuml
 class Usuario {
-  - int : usucodigo
+  - int : idUsuario
   - String : nome
   - String : sexo
   - int : idade
@@ -13,13 +13,16 @@ class Usuario {
 }
 
 class Treino {
-  - int : trecodigo
+  - int : idTreino
   - LocalDate : data
-  - String : tipo
+  - TipoTreino : tipo
+  - Usuario : usuario
+  - List<Exercicio> exercicios
+  + void : adicionarExercicio()
 }
 
 class Refeição {
-  - int : refcodigo
+  - int : idRefeicao
   - LocalDate : data
   - String : tipoRefeição
   + void : adicionarAlimento()
@@ -27,7 +30,7 @@ class Refeição {
 }
 
 class Alimento {
-  - int : alicodigo
+  - int : idAlimento
   - String : nomeAlimento
   - double : quantidade
   - double : calorias
@@ -35,14 +38,14 @@ class Alimento {
 }
 
 class Sono {
-  - int : soncodigo
+  - int : idSono
   - LocalDate : data
   - double : horasDormidas
   - int : qualidade
 }
 
 class Desempenho {
-  - int : descodigo
+  - int : idDesempenho
   - LocalDate inicioPeriodo
   - LocalDate fimPeriodo
   - double : mediaTreinos
@@ -53,22 +56,22 @@ class Desempenho {
 }
 
 class Relatorio {
-  - int : relcodigo
+  - int : idRelatorio
   - LocalDate : dataInicio
   - LocalDate : dataFim
   - String : tipo
   + void : gerarRelatorio()
 }
-class Exercicio
-  - int : execodigo
+class Exercicio{
+  - int : idExercicio
   - double : carga
   - int : repeticoes
   - int : series
-  + registrarExercicio()
+  - Treino : treino
 }
 
 class Alerta {
-  - int : alecodigo
+  - int : idAlerta
   - LocalDate : data
   - String : tipo
   - String : mensagem
@@ -85,7 +88,7 @@ Desempenho ..> Sono
 Relatorio ..> Treino
 Relatorio ..> Sono
 Relatorio ..> Refeição
-Treino"1" *-- "0..*"Exercícios
+Treino"1" *-- "0..*"Exercicio
 @enduml
 
 

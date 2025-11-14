@@ -41,43 +41,61 @@ public class Usuario {
 		return nome;
 	}
 	public void setNome(String nome) {
+		if(nome.length() == 0) {
+			throw new IllegalArgumentException("O nome não pode estar em branco");
+		}
 		this.nome = nome;
 	}
 	public char getSexo() {
 		return sexo;
 	}
 	public void setSexo(char sexo) {
+		if(sexo != 'F' && sexo != 'M') {
+		throw new IllegalArgumentException("Sexo inválido.");
+	}
 		this.sexo = sexo;
 	}
 	public int getIdade() {
 		return idade;
 	}
 	public void setIdade(int idade) {
+		if(idade <= 0) {
+			throw new IllegalArgumentException("A idade deve ser maior que zero");
+		}
 		this.idade = idade;
 	}
 	public double getPeso() {
 		return peso;
 	}
 	public void setPeso(double peso) {
+		if(peso <= 0) {
+			throw new IllegalArgumentException("O peso deve ser maior que zero.");
+		}
 		this.peso = peso;
 	}
 	public double getAltura() {
 		return altura;
 	}
 	public void setAltura(double altura) {
+		if(altura <= 0) {
+			throw new IllegalArgumentException("A altura deve ser maior que zero.");
+		}
 		this.altura = altura;
 	}
 	public double getMetaPeso() {
 		return metaPeso;
 	}
 	public void setMetaPeso(double metaPeso) {
+		if(metaPeso <= 0) {
+			throw new IllegalArgumentException("A meta de peso deve ser maior que zero.");
+		}
 		this.metaPeso = metaPeso;
 	}
 
 	public double calcularIMC() {
 		
 		if(altura <= 0 || peso <= 0) {
-			throw new IllegalArgumentException("peso e altura devem ser números validos para calcular o IMC");
+			throw new IllegalArgumentException("Peso e altura devem ser números validos para calcular o IMC");
 		}
 		
 		return peso/(altura*altura);	
@@ -101,9 +119,15 @@ public class Usuario {
 			default:
 				throw new IllegalArgumentException("O sexo deve ser M ou F.");
 		}
-		
-	}
+	}	
 	
+	public void atualizarPeso(double novoPeso) {
+		if(novoPeso <= 0 || novoPeso > 500) {
+			throw new IllegalArgumentException("O novo peso deve ser maior que zero.");
+		}
+			this.peso = novoPeso;
+		}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -121,8 +145,11 @@ public class Usuario {
 		builder.append(altura);
 		builder.append(", metaPeso=");
 		builder.append(metaPeso);
+		builder.append(", calcularIMC()=");
+		builder.append(calcularIMC());
+		builder.append(", calcularTMB()=");
+		builder.append(calcularTMB());
 		builder.append("]");
 		return builder.toString();
 	}
-	
 }

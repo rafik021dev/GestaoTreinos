@@ -29,24 +29,36 @@ public class Exercicio {
 		return carga;
 	}
 	public void setCarga(int carga) {
+		if(carga <= 0) {
+			throw new IllegalArgumentException("A carga deve ser maior que zero.");
+		}
 		this.carga = carga;
 	}
 	public int getRepeticoes() {
 		return repeticoes;
 	}
 	public void setRepeticoes(int repeticoes) {
+		if(repeticoes <= 0) {
+			throw new IllegalArgumentException("As repetições devem ser maiores que zero.");
+		}
 		this.repeticoes = repeticoes;
 	}
 	public int getSeries() {
 		return series;
 	}
 	public void setSeries(int series) {
+		if(series <= 0) {
+			throw new IllegalArgumentException("As series devem ser maiores que zero.");
+		}
 		this.series = series;
 	}
 	public Treino getTreino() {
 		return treino;
 	}
 	public void setTreino(Treino treino) {
+		if(treino == null) {
+			throw new IllegalArgumentException("O treino não pode ser nulo.");
+		}
 		this.treino = treino;
 	}
 
