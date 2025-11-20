@@ -68,6 +68,13 @@ public class Treino {
 		this.usuario = usuario;
 	}
 	
+	public void adicionarExercicio(Exercicio exercicio){
+		if(exercicio == null) {
+			throw new IllegalArgumentException("O execicio nao pode ser nulo.");
+		}
+		exercicios.add(exercicio);
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -79,9 +86,9 @@ public class Treino {
 		builder.append(tipo);
 		builder.append(", usuario=");
 		builder.append(usuario);
+		builder.append(", exercicios=");
+		builder.append(exercicios);
 		builder.append("]");
 		return builder.toString();
 	}
-
-
 }

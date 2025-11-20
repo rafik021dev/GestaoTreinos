@@ -50,7 +50,7 @@ public class Usuario {
 		return sexo;
 	}
 	public void setSexo(char sexo) {
-		if(sexo != 'F' && sexo != 'M') {
+		if(sexo != 'F' || sexo != 'M') {
 		throw new IllegalArgumentException("Sexo inválido.");
 	}
 		this.sexo = sexo;

@@ -1,7 +1,6 @@
 package gestaotreinos.model.entity;
 
 import java.time.LocalDate;
-
 import ENUMs.QualidadeSono;
 
 public class Sono {
