@@ -23,6 +23,7 @@ class Treino {
 
 class Refeição {
   - int : idRefeicao
+  - Usuario : usuario
   - LocalDate : data
   - String : tipoRefeição
   + void : adicionarAlimento()
@@ -39,9 +40,10 @@ class Alimento {
 
 class Sono {
   - int : idSono
+  - Usuario: usuario
   - LocalDate : data
   - double : horasDormidas
-  - int : qualidade
+  - QualidadeSono: qualidade
 }
 
 class Desempenho {
@@ -88,7 +90,7 @@ Desempenho ..> Sono
 Relatorio ..> Treino
 Relatorio ..> Sono
 Relatorio ..> Refeição
-Treino"1" *-- "0..*"Exercicio
+Treino"1" *-- "1..*"Exercicio
 @enduml
 
 
