@@ -13,10 +13,10 @@ public class Exercicio {
 	}
 	
 	public Exercicio(int carga,int repeticoes,int series,Treino treino) {
-		this.carga = carga;
-		this.repeticoes = repeticoes;
-		this.series = series;
-		this.treino = treino;
+		setCarga(carga);
+		setRepeticoes(repeticoes);
+		setSeries(series);
+		setTreino(treino);
 	}
 	
 	public int getIdExercicio() {

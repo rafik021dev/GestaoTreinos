@@ -15,20 +15,20 @@ public class Usuario {
 	}
 	
 	public Usuario(String nome, char sexo, int idade, double peso, double altura) {
-		this.nome = nome;
-        this.sexo = sexo;
-        this.idade = idade;
-        this.peso = peso;
-        this.altura = altura;
+		 setNome(nome);
+		 setSexo(sexo);
+		 setIdade(idade);
+		 setPeso(peso);
+		 setAltura(altura);
 	}
 	
 	public Usuario(String nome, char sexo, int idade, double peso, double altura, double metaPeso) {
-		this.nome = nome;
-        this.sexo = sexo;
-        this.idade = idade;
-        this.peso = peso;
-        this.altura = altura;
-        this.metaPeso = metaPeso;
+		setNome(nome);
+	    setSexo(sexo);
+	    setIdade(idade);
+	    setPeso(peso);
+	    setAltura(altura);
+	    setMetaPeso(metaPeso);
 	}
 
 	public int getIdUsuario() {
@@ -123,7 +123,7 @@ public class Usuario {
 	
 	public void atualizarPeso(double novoPeso) {
 		if(novoPeso <= 0 || novoPeso > 500) {
-			throw new IllegalArgumentException("O novo peso deve ser maior que zero.");
+			throw new IllegalArgumentException("Deve ser um peso válido.");
 		}
 			this.peso = novoPeso;
 		}

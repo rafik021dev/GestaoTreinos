@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import ENUMs.TipoTreino;
+
 public class Treino {
 
 	private int idTreino;
@@ -17,9 +19,9 @@ public class Treino {
 	}
 	
 	public Treino(Usuario usuario,LocalDate data,TipoTreino tipo) {
-		this.usuario = usuario;
-		this.data = data;
-		this.tipo = tipo;
+		setUsuario(usuario);
+		setData(data);
+		setTipo(tipo);
 	}
 	
 	public int getIdTreino() {
