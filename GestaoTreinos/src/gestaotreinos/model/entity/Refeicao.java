@@ -3,7 +3,8 @@ package gestaotreinos.model.entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import ENUMs.TipoRefeicao;
+
+import gestaotreinos.enums.TipoRefeicao;
 
 public class Refeicao {
 	Usuario usuario;

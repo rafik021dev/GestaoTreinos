@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import ENUMs.TipoTreino;
+import gestaotreinos.enums.TipoTreino;
 
 public class Treino {
 

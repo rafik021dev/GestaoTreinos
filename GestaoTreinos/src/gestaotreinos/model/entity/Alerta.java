@@ -1,7 +1,8 @@
 package gestaotreinos.model.entity;
 
 import java.time.LocalDate;
-import ENUMs.TipoAlerta;
+
+import gestaotreinos.enums.TipoAlerta;
 
 public class Alerta {
 

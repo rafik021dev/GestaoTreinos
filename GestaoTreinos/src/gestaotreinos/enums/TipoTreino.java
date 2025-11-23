@@ -1,4 +1,4 @@
-package ENUMs;
+package gestaotreinos.enums;
 
 public enum TipoTreino {
 	BRACO,

@@ -1,6 +1,6 @@
 package gestaotreinos.model.entity;
 
-import ENUMs.TipoMacro;
+import gestaotreinos.enums.TipoMacro;
 
 public class Alimento {
 	private int idAlimento;

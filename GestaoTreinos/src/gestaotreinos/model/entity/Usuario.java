@@ -9,6 +9,8 @@ public class Usuario {
 	private double peso;
 	private double altura;
 	private double metaPeso;
+        private String email;
+        private String senha;
 	
 	public Usuario() {
 		
@@ -152,4 +154,22 @@ public class Usuario {
 		builder.append("]");
 		return builder.toString();
 	}
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+        
+        
 }
