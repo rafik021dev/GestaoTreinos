@@ -21,7 +21,7 @@ class Treino {
   + void : adicionarExercicio()
 }
 
-class Refeição {
+class Refeicao {
   - int : idRefeicao
   - Usuario : usuario
   - LocalDate : data
@@ -48,8 +48,6 @@ class Sono {
 
 class Desempenho {
   - int : idDesempenho
-  - LocalDate inicioPeriodo
-  - LocalDate fimPeriodo
   - double : mediaTreinos
   - double : mediaSono
   - double : mediaCalorias
@@ -59,10 +57,10 @@ class Desempenho {
 
 class Relatorio {
   - int : idRelatorio
-  - LocalDate : dataInicio
-  - LocalDate : dataFim
-  - String : tipo
+  - Usuario : usuario
+  - tipoRelatorio : tipo
   + void : gerarRelatorio()
+  
 }
 class Exercicio{
   - int : idExercicio
@@ -80,17 +78,21 @@ class Alerta {
 }
 
 Usuario "1" *-- "0..*" Treino
-Usuario "1" *-- "0..*" Refeição 
+Usuario "1" *-- "0..*" Refeicao 
 Usuario "1" *-- "0..*" Sono
-Refeição "1" *-- "1..*" Alimento
+Refeicao "1" *-- "1..*" Alimento
 Usuario "1" *-- "0..*" Alerta
+Treino"1" *-- "0..*"Exercicio
+Desempenho"1" --* "1"Relatorio
+Relatorio"0..*" o-- "1"Usuario
 
-Desempenho ..> Treino
-Desempenho ..> Sono  
 Relatorio ..> Treino
 Relatorio ..> Sono
-Relatorio ..> Refeição
-Treino"1" *-- "1..*"Exercicio
+Relatorio ..> Refeicao
+
+
+
+
 @enduml
 
 
