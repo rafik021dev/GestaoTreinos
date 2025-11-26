@@ -1,24 +1,20 @@
 package gestaotreinos.model.entity;
 
-import gestaotreinos.enums.TipoMacro;
-
 public class Alimento {
 	private int idAlimento;
 	private String nomeAlimento;
 	private double quantidade;
 	private double calorias;
-	private TipoMacro tipo;
 	private Refeicao refeicao;
 	
 	public Alimento() {
 		
 	}
 	
-	public Alimento(String nomeAlimento,double quantidade,double calorias,TipoMacro tipo) {
+	public Alimento(String nomeAlimento,double quantidade,double calorias) {
 		setNomeAlimento(nomeAlimento);
 		setQuantidade(quantidade);
 		setCalorias(calorias);
-		setTipo(tipo);
 	}
 	
 	public Refeicao getRefeicao() {
@@ -63,15 +59,7 @@ public class Alimento {
 		}
 		this.calorias = calorias;
 	}
-	public TipoMacro getTipo() {
-		return tipo;
-	}
-	public void setTipo(TipoMacro tipo) {
-		if(tipo == null) {
-			throw new IllegalArgumentException("O tipo de macronutriente não pode ser nulo.");
-		}
-		this.tipo = tipo;
-	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -83,8 +71,6 @@ public class Alimento {
 		builder.append(quantidade);
 		builder.append(", calorias=");
 		builder.append(calorias);
-		builder.append(", tipo=");
-		builder.append(tipo);
 		builder.append(", refeicao=");
 		builder.append(refeicao);
 		builder.append("]");
