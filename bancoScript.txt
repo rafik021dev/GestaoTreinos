@@ -1,0 +1,99 @@
+CREATE TABLE usuario (
+    idUsuario      SERIAL PRIMARY KEY,
+    nome           VARCHAR(45)  NOT NULL,
+    sexo           CHAR(1)      NOT NULL,
+    idade          INT          NOT NULL,
+    peso           DECIMAL(5,2) NOT NULL,
+    altura         DECIMAL(4,2) NOT NULL,
+    metapeso       DECIMAL(5,2),
+    email          VARCHAR(120),
+    senha          VARCHAR(255) NOT NULL
+);
+CREATE TABLE treino (
+    idTreino   SERIAL PRIMARY KEY,
+    data       DATE        NOT NULL,
+    tipo       VARCHAR(45) NOT NULL,
+    idUsuario  INT         NOT NULL,
+    CONSTRAINT fk_treino_usuario
+        FOREIGN KEY (idUsuario)
+        REFERENCES usuario (idUsuario)
+        ON DELETE CASCADE
+);
+CREATE TABLE exercicio (
+    idExercicio  SERIAL PRIMARY KEY,
+    nome         VARCHAR(45)   NOT NULL,
+    carga        DECIMAL(4,2),
+    repeticoes   INT,
+    series       INT,
+    idTreino     INT           NOT NULL,
+    CONSTRAINT fk_exercicio_treino
+        FOREIGN KEY (idTreino)
+        REFERENCES treino (idTreino)
+        ON DELETE CASCADE
+);
+CREATE TABLE sono (
+    idSono         SERIAL PRIMARY KEY,
+    data           DATE          NOT NULL,
+    horasDormidas  DECIMAL(4,2)  NOT NULL,
+    qualidade      VARCHAR(20)   NOT NULL,
+    idUsuario      INT           NOT NULL,
+    CONSTRAINT fk_sono_usuario
+        FOREIGN KEY (idUsuario)
+        REFERENCES usuario (idUsuario)
+        ON DELETE CASCADE
+);
+CREATE TABLE refeicao (
+    idRefeicao  SERIAL PRIMARY KEY,
+    data        DATE         NOT NULL,
+    tipo        VARCHAR(20)  NOT NULL,
+    idUsuario   INT          NOT NULL,
+    CONSTRAINT fk_refeicao_usuario
+        FOREIGN KEY (idUsuario)
+        REFERENCES usuario (idUsuario)
+        ON DELETE CASCADE
+);
+CREATE TABLE alimento (
+    idAlimento     SERIAL PRIMARY KEY,
+    nome           VARCHAR(45)     NOT NULL,
+    quantidade     DECIMAL(6,2)    NOT NULL,
+    calorias       INT             NOT NULL,
+    macronutriente VARCHAR(20)     NOT NULL,
+    idRefeicao     INT             NOT NULL,
+    CONSTRAINT fk_alimento_refeicao
+        FOREIGN KEY (idRefeicao)
+        REFERENCES refeicao (idRefeicao)
+        ON DELETE CASCADE
+);
+CREATE TABLE alerta (
+    idAlerta   SERIAL PRIMARY KEY,
+    data       DATE          NOT NULL,
+    tipo       VARCHAR(20)   NOT NULL,
+    mensagem   VARCHAR(255)  NOT NULL,
+    idUsuario  INT           NOT NULL,
+    CONSTRAINT fk_alerta_usuario
+        FOREIGN KEY (idUsuario)
+        REFERENCES usuario (idUsuario)
+        ON DELETE CASCADE
+);
+CREATE TABLE desempenho (
+    idDesempenho        SERIAL PRIMARY KEY,
+    mediaTreinos        DOUBLE PRECISION,
+    mediaSono           DOUBLE PRECISION,
+    mediaCalorias       DOUBLE PRECISION,
+    indiceDesempenho    DOUBLE PRECISION,
+    idUsuario           INT NOT NULL,
+    CONSTRAINT fk_desempenho_usuario
+        FOREIGN KEY (idUsuario)
+        REFERENCES usuario (idUsuario)
+        ON DELETE CASCADE
+);
+CREATE TABLE relatorio (
+    idRelatorio  SERIAL PRIMARY KEY,
+    tipo         VARCHAR(20) NOT NULL,
+    idUsuario    INT         NOT NULL,
+    CONSTRAINT fk_relatorio_usuario
+        FOREIGN KEY (idUsuario)
+        REFERENCES usuario (idUsuario)
+        ON DELETE CASCADE
+);
+

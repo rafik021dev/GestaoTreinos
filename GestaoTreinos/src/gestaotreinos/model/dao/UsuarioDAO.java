@@ -101,9 +101,7 @@ public class UsuarioDAO {
 	                   usuarioRS.setIdUsuario(rs.getInt("idusuario"));
 	                   usuarioRS.setNome(rs.getString("nome"));
 	                   usuarioRS.setSexo(rs.getString("sexo").charAt(0));
-	                   usuarioRS.setIdade(rs.getInt("idade"));
-	                   usuarioRS.setIdade(rs.getInt("idade"));
-	                   usuarioRS.setIdade(rs.getInt("idade"));
+	                   usuarioRS.setIdade(rs.getInt("idade"));	                  
 	                   usuarioRS.setPeso(rs.getDouble("peso"));
 	                   usuarioRS.setAltura(rs.getDouble("altura"));
 	                   usuarioRS.setMetaPeso(rs.getDouble("metapeso"));
