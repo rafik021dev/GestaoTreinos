@@ -8,9 +8,9 @@ public class Usuario {
 	private int idade;
 	private double peso;
 	private double altura;
-	private double metaPeso;
-        private String email;
-        private String senha;
+	private Double metaPeso;
+    private String email;
+    private String senha;
 	
 	public Usuario() {
 		
@@ -52,7 +52,7 @@ public class Usuario {
 		return sexo;
 	}
 	public void setSexo(char sexo) {
-		if(sexo != 'F' || sexo != 'M') {
+		if(sexo != 'F' && sexo != 'M') {
 		throw new IllegalArgumentException("Sexo inválido.");
 	}
 		this.sexo = sexo;
@@ -84,10 +84,10 @@ public class Usuario {
 		}
 		this.altura = altura;
 	}
-	public double getMetaPeso() {
+	public Double getMetaPeso() {
 		return metaPeso;
 	}
-	public void setMetaPeso(double metaPeso) {
+	public void setMetaPeso(Double metaPeso) {
 		if(metaPeso <= 0) {
 			throw new IllegalArgumentException("A meta de peso deve ser maior que zero.");
 		}

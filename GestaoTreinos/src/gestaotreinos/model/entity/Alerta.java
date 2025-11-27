@@ -6,6 +6,7 @@ import gestaotreinos.enums.TipoAlerta;
 
 public class Alerta {
 
+	private int idAlerta;
 	private Usuario usuario;
 	private LocalDate data;
 	private TipoAlerta tipo;
@@ -21,6 +22,13 @@ public class Alerta {
 		 setTipo(tipo);
 	}
 	
+	public int getIdAlerta() {
+		return idAlerta;
+	}
+	public void setIdAlerta(int idAlerta) {
+		this.idAlerta = idAlerta;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
