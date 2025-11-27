@@ -99,7 +99,7 @@ public class ViewLogin extends javax.swing.JFrame {
      * Método responsável por Validar o Login do Usuário.
      */
     private void Login() {
-                try {
+        try {
             String sEmailUsuario, sSenhaUsuario;
         
             sEmailUsuario = txtEmailUsuario.getText();
