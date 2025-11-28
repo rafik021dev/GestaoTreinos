@@ -16,33 +16,40 @@ public class AlertaDAO {
 	    public AlertaDAO(Connection conn) {
 	        this.conn = conn;
 	    }
-	    
-	    public void inserirAlerta(Alerta alerta) throws SQLException {
+	    /* 
+	     * inserir na tabela alerta
+	     */
+	    public void inserirAlerta(Alerta oAlerta) throws SQLException {
 	        String sSql = "INSERT INTO alerta (data, tipo, mensagem, idusuario) "
 	                   + "VALUES (?, ?, ?, ?)";
 
 	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-	            stmt.setDate(1, Date.valueOf(alerta.getData()));
-	            stmt.setString(2, alerta.getTipo().toString());
-	            stmt.setString(3, alerta.getMensagem());
-	            stmt.setLong(4, alerta.getUsuario().getIdUsuario());
+	            stmt.setDate(1, Date.valueOf(oAlerta.getData()));
+	            stmt.setString(2, oAlerta.getTipo().toString());
+	            stmt.setString(3, oAlerta.getMensagem());
+	            stmt.setLong(4, oAlerta.getUsuario().getIdUsuario());
 	            stmt.executeUpdate();
 	        }
 	    }
-	    
-	    public void atualizarAlerta(Alerta alerta) throws SQLException {
+	    /* 
+	     * atualizar na tabela alerta
+	     */
+	    public void atualizarAlerta(Alerta oAlerta) throws SQLException {
 	        String sSql = "UPDATE alerta SET data = ?, tipo = ?, mensagem = ?, idusuario = ? "
 	                   + "WHERE idalerta = ?";
 
 	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-	            stmt.setDate(1, Date.valueOf(alerta.getData()));
-	            stmt.setString(2, alerta.getTipo().toString());
-	            stmt.setString(3, alerta.getMensagem());
-	            stmt.setLong(4, alerta.getUsuario().getIdUsuario());
-	            stmt.setLong(5, alerta.getIdAlerta());
+	            stmt.setDate(1, Date.valueOf(oAlerta.getData()));
+	            stmt.setString(2, oAlerta.getTipo().toString());
+	            stmt.setString(3, oAlerta.getMensagem());
+	            stmt.setLong(4, oAlerta.getUsuario().getIdUsuario());
+	            stmt.setLong(5, oAlerta.getIdAlerta());
 	            stmt.executeUpdate();
 	        }
 	    }
+	    /*
+	     * deletar na tabela alerta
+	     */
 	    public void deletarAlerta(long id) throws SQLException {
 	        String sSql = "DELETE FROM alerta WHERE idalerta = ?";
 
@@ -51,6 +58,9 @@ public class AlertaDAO {
 	            stmt.executeUpdate();
 	        }
 	    }
+	    /* 
+	     * buscar pelo id na tabela alerta
+	     */
 	    public Alerta buscarPorIdalerta(long id) throws SQLException {
 	        String sSql = "SELECT idalerta, data, tipo, mensagem, idusuario FROM alerta WHERE idalerta = ?";
 

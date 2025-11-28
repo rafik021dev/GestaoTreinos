@@ -6,11 +6,22 @@ public class Desempenho {
 	private double mediaCalorias;
 	private double mediaTreino;
 	private double indiceDesempenho;
+	private Usuario usuario;
 	
 	public Desempenho() {
 		
 	}
 
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		if(usuario == null) {
+			throw new IllegalArgumentException("O usuário não deve ser nulo.");
+		}
+		this.usuario = usuario;
+	}
 	public int getIdDesempenho() {
 		return idDesempenho;
 	}

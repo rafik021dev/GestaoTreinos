@@ -16,7 +16,9 @@ public class TreinoDAO {
 	    public TreinoDAO(Connection conn) {
 	        this.conn = conn;
 	    }
-	    
+	   /*
+	    * inserir na tabela treino 
+	    */
 	    public void inserirTreino(Treino treino) throws SQLException {
 	        String sSql = "INSERT INTO treino (data, tipo, idusuario) "
 	                   + "VALUES (?, ?, ?)";
@@ -28,11 +30,14 @@ public class TreinoDAO {
 	            stmt.executeUpdate();
 	        }
 	    }    
+	    /*
+	     * atualizar na tabela treino
+	     */
 	    public void atualizarTreino(Treino treino) throws SQLException {
-	        String sql = "UPDATE treino SET data = ?, tipo = ?, idusuario = ? "
+	        String sSql = "UPDATE treino SET data = ?, tipo = ?, idusuario = ? "
 	                   + "WHERE idtreino = ?";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
 	            stmt.setDate(1, Date.valueOf(treino.getData()));
 	            stmt.setString(2, treino.getTipo().toString());
 	            stmt.setLong(3, treino.getUsuario().getIdUsuario());
@@ -40,18 +45,24 @@ public class TreinoDAO {
 	            stmt.executeUpdate();
 	        }
 	    }
+	    /*
+	     * deletar na tabela treino
+	     */
 	    public void deletarTreino(long id) throws SQLException {
-	        String sql = "DELETE FROM treino WHERE idtreino = ?";
+	        String sSql = "DELETE FROM treino WHERE idtreino = ?";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
 	            stmt.setLong(1, id);
 	            stmt.executeUpdate();
 	        }
-	    }	    	    	    	    	    
+	    }	    
+	    /*
+	     * buscar pelo idtreino
+	     */
 	        public Treino buscarPorIdtreino(long id) throws SQLException {
-	            String sql = "SELECT idtreino, data, tipo, idusuario FROM treino WHERE idtreino = ?";
+	            String sSql = "SELECT idtreino, data, tipo, idusuario FROM treino WHERE idtreino = ?";
 
-	            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+	            try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
 	                stmt.setLong(1, id);
 	                try (ResultSet rs = stmt.executeQuery()) {
 	                    if (rs.next()) {

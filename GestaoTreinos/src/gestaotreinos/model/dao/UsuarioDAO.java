@@ -90,10 +90,10 @@ public class UsuarioDAO {
 	 * metodo para realizar uma busca por id nos usuários do sistema
 	 */
 	    public Usuario buscarPorIdusuario(long id) throws SQLException {
-	        String sql = "SELECT idusuario, nome, sexo, idade, peso, altura, "
+	        String sSql = "SELECT idusuario, nome, sexo, idade, peso, altura, "
 	                   + "metapeso, email, senha FROM usuario WHERE idusuario = ?";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
 	            stmt.setLong(1, id);
 	            try (ResultSet rs = stmt.executeQuery()) {
 	                if (rs.next()) {
@@ -122,7 +122,7 @@ public class UsuarioDAO {
 	        String sSql = "SELECT idusuario, nome, sexo, idade, peso, altura, "
 	                   + "metapeso, email, senha FROM usuario ORDER BY idusuario";
 	        
-	        List<Usuario> lista = new ArrayList();	
+	        List<Usuario> lista = new ArrayList<>();	
 	
 	        try (PreparedStatement stmt = conn.prepareStatement(sSql);
 	        		ResultSet rs = stmt.executeQuery()) {
@@ -144,7 +144,7 @@ public class UsuarioDAO {
 	        return lista;
 	    }
 	    
-        /**
+        /*
          * Método responsável por validar o Login do Usuário no Sistema
          * @param oUsuario
          * @return ResultSet ResSet

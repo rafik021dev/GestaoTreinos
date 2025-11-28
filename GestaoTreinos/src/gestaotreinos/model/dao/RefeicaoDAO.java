@@ -16,24 +16,28 @@ public class RefeicaoDAO {
 	    public RefeicaoDAO(Connection conn) {
 	        this.conn = conn;
 	    }
-	    
+	    /*
+	     * inserir na tabela refeicao
+	     */
 	    public void inserirRefeicao(Refeicao refeicao) throws SQLException {
-	        String sql = "INSERT INTO refeicao (data, tipo, idusuario) "
+	        String sSql = "INSERT INTO refeicao (data, tipo, idusuario) "
 	                   + "VALUES (?, ?, ?)";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
 	            stmt.setDate(1, Date.valueOf(refeicao.getData()));
 	            stmt.setString(2, refeicao.getTipo().toString());
 	            stmt.setLong(3, refeicao.getUsuario().getIdUsuario());
 	            stmt.executeUpdate();
 	        }
 	    }
-	    
+	    /*
+	     * atualizar na tabela refeicao
+	     */
 	    public void atualizarRefeicao(Refeicao refeicao) throws SQLException {
-	        String sql = "UPDATE refeicao SET data = ?, tipo = ?, idusuario = ? "
+	        String sSql = "UPDATE refeicao SET data = ?, tipo = ?, idusuario = ? "
 	                   + "WHERE idrefeicao = ?";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
 	            stmt.setDate(1, Date.valueOf(refeicao.getData()));
 	            stmt.setString(2, refeicao.getTipo().toString());
 	            stmt.setLong(3, refeicao.getUsuario().getIdUsuario());
@@ -41,32 +45,38 @@ public class RefeicaoDAO {
 	            stmt.executeUpdate();
 	        }
 	    }
-	    
+	    /*
+	     * deletar na tabela refeicao
+	     */
 	    public void deletarRefeicao(long id) throws SQLException {
-	        String sql = "DELETE FROM refeicao WHERE idrefeicao = ?";
+	        String sSql = "DELETE FROM refeicao WHERE idrefeicao = ?";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
 	            stmt.setLong(1, id);
 	            stmt.executeUpdate();
 	        }
 	    }
-	    
-	    public void deletarPorUsuario(long idUsuario) throws SQLException {
-	        String sql = "DELETE FROM refeicao WHERE idusuario = ?";
+	    /*
+	     * deletar refeicao por usuario
+	     */
+	    public void deletarRefeicaoPorUsuario(long idUsuario) throws SQLException {
+	        String sSql = "DELETE FROM refeicao WHERE idusuario = ?";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
 	            stmt.setLong(1, idUsuario);
 	            stmt.executeUpdate();
 	        }
-	    }
-	    
-	    public List<Refeicao> listarPorUsuario(long idUsuario) throws SQLException {
-	        String sql = "SELECT idrefeicao, data, tipo, idusuario FROM refeicao "
+	    }   
+	    /*
+	     * listar refeicao por usuario
+	     */
+	    public List<Refeicao> listarRefeicaoPorUsuario(long idUsuario) throws SQLException {
+	        String sSql = "SELECT idrefeicao, data, tipo, idusuario FROM refeicao "
 	                   + "WHERE idusuario = ? ORDER BY data DESC";
 
 	        List<Refeicao> lista = new ArrayList<Refeicao>();
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
 	            stmt.setLong(1, idUsuario);
 	            try (ResultSet rs = stmt.executeQuery()) {
 	                while (rs.next()) {

@@ -16,7 +16,9 @@ public class SonoDAO {
     public SonoDAO(Connection conn) {
         this.conn = conn;
     }
-
+    /*
+     * inserir na tabela sono
+     */
     public void inserirSono(Sono sono) throws SQLException {
         String sSql = "INSERT INTO sono (data, horasdormidas, qualidade, idusuario) "
                    + "VALUES (?, ?, ?, ?)";
@@ -29,7 +31,9 @@ public class SonoDAO {
             stmt.executeUpdate();
         }
     }
-
+    /*
+     * atualizar na tabela sono
+     */
     public void atualizarSono(Sono sono) throws SQLException {
         String sSql = "UPDATE sono SET data = ?, horasdormidas = ?, qualidade = ?, idusuario = ? "
                    + "WHERE idsono = ?";
@@ -43,7 +47,9 @@ public class SonoDAO {
             stmt.executeUpdate();
         }
     }
-
+    /*
+     * deletar na tabela sono
+     */
     public void deletarSono(long id) throws SQLException {
         String sSql = "DELETE FROM sono WHERE idsono = ?";
 
@@ -51,11 +57,13 @@ public class SonoDAO {
             stmt.setLong(1, id);
             stmt.executeUpdate();
         }
-    }
-
-    public List<Sono> listarPorUsuario(long idUsuario) throws SQLException {
+    }   
+    /*
+     * listar sono pelo idusuario
+     */
+    public List<Sono> listarSonoPorUsuario(long idUsuario) throws SQLException {
         String sSql = "SELECT idsono, data, horasdormidas, qualidade, idusuario FROM sono "
-                   + "WHERE idusuario = ? ORDER BY data DESC";
+                   + "WHERE idusuario = ? ORDER BY data";
 
         List<Sono> lista = new ArrayList<>();
 

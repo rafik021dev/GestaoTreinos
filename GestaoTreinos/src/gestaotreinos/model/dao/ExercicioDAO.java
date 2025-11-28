@@ -14,7 +14,9 @@ public class ExercicioDAO {
 	    public ExercicioDAO(Connection conn) {
 	        this.conn = conn;   
 	    }
-	    
+	    /*
+	     * inseir na tabela exercicio
+	     */
 	    public void inserirExercicio(Exercicio oExercicio, long idTreino) throws SQLException {
 	        String sSql = "INSERT INTO exercicio (nome, carga, series, repeticoes, idtreino) "
 	                   + "VALUES (?, ?, ?, ?, ?)";
@@ -28,7 +30,9 @@ public class ExercicioDAO {
 	            stmt.executeUpdate();
 	        }
 	    }
-	    
+	    /*
+	     * atualizar na tabela exercicio
+	     */
 	    public void atualizarExercicio(Exercicio oExercicio) throws SQLException {
 	        String sSql = "UPDATE exercicio SET nome = ?, carga = ? , series = ?, repeticoes = ? "
 	                   + "WHERE idexercicio = ?";
@@ -42,7 +46,9 @@ public class ExercicioDAO {
 	            stmt.executeUpdate();
 	        }
 	    }
-	    
+	    /* 
+	     * deletar na tabela exercicio
+	     */
 	    public void deletarExercicio(long id) throws SQLException {
 	        String sSql = "DELETE FROM exercicio WHERE idexercicio = ?";
 
@@ -51,7 +57,9 @@ public class ExercicioDAO {
 	            stmt.executeUpdate();
 	        }
 	    }
-	    
+	    /*
+	     * deletar na tabela exercicio por treino
+	     */
 	    public void deletarPorTreino(long idTreino) throws SQLException {
 	        String sSql = "DELETE FROM exercicio WHERE idtreino = ?";
 
@@ -60,7 +68,9 @@ public class ExercicioDAO {
 	            stmt.executeUpdate();
 	        }
 	    }
-	    
+	    /*
+	     * buscar exercicio pelo idexercicio
+	     */
 	    public Exercicio buscarPorIdexercicio(long id) throws SQLException {
 	        String sSql = "SELECT idexercicio, nome, carga, series, repeticoes FROM exercicio WHERE idexercicio = ?";
 
@@ -82,6 +92,9 @@ public class ExercicioDAO {
 	        return null;
 	    }
 	
+	    /*
+	     * listar exercicios
+	     */
 	    public List<Exercicio> listarExercicio() throws SQLException {
 	        String sSql = "SELECT idexercicio, nome, carga, series, repeticoes FROM exercicio ORDER BY nome";
 	        
