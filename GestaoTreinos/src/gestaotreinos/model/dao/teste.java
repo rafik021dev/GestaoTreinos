@@ -54,7 +54,7 @@ public class teste {
                         System.out.println("   ");
                     }
                     
-                    Usuario usuario = usuarioDAO.buscarPorId(1); 
+                    Usuario usuario = usuarioDAO.buscarPorIdusuario(1); 
                     System.out.println("busca:");
                     if (usuario != null) {
                         System.out.println("ID: " + usuario.getIdUsuario());

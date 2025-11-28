@@ -4,14 +4,14 @@ public class Alimento {
 	private int idAlimento;
 	private String nomeAlimento;
 	private double quantidade;
-	private double calorias;
+	private int calorias;
 	private Refeicao refeicao;
 	
 	public Alimento() {
 		
 	}
 	
-	public Alimento(String nomeAlimento,double quantidade,double calorias) {
+	public Alimento(String nomeAlimento,double quantidade,int calorias) {
 		setNomeAlimento(nomeAlimento);
 		setQuantidade(quantidade);
 		setCalorias(calorias);
@@ -50,10 +50,10 @@ public class Alimento {
 		}
 		this.quantidade = quantidade;
 	}
-	public double getCalorias() {
+	public int getCalorias() {
 		return calorias;
 	}
-	public void setCalorias(double calorias) {
+	public void setCalorias(int calorias) {
 		if(calorias <= 0) {
 			throw new IllegalArgumentException("As calorias devem ser maior que zero.");	
 		}
