@@ -6,6 +6,7 @@ public class Exercicio {
 	private int carga;
 	private int repeticoes;
 	private int series;
+	private String nome;
 	private Treino treino;
 	
 	public Exercicio() {
@@ -19,6 +20,15 @@ public class Exercicio {
 		setTreino(treino);
 	}
 	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		if(nome.length() <= 0) {
+			throw new IllegalArgumentException("o nome nao pode ser nulo.");	
+		}
+		this.nome = nome;
+	}
 	public int getIdExercicio() {
 		return idExercicio;
 	}

@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import gestaotreinos.enums.TipoTreino;
 import gestaotreinos.model.entity.Treino;
+import gestaotreinos.model.entity.Usuario;
 
 public class TreinoDAO {
 
@@ -39,7 +40,7 @@ public class TreinoDAO {
 	            stmt.executeUpdate();
 	        }
 	    }
-	    public void deletar(long id) throws SQLException {
+	    public void deletarTreino(long id) throws SQLException {
 	        String sql = "DELETE FROM treino WHERE idtreino = ?";
 
 	        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -60,10 +61,14 @@ public class TreinoDAO {
 	                        treinoRS.setIdTreino(rs.getInt("idtreino"));
 	                        treinoRS.setTipo(TipoTreino.valueOf(rs.getString("tipo")));
 	                        
+	                        Usuario usuario = new Usuario();
+	                        usuario.setIdUsuario((int)rs.getLong("idusuario"));
+	                        treinoRS.setUsuario(usuario);
+	                        
 	                        return treinoRS;
-	                    }else
-	                    	return null;
+	                    }
 	                }
-	            }      
+	            }  
+	            return null;
 	        }	      	    	   	    	    	    
   }

@@ -89,7 +89,7 @@ public class UsuarioDAO {
 	/* 
 	 * metodo para realizar uma busca por id nos usuários do sistema
 	 */
-	    public Usuario buscarPorId(long id) throws SQLException {
+	    public Usuario buscarPorIdusuario(long id) throws SQLException {
 	        String sql = "SELECT idusuario, nome, sexo, idade, peso, altura, "
 	                   + "metapeso, email, senha FROM usuario WHERE idusuario = ?";
 
@@ -109,10 +109,10 @@ public class UsuarioDAO {
 	                   usuarioRS.setSenha(rs.getString("senha"));	 
 	                   
 	                   return usuarioRS;
-	                }
+	                }else 
+	                   return null;
 	            }
-	        }
-	        return null;
+	       }
 	    }
 	    
 	    /* 
