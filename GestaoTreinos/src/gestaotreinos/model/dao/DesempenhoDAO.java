@@ -19,44 +19,60 @@ public class DesempenhoDAO {
     /* 
      * inserir na tabela desempenho
      */
-    public void inserirDesempenho(Desempenho oDesempenho, long idUsuario) throws SQLException {
+    public boolean inserirDesempenho(Desempenho oDesempenho, int idUsuario) {
         String sSql = "INSERT INTO desempenho (mediasono, mediacalorias, mediatreino, indicedesempenho, idusuario) "
                    + "VALUES (?, ?, ?, ?, ?)";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-            stmt.setDouble(1, oDesempenho.getMediaSono());
-            stmt.setDouble(2, oDesempenho.getMediaCalorias());
-            stmt.setDouble(3, oDesempenho.getMediaTreino());
-            stmt.setDouble(4, oDesempenho.getIndiceDesempenho());
-            stmt.setLong(5, idUsuario);
-            stmt.executeUpdate();
+        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+            ps.setDouble(1, oDesempenho.getMediaSono());
+            ps.setDouble(2, oDesempenho.getMediaCalorias());
+            ps.setDouble(3, oDesempenho.getMediaTreino());
+            ps.setDouble(4, oDesempenho.getIndiceDesempenho());
+            ps.setInt(5, idUsuario);
+            ps.executeUpdate();
+            
+            return true;
+        }catch(Exception e) {
+        	e.printStackTrace();
+        	return false;
         }
     }
     /* 
      * atualizar na tabela desempenho
      */
-    public void atualizarDesempenho(Desempenho oDesempenho) throws SQLException {
+    public boolean atualizarDesempenho(Desempenho oDesempenho) {
         String sSql = "UPDATE desempenho SET mediasono = ?, mediacalorias = ?, mediatreino = ?, indicedesempenho = ? "
                    + "WHERE iddesempenho = ?";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-            stmt.setDouble(1, oDesempenho.getMediaSono());
-            stmt.setDouble(2, oDesempenho.getMediaCalorias());
-            stmt.setDouble(3, oDesempenho.getMediaTreino());
-            stmt.setDouble(4, oDesempenho.getIndiceDesempenho());
-            stmt.setInt(5, oDesempenho.getIdDesempenho());
-            stmt.executeUpdate();
+        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+            ps.setDouble(1, oDesempenho.getMediaSono());
+            ps.setDouble(2, oDesempenho.getMediaCalorias());
+            ps.setDouble(3, oDesempenho.getMediaTreino());
+            ps.setDouble(4, oDesempenho.getIndiceDesempenho());
+            ps.setInt(5, oDesempenho.getIdDesempenho());
+            ps.executeUpdate();
+            
+            return true;
+        }catch(Exception e) {
+        	e.printStackTrace();
+        	return false;
         }
+        
     }
     /*
      * deletar na tabela desempenho
      */
-    public void deletarDesempenho(int id) throws SQLException {
+    public boolean deletarDesempenho(int id) {
         String sSql = "DELETE FROM desempenho WHERE iddesempenho = ?";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
+        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            
+            return true;
+        }catch(Exception e) {
+        	e.printStackTrace();
+        	return false;
         }
     }
     /* 
@@ -66,9 +82,9 @@ public class DesempenhoDAO {
         String sSql = "SELECT iddesempenho, mediasono, mediacalorias, mediatreino, indicedesempenho, idusuario "
                    + "FROM desempenho WHERE iddesempenho = ?";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-            stmt.setInt(1, id);
-            try (ResultSet rs = stmt.executeQuery()) {
+        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Desempenho desempenhoRS = new Desempenho();
                     desempenhoRS.setIdDesempenho(rs.getInt("iddesempenho"));
@@ -90,15 +106,15 @@ public class DesempenhoDAO {
     /* 
      * listar desempenho por usuário
      */
-    public List<Desempenho> listarDesempenhoPorUsuario(long idUsuario) throws SQLException {
+    public List<Desempenho> listarDesempenhoPorUsuario(int idUsuario) throws SQLException {
         String sSql = "SELECT iddesempenho, mediasono, mediacalorias, mediatreino, indicedesempenho, idusuario "
                    + "FROM desempenho WHERE idusuario = ? ORDER BY iddesempenho";
 
         List<Desempenho> lista = new ArrayList<>();
 
-        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-            stmt.setLong(1, idUsuario);
-            try (ResultSet rs = stmt.executeQuery()) {
+        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+            ps.setInt(1, idUsuario);
+            try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Desempenho desempenhoRS = new Desempenho();
                     desempenhoRS.setIdDesempenho(rs.getInt("iddesempenho"));
@@ -114,7 +130,10 @@ public class DesempenhoDAO {
                     lista.add(desempenhoRS);
                 }
             }
+            return lista;
+        }catch(Exception e) {
+        	e.printStackTrace();
+    		return null;        
         }
-        return lista;
     }
 }

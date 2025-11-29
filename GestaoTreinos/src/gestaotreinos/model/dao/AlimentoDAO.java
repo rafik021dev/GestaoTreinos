@@ -18,79 +18,102 @@ public class AlimentoDAO {
 	    /*
 	     * inserir na tabela alimento
 	     */
-	    public void inserirAlimento(Alimento oAlimento, long idRefeicao) throws SQLException {
+	    public boolean inserirAlimento(Alimento oAlimento, int idRefeicao){
 	        String sSql = "INSERT INTO alimento (nome, quantidade, calorias, idrefeicao) "
 	                   + "VALUES (?, ?, ?, ?)";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-	            stmt.setString(1, oAlimento.getNomeAlimento());
-	            stmt.setDouble(2, oAlimento.getQuantidade());
-	            stmt.setInt(3, oAlimento.getCalorias());
-	            stmt.setLong(4, idRefeicao);
-	            stmt.executeUpdate();
+	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+	            ps.setString(1, oAlimento.getNomeAlimento());
+	            ps.setDouble(2, oAlimento.getQuantidade());
+	            ps.setInt(3, oAlimento.getCalorias());
+	            ps.setInt(4, idRefeicao);
+	            ps.executeUpdate();
+	            return true;
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
 	        }
 	    }
 	    /*
 	     * atualizar na tabela alimento
 	     */
-	    public void atualizarAlimento(Alimento alimento) throws SQLException {
+	    public boolean atualizarAlimento(Alimento alimento) {
 	        String sSql = "UPDATE alimento SET nome = ?, quantidade = ?, calorias = ? "
 	                   + "WHERE idalimento = ?";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-	            stmt.setString(1, alimento.getNomeAlimento());
-	            stmt.setDouble(2, alimento.getQuantidade());
-	            stmt.setInt(3, alimento.getCalorias());
-	            stmt.setLong(4, alimento.getIdAlimento());
-	            stmt.executeUpdate();
+	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+	            ps.setString(1, alimento.getNomeAlimento());
+	            ps.setDouble(2, alimento.getQuantidade());
+	            ps.setInt(3, alimento.getCalorias());
+	            ps.setInt(4, alimento.getIdAlimento());
+	            ps.executeUpdate();
+	            return true;
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
 	        }
 	    }
 	    /*
 	     * deletar na tabela alimento
 	     */
-	    public void deletarAlimento(long id) throws SQLException {
+	    public boolean deletarAlimento(int id) {
 	        String sSql = "DELETE FROM alimento WHERE idalimento = ?";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-	            stmt.setLong(1, id);
-	            stmt.executeUpdate();
-	        }
+	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+	            ps.setInt(1, id);
+	            ps.executeUpdate();
+	            return true;
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        }	        
 	    }
 	    /*
 	     * deletar alimentos por refeição
 	     */
-	    public void deletarPorRefeicao(long idRefeicao) throws SQLException {
+	    public boolean deletarPorRefeicao(int idRefeicao) {
 	        String sSql = "DELETE FROM alimento WHERE idrefeicao = ?";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-	            stmt.setLong(1, idRefeicao);
-	            stmt.executeUpdate();
-	        }
+	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+	            ps.setInt(1, idRefeicao);
+	            ps.executeUpdate();
+	            return true;
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        }	        
 	    }
 	    /*
 	     * listar alimentos por refeição
 	     */
-	    public List<Alimento> listarPorRefeicao(long idRefeicao) throws SQLException {
+	    public List<Alimento> listaPorRefeicao(int idRefeicao){
 	        String sSql = "SELECT idalimento, nome, quantidade, calorias, idrefeicao FROM alimento "
 	                   + "WHERE idrefeicao = ? ORDER BY nome ASC";
 
 	        List<Alimento> lista = new ArrayList<>();
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-	            stmt.setLong(1, idRefeicao);
-	            try (ResultSet rs = stmt.executeQuery()) {
+	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+	            ps.setInt(1, idRefeicao);
+	            try (ResultSet rs = ps.executeQuery()) {
 	                while (rs.next()) {
 	                   Alimento AlimentoRS = new Alimento();
 	                   AlimentoRS.setIdAlimento(rs.getInt("idalimento"));
 	                   AlimentoRS.setNomeAlimento(rs.getString("nome"));
 	                   AlimentoRS.setQuantidade(rs.getDouble("quantidade"));
 	                   AlimentoRS.setCalorias(rs.getInt("calorias"));
-	                   
+	                  	                  
 	                   lista.add(AlimentoRS);
 	                }
 	            }
-	        }
-	        return lista;
+	            return lista;
+	        }catch(Exception e) {
+	        	e.printStackTrace();
+	        	return null;
+	        }	        
 	    }
 	    	    
 }	    

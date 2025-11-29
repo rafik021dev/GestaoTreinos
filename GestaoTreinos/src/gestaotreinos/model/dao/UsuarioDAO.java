@@ -22,80 +22,95 @@ public class UsuarioDAO {
      * @param oUsuario
      * @throws SQLException
      */
-	public void insertUsuario(Usuario oUsuario) throws SQLException{
+	public boolean insertUsuario(Usuario oUsuario) {
 		String sSql = "INSERT INTO usuario "
                 + "(nome, sexo, idade, peso, altura, metapeso, email, senha)"
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-		try (PreparedStatement stmt = conn.prepareStatement(sSql)){
-			stmt.setString(1, oUsuario.getNome());
-			stmt.setString(2,String.valueOf(oUsuario.getSexo()));
-			stmt.setInt(3, oUsuario.getIdade());
-			stmt.setDouble(4, oUsuario.getPeso());
-			stmt.setDouble(5, oUsuario.getAltura());
+		try (PreparedStatement ps = conn.prepareStatement(sSql)){
+			ps.setString(1, oUsuario.getNome());
+			ps.setString(2,String.valueOf(oUsuario.getSexo()));
+			ps.setInt(3, oUsuario.getIdade());
+			ps.setDouble(4, oUsuario.getPeso());
+			ps.setDouble(5, oUsuario.getAltura());
 			
 			if(oUsuario.getMetaPeso() != null) {
-				stmt.setDouble(6, oUsuario.getMetaPeso());
+				ps.setDouble(6, oUsuario.getMetaPeso());
 			}
 			else {	
-				stmt.setNull(6, java.sql.Types.DECIMAL);
+				ps.setNull(6, java.sql.Types.DECIMAL);
 			}
 			
-			stmt.setString(7, oUsuario.getEmail());
-			stmt.setString(8, oUsuario.getSenha());
+			ps.setString(7, oUsuario.getEmail());
+			ps.setString(8, oUsuario.getSenha());
 
-			stmt.executeUpdate();
+			ps.executeUpdate();
+            return true;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
 		}
 	}
 	/*
 	 * metodo responsável por atualizar um usuário ja cadastrado no sistema
 	 */
-	public void atualizarUsuario(Usuario oUsuario) throws SQLException{
+	public boolean atualizarUsuario(Usuario oUsuario) {
 		String sSql = "UPDATE usuario SET"
 				+"nome = ?, sexo = ?, idade = ?, peso = ?,"
 				+ " altura = ?, metapeso = ?, email = ?, senha = ? "
 				+"WHERE idusuario = ?";
-		try (PreparedStatement stmt = conn.prepareStatement(sSql)){
-			stmt.setString(1, oUsuario.getNome());
-			stmt.setString(2,String.valueOf(oUsuario.getSexo()));
-			stmt.setInt(3, oUsuario.getIdade());
-			stmt.setDouble(4, oUsuario.getPeso());
-			stmt.setDouble(5, oUsuario.getAltura());
+		try (PreparedStatement ps = conn.prepareStatement(sSql)){
+			ps.setString(1, oUsuario.getNome());
+			ps.setString(2,String.valueOf(oUsuario.getSexo()));
+			ps.setInt(3, oUsuario.getIdade());
+			ps.setDouble(4, oUsuario.getPeso());
+			ps.setDouble(5, oUsuario.getAltura());
 			
 			if(oUsuario.getMetaPeso() != null) {
-				stmt.setDouble(6, oUsuario.getMetaPeso());
+				ps.setDouble(6, oUsuario.getMetaPeso());
 			}
 			else {	
-				stmt.setNull(6, java.sql.Types.DECIMAL);
+				ps.setNull(6, java.sql.Types.DECIMAL);
 			}
 			
-			stmt.setString(7, oUsuario.getEmail());
-			stmt.setString(8, oUsuario.getSenha());
-			stmt.setLong(9, oUsuario.getIdUsuario());
+			ps.setString(7, oUsuario.getEmail());
+			ps.setString(8, oUsuario.getSenha());
+			ps.setInt(9, oUsuario.getIdUsuario());
 
-			stmt.executeUpdate();
+			ps.executeUpdate();
+            return true;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
 		}
 	}	
 	/*
 	 * metodo responável por deletar um usuário cadastrado no sistema
 	 */
-	public void deletarUsuario(long id) throws SQLException{
+	public boolean deletarUsuario(int idUsuario) {
 		String sSql = "DELETE FROM usuario WHERE idusuario = ?";
 		
-		try (PreparedStatement stmt = conn.prepareStatement(sSql)){
-			stmt.setLong(1, id);
-			stmt.executeUpdate();
+		try (PreparedStatement ps = conn.prepareStatement(sSql)){
+			ps.setInt(1, idUsuario);
+			ps.executeUpdate();
+            return true;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
 		}
 	}
 	/* 
 	 * metodo para realizar uma busca por id nos usuários do sistema
 	 */
-	    public Usuario buscarPorIdusuario(long id) throws SQLException {
+	    public Usuario buscarPorIdusuario(int idUsuario) throws SQLException {
 	        String sSql = "SELECT idusuario, nome, sexo, idade, peso, altura, "
 	                   + "metapeso, email, senha FROM usuario WHERE idusuario = ?";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-	            stmt.setLong(1, id);
-	            try (ResultSet rs = stmt.executeQuery()) {
+	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+	            ps.setInt(1, idUsuario);
+	            try (ResultSet rs = ps.executeQuery()) {
 	                if (rs.next()) {
 	                   Usuario usuarioRS = new Usuario();
 	                   usuarioRS.setIdUsuario(rs.getInt("idusuario"));
@@ -124,8 +139,8 @@ public class UsuarioDAO {
 	        
 	        List<Usuario> lista = new ArrayList<>();	
 	
-	        try (PreparedStatement stmt = conn.prepareStatement(sSql);
-	        		ResultSet rs = stmt.executeQuery()) {
+	        try (PreparedStatement ps = conn.prepareStatement(sSql);
+	        		ResultSet rs = ps.executeQuery()) {
 	        			while(rs.next()) {
 	        				 Usuario usuarioRS = new Usuario();
 	  	                   usuarioRS.setIdUsuario(rs.getInt("idusuario"));
@@ -139,11 +154,13 @@ public class UsuarioDAO {
 	  	                   usuarioRS.setSenha(rs.getString("senha"));	 
 	  	                   
 	  	                   lista.add(usuarioRS);
-	        			}
-	        		}
-	        return lista;
-	    }
-	    
+	        			}	        		
+	        	return lista;
+	        }catch(Exception e) {
+	        	e.printStackTrace();
+    			return null;
+	        }
+	    }  
         /*
          * Método responsável por validar o Login do Usuário no Sistema
          * @param oUsuario

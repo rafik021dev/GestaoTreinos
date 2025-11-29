@@ -19,54 +19,71 @@ public class AlertaDAO {
 	    /* 
 	     * inserir na tabela alerta
 	     */
-	    public void inserirAlerta(Alerta oAlerta) throws SQLException {
+	    public boolean inserirAlerta(Alerta oAlerta){
 	        String sSql = "INSERT INTO alerta (data, tipo, mensagem, idusuario) "
 	                   + "VALUES (?, ?, ?, ?)";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-	            stmt.setDate(1, Date.valueOf(oAlerta.getData()));
-	            stmt.setString(2, oAlerta.getTipo().toString());
-	            stmt.setString(3, oAlerta.getMensagem());
-	            stmt.setLong(4, oAlerta.getUsuario().getIdUsuario());
-	            stmt.executeUpdate();
+	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+	            ps.setDate(1, Date.valueOf(oAlerta.getData()));
+	            ps.setString(2, oAlerta.getTipo().name());
+	            ps.setString(3, oAlerta.getMensagem());
+	            ps.setInt(4, oAlerta.getUsuario().getIdUsuario());
+	            ps.executeUpdate();
+	            return true;
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	            
 	        }
 	    }
 	    /* 
 	     * atualizar na tabela alerta
 	     */
-	    public void atualizarAlerta(Alerta oAlerta) throws SQLException {
+	    public boolean atualizarAlerta(Alerta oAlerta) {
 	        String sSql = "UPDATE alerta SET data = ?, tipo = ?, mensagem = ?, idusuario = ? "
 	                   + "WHERE idalerta = ?";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-	            stmt.setDate(1, Date.valueOf(oAlerta.getData()));
-	            stmt.setString(2, oAlerta.getTipo().toString());
-	            stmt.setString(3, oAlerta.getMensagem());
-	            stmt.setLong(4, oAlerta.getUsuario().getIdUsuario());
-	            stmt.setLong(5, oAlerta.getIdAlerta());
-	            stmt.executeUpdate();
+	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+	            ps.setDate(1, Date.valueOf(oAlerta.getData()));
+	            ps.setString(2, oAlerta.getTipo().name());
+	            ps.setString(3, oAlerta.getMensagem());
+	            ps.setInt(4, oAlerta.getUsuario().getIdUsuario());
+	            ps.setInt(5, oAlerta.getIdAlerta());
+	            ps.executeUpdate();
+	            return true;
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	            
 	        }
 	    }
 	    /*
 	     * deletar na tabela alerta
 	     */
-	    public void deletarAlerta(long id) throws SQLException {
+	    public boolean deletarAlerta(int id) {
 	        String sSql = "DELETE FROM alerta WHERE idalerta = ?";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-	            stmt.setLong(1, id);
-	            stmt.executeUpdate();
+	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+	            ps.setInt(1, id);
+	            ps.executeUpdate();
+	            return true;
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
 	        }
 	    }
 	    /* 
 	     * buscar pelo id na tabela alerta
 	     */
-	    public Alerta buscarPorIdalerta(long id) throws SQLException {
+	    public Alerta buscarPorIdalerta(int id) throws SQLException {
 	        String sSql = "SELECT idalerta, data, tipo, mensagem, idusuario FROM alerta WHERE idalerta = ?";
 
-	        try (PreparedStatement stmt = conn.prepareStatement(sSql)) {
-	            stmt.setLong(1, id);
-	            try (ResultSet rs = stmt.executeQuery()) {
+	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+	            ps.setInt(1, id);
+	            try (ResultSet rs = ps.executeQuery()) {
 	                if (rs.next()) {
 	                	Alerta alertaRS = new Alerta();
 	                	alertaRS.setIdAlerta(rs.getInt("idalerta"));

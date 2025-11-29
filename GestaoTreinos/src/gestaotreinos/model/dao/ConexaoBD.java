@@ -13,11 +13,10 @@ public class ConexaoBD {
 					System.out.println("Conexão estabelecida.");
 				}else
 					System.out.println("A conexão falhou.");
-			
-		}catch(Exception e) {
-			System.out.println("Erro ao conectar: " + e.getMessage());
-			e.printStackTrace();
-		}
-		return conn;	
-	}	
+			}catch(Exception e) {
+				System.out.println("Erro ao conectar: " + e.getMessage());
+				e.printStackTrace();
+			}
+			return conn;	
+	}
 }
