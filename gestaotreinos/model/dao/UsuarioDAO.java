@@ -8,15 +8,15 @@ import gestaotreinos.model.entity.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
 
-	private Connection conn;
+	Connection conn;
 	
 	public UsuarioDAO(Connection conn) {
         this.conn = conn;
@@ -160,19 +160,18 @@ public class UsuarioDAO {
 	  	                   
 	  	                   lista.add(usuarioRS);
 	        			}
-	        	}
-	        	return lista;
 	        }
+	        	return lista;
 	    }  
         /*
          * Método responsável por validar o Login do Usuário no Sistema
          * @param oUsuario
          * @return ResultSet ResSet
          * @todo TESTAR!
+		 */
          
         public ResultSet autenticacaoUsuario(Usuario oUsuario) {
-            //conn = new ConexaoBD().//amanhã, adaptar o novo método de conexao passando os parâmetros corretos
-        //método não testado, apenas copiei o que tinha feito no NetBeans
+            conn = new ConexaoBD().conectaBD();
             try {
                 String sSql = "SELECT nome," +
                                     " senha " +
@@ -191,10 +190,10 @@ public class UsuarioDAO {
 
             } catch (SQLException erro) {
                 JOptionPane.showMessageDialog(null, "UsuarioDAO: " + erro);
-
                 return null;
             }
-        }*/	
+        }
+}
 	
 
 

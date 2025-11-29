@@ -1,10 +1,11 @@
 package gestaotreinos.view;
 
-import gestaotreinos.dao.UsuarioDAO;
+import gestaotreinos.model.dao.UsuarioDAO;
 import gestaotreinos.model.entity.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import gestaotreinos.model.dao.ConexaoBD;
 
 public class ViewLogin extends javax.swing.JFrame {
     
@@ -113,36 +114,33 @@ public class ViewLogin extends javax.swing.JFrame {
     /**
      * Método responsável por Validar o Login do Usuário.
      */
-    private void Login() {
-        try {
-            String sEmailUsuario, sSenhaUsuario;
-        
-            sEmailUsuario = txtEmailUsuario.getText();
-            sSenhaUsuario = txtSenhaUsuario.getText();
-        
-            Usuario oUsuario = new Usuario();
+private void Login() {
+    try {
+        String sEmailUsuario, sSenhaUsuario;
 
-            //Setando as informações da tela de Login para o objeto Usuário
-            oUsuario.setEmail(sEmailUsuario);
-            oUsuario.setSenha(sSenhaUsuario);
-            
-            UsuarioDAO oUsuarioDAO = new UsuarioDAO();
-            ResultSet ResSetUsuarioDAO = oUsuarioDAO.autenticacaoUsuario(oUsuario);
-            
-            if (ResSetUsuarioDAO.next()) {
-                //Caso o Login seja bem sucedido, abrirá a tela Principal do Sistema e logo em seguida fechará a tela de Login atual.
-                ViewPrincipal oViewPrincipal = new ViewPrincipal();
-                oViewPrincipal.setVisible(true);
+        sEmailUsuario = txtEmailUsuario.getText();
+        sSenhaUsuario = txtSenhaUsuario.getText();
 
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Informações de Login Inválidas");
-            }
-            
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "ViewLogin" + erro);
+        Usuario oUsuario = new Usuario();
+        oUsuario.setEmail(sEmailUsuario);
+        oUsuario.setSenha(sSenhaUsuario);
+
+        java.sql.Connection conn = ConexaoBD.conectaBD();
+        UsuarioDAO oUsuarioDAO = new UsuarioDAO(conn);
+        ResultSet ResSetUsuarioDAO = oUsuarioDAO.autenticacaoUsuario(oUsuario);
+
+        if (ResSetUsuarioDAO.next()) {
+            ViewPrincipal oViewPrincipal = new ViewPrincipal();
+            oViewPrincipal.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Informações de Login Inválidas");
         }
+
+    } catch (SQLException erro) {
+        JOptionPane.showMessageDialog(null, "ViewLogin" + erro);
     }
+}
     /**
      * @param args the command line arguments
      */
