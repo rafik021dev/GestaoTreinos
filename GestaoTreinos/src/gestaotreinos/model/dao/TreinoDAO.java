@@ -5,7 +5,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import gestaotreinos.enums.TipoTreino;
+import gestaotreinos.model.entity.Exercicio;
 import gestaotreinos.model.entity.Treino;
 import gestaotreinos.model.entity.Usuario;
 
@@ -96,5 +100,46 @@ public class TreinoDAO {
 	                }
 	            }  
 	            return null;
-	        }	      	    	   	    	    	    
+	        }	      
+	        /*
+	         * lista os treino pelo idusuario
+	         */
+	        public List<Treino> listarTreinosPorUsuario(int idUsuario) throws SQLException {
+	            String sSql = "SELECT idtreino, data, tipo, idusuario FROM treino WHERE idusuario = ? ORDER BY data DESC";
+	            List<Treino> lista = new ArrayList<>();
+
+	            ExercicioDAO exercicioDAO = new ExercicioDAO(conn);
+	            
+	            try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+	                ps.setInt(1, idUsuario);
+	                try (ResultSet rs = ps.executeQuery()) {
+	                    while (rs.next()) {
+	                        Treino treinoRS = new Treino();
+	                        treinoRS.setIdTreino(rs.getInt("idtreino"));
+	                        treinoRS.setData(rs.getDate("data").toLocalDate());
+	                        treinoRS.setTipo(TipoTreino.valueOf(rs.getString("tipo")));
+	                        List<Exercicio> exerciciosTreino = exercicioDAO.listarPorTreino(treinoRS.getIdTreino());
+	                        treinoRS.setExercicios(exerciciosTreino);
+	                        
+	                        lista.add(treinoRS);
+	                    }
+	                }
+	            }
+	            return lista;
+	        }
+	        public int buscarUltimoId(int idUsuario) throws SQLException {
+	           
+	            String sSql = "SELECT MAX(idtreino) as id FROM treino WHERE idusuario = ?";
+	            
+	            try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+	                ps.setInt(1, idUsuario);
+	                
+	                try (ResultSet rs = ps.executeQuery()) {
+	                    if (rs.next()) {
+	                        return rs.getInt("id");
+	                    }
+	                }
+	            }
+	            return 0;
+	        }
   }

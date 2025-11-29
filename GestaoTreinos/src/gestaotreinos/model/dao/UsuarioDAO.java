@@ -22,7 +22,7 @@ public class UsuarioDAO {
      * @param oUsuario
      * @throws SQLException
      */
-	public boolean insertUsuario(Usuario oUsuario) {
+	public boolean inserir(Usuario oUsuario) {
 		String sSql = "INSERT INTO usuario "
                 + "(nome, sexo, idade, peso, altura, metapeso, email, senha)"
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -54,7 +54,7 @@ public class UsuarioDAO {
 	/*
 	 * metodo responsável por atualizar um usuário ja cadastrado no sistema
 	 */
-	public boolean atualizarUsuario(Usuario oUsuario) {
+	public boolean atualizar(Usuario oUsuario) {
 		String sSql = "UPDATE usuario SET"
 				+"nome = ?, sexo = ?, idade = ?, peso = ?,"
 				+ " altura = ?, metapeso = ?, email = ?, senha = ? "
@@ -88,7 +88,7 @@ public class UsuarioDAO {
 	/*
 	 * metodo responável por deletar um usuário cadastrado no sistema
 	 */
-	public boolean deletarUsuario(int idUsuario) {
+	public boolean deletar(int idUsuario) {
 		String sSql = "DELETE FROM usuario WHERE idusuario = ?";
 		
 		try (PreparedStatement ps = conn.prepareStatement(sSql)){
@@ -104,7 +104,7 @@ public class UsuarioDAO {
 	/* 
 	 * metodo para realizar uma busca por id nos usuários do sistema
 	 */
-	    public Usuario buscarPorIdusuario(int idUsuario) throws SQLException {
+	    public Usuario buscarPorId(int idUsuario) throws SQLException {
 	        String sSql = "SELECT idusuario, nome, sexo, idade, peso, altura, "
 	                   + "metapeso, email, senha FROM usuario WHERE idusuario = ?";
 
@@ -154,11 +154,9 @@ public class UsuarioDAO {
 	  	                   usuarioRS.setSenha(rs.getString("senha"));	 
 	  	                   
 	  	                   lista.add(usuarioRS);
-	        			}	        		
+	        			}
+	        	}
 	        	return lista;
-	        }catch(Exception e) {
-	        	e.printStackTrace();
-    			return null;
 	        }
 	    }  
         /*
