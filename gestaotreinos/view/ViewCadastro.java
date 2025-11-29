@@ -4,6 +4,7 @@
  */
 package GestaoTreinos.src.gestaotreinos.view;
 
+import gestaotreinos.controller.entity.UsuarioController;
 import javax.swing.JOptionPane;
 
 /**
@@ -44,17 +45,17 @@ public class ViewCadastro extends javax.swing.JFrame {
         jRadioButtonMasc = new javax.swing.JRadioButton();
         jRadioButtonFem = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        jSIdade = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
-        jSpinner2 = new javax.swing.JSpinner();
+        jSPeso = new javax.swing.JSpinner();
         jLabel11 = new javax.swing.JLabel();
-        jSpinner3 = new javax.swing.JSpinner();
+        jSMetaPeso = new javax.swing.JSpinner();
         jSeparator7 = new javax.swing.JSeparator();
-        jTextFieldName = new javax.swing.JTextField();
+        jTNome = new javax.swing.JTextField();
         jTextFieldEmail = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton2 = new javax.swing.JButton();
@@ -85,7 +86,7 @@ public class ViewCadastro extends javax.swing.JFrame {
 
         jLabel4.setText("Sexo:");
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(18, 1, 120, 1));
+        jSIdade.setModel(new javax.swing.SpinnerNumberModel(18, 1, 120, 1));
 
         jLabel8.setText("Idade:");
         jLabel8.setToolTipText("");
@@ -94,15 +95,15 @@ public class ViewCadastro extends javax.swing.JFrame {
 
         jLabel10.setText("Peso Atual:");
 
-        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 0.0d));
+        jSPeso.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 0.0d));
 
         jLabel11.setText("Meta de Peso:");
 
-        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0.0f, null, null, 0.0f));
-        jSpinner3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jSpinner3.setName(""); // NOI18N
+        jSMetaPeso.setModel(new javax.swing.SpinnerNumberModel(0.0f, null, null, 0.0f));
+        jSMetaPeso.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jSMetaPeso.setName(""); // NOI18N
 
-        jTextFieldName.addActionListener(this::jTextFieldNameActionPerformed);
+        jTNome.addActionListener(this::jTNomeActionPerformed);
 
         jPasswordField1.addActionListener(this::jPasswordField1ActionPerformed);
 
@@ -134,7 +135,7 @@ public class ViewCadastro extends javax.swing.JFrame {
                                             .addComponent(jLabel8))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jSIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jRadioButtonMasc)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -150,8 +151,8 @@ public class ViewCadastro extends javax.swing.JFrame {
                                             .addComponent(jLabel10))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jSpinner2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                                            .addComponent(jSpinner3))))))
+                                            .addComponent(jSPeso, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                                            .addComponent(jSMetaPeso))))))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(38, 38, 38)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -165,7 +166,7 @@ public class ViewCadastro extends javax.swing.JFrame {
                                     .addGap(30, 30, 30)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jTextFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                                        .addComponent(jTextFieldName)
+                                        .addComponent(jTNome)
                                         .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(204, 204, 204)
@@ -186,7 +187,7 @@ public class ViewCadastro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -208,7 +209,7 @@ public class ViewCadastro extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,11 +220,11 @@ public class ViewCadastro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSMetaPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -242,12 +243,12 @@ public class ViewCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonMascActionPerformed
 
-    private void jTextFieldNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNameActionPerformed
+    private void jTNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNomeActionPerformed
        
-    }//GEN-LAST:event_jTextFieldNameActionPerformed
+    }//GEN-LAST:event_jTNomeActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       String nome = jTextFieldName.toString();
+       String nome = jTNome.toString();
        String email = jTextFieldEmail.toString();
        String Senha = jPasswordField1.toString();
        String sexo = "";
@@ -255,10 +256,16 @@ public class ViewCadastro extends javax.swing.JFrame {
            sexo = "F";
        }else if(jRadioButtonMasc.isSelected()){
            sexo = "M";
-       }
+       }     
+       String idade = jSIdade.getValue().toString();
+       String peso = jSPeso.getValue().toString();
+       String meta = jSMetaPeso.getValue().toString();
        
-       
-       
+        UsuarioController cont = new UsuarioController();
+        String resultado = cont.cadastrar(nome, email, Senha, sexo, idade, peso, sexo, meta);
+        
+        JOptionPane.showMessageDialog(this, resultado);
+                    
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
@@ -307,6 +314,9 @@ public class ViewCadastro extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JRadioButton jRadioButtonFem;
     private javax.swing.JRadioButton jRadioButtonMasc;
+    private javax.swing.JSpinner jSIdade;
+    private javax.swing.JSpinner jSMetaPeso;
+    private javax.swing.JSpinner jSPeso;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -314,10 +324,7 @@ public class ViewCadastro extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JSpinner jSpinner3;
+    private javax.swing.JTextField jTNome;
     private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package gestaotreinos.model.bo;
+package gestaotreinos.model.BO;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,20 +13,6 @@ public class UsuarioBO {
 	public UsuarioBO(Connection conn){
 		this.conn = conn;
 	}	
-        public boolean inserirUsuario(Usuario usuario) throws SQLException {
-            UsuarioDAO dao = new UsuarioDAO(conn);
-
-            List<Usuario> lista = dao.listarUsuarios();
-            if (lista != null) {
-                for (Usuario u : lista) {
-
-            if (u.getEmail() != null && u.getEmail().equalsIgnoreCase(usuario.getEmail())) {
-                throw new IllegalArgumentException("Este email já está cadastrado.");
-            }
-        }
-    }
-    return dao.inserir(usuario);
-}
 	
 	public boolean atualizarUsuario(Usuario usuario){
 		UsuarioDAO dao = new UsuarioDAO(conn);
@@ -74,4 +56,3 @@ public class UsuarioBO {
 		return u;
 	}
 }
-
