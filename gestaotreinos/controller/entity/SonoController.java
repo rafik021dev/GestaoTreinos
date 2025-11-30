@@ -9,12 +9,15 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import gestaotreinos.enums.QualidadeSono;
+import gestaotreinos.enums.TipoAlerta;
+import gestaotreinos.model.dao.AlertaDAO;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import gestaotreinos.model.entity.Sono;
 import gestaotreinos.model.dao.ConexaoBD;
 import gestaotreinos.model.dao.SonoDAO;
+import gestaotreinos.model.entity.Alerta;
 
 
 
@@ -55,27 +58,34 @@ public class SonoController {
             }
 
             SonoDAO dao = new SonoDAO(conn);
-
-            String alerta = "";
+            if (!dao.inserirSono(sono)) {
+                return "erro: falha ao salvar no banco.";
+            }
+              
+           
             if (sono.getHorasDormidas() < 6.0) {
-                List<Sono> historico = dao.listarSonoPorUsuario(idUsuario);
+                List<Sono> listaSono = dao.listarSonoPorUsuario(idUsuario);
                 
-                if (historico != null && historico.size() >= 2){
-                    Sono ultimo = historico.get(0);
-                    Sono penultimo = historico.get(1);
+                if (listaSono != null && listaSono.size() >= 3){
+                    Sono ontem = listaSono.get(1);
+                    Sono anteontem = listaSono.get(2);
                     
-                    if (ultimo.getHorasDormidas() < 6.0 && penultimo.getHorasDormidas() < 6.0) {
-                        alerta = "CUIDADO: voce dormiu menos de 6h nos ultimos 3 dias";
+                    AlertaDAO alertaDAO = new AlertaDAO(conn);
+                    Alerta alerta = new Alerta();
+                    
+                    if (ontem.getHorasDormidas() < 6.0 && anteontem.getHorasDormidas() < 6.0) {     
+                        alerta.setData(LocalDate.now());
+                        alerta.setMensagem("CUIDADO: voce dormiu menos de 6h nos ultimos 3 dias");
+                        alerta.setTipo(TipoAlerta.SONO);
+                        alerta.setUsuario(usuario);
+                       
+                        alertaDAO.inserirAlerta(alerta);
+                        System.out.println(alerta.getMensagem());
                     }
                 }
             }
+            return "Registro de sono realizado";
             
-            if (dao.inserirSono(sono)) {
-                return "Registro de sono realizado";
-            } else {
-                return "erro: falha ao salvar no banco.";
-            }
-
         } catch (DateTimeParseException e) {
             return "erro: data invalida";
         } catch (NumberFormatException e) {
