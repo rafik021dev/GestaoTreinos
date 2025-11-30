@@ -131,7 +131,25 @@ public class UsuarioDAO {
 	            }
 	       }
 	    }
-	    
+            /*metodo responsavel por buscar id com email e senha
+            * @param email, senha
+            *return idusuario
+            */
+            public int BuscarIdPorEmailSenha(String email, String senha){
+                String sSql = "SELECT idusuario FROM usuario where email = ? AND senha = ?";
+                try (PreparedStatement ps = conn.prepareStatement(sSql)){
+                    ps.setString(1, email);
+                    ps.setString(2, senha);
+                    try(ResultSet rs = ps.executeQuery()){
+                        if(rs.next()){
+                            return rs.getInt("idusuario");
+                        }
+                    }
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
+                return 0;
+            }           
 	    /* 
 	     * metodo para listar todos usuários do sistema por ordem de id
 	     */

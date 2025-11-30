@@ -29,21 +29,22 @@ public class ViewRegistros extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        jBTreino = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jBSono = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Registrar");
 
-        jButton1.setText("Treino");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jBTreino.setText("Treino");
+        jBTreino.addActionListener(this::jBTreinoActionPerformed);
 
         jButton2.setText("Refeição");
 
-        jButton3.setText("Sono");
+        jBSono.setText("Sono");
+        jBSono.addActionListener(this::jBSonoActionPerformed);
 
         jButton4.setText("Voltar");
         jButton4.addActionListener(this::jButton4ActionPerformed);
@@ -67,9 +68,9 @@ public class ViewRegistros extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(128, 128, 128)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBTreino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBSono, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(134, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -80,11 +81,11 @@ public class ViewRegistros extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
-                .addComponent(jButton1)
+                .addComponent(jBTreino)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(jBSono)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addContainerGap())
@@ -93,13 +94,23 @@ public class ViewRegistros extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jBTreinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTreinoActionPerformed
+        ViewRegistrarTreino oViewRegistrarTreino = new ViewRegistrarTreino();   
+        oViewRegistrarTreino.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jBTreinoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+      ViewPrincipal oViewPrincipal = new ViewPrincipal();   
+        oViewPrincipal.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jBSonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSonoActionPerformed
+         ViewRegistrarSono oViewRegistrarSono = new ViewRegistrarSono();   
+        oViewRegistrarSono.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jBSonoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,9 +138,9 @@ public class ViewRegistros extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBSono;
+    private javax.swing.JButton jBTreino;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;

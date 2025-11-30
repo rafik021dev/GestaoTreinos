@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import gestaotreinos.enums.TipoTreino;
+import java.util.Date;
 /**
  *
  * @author rafae
@@ -49,10 +50,11 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo:");
 
-        sTipoTreino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PEITO", "COSTAS", "BRACO", "OMBRO", "PERNA" }));
+        sTipoTreino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Peito", "Costas", "Braco", "Ombro", "Perna" }));
         sTipoTreino.addActionListener(this::sTipoTreinoActionPerformed);
 
         jButton1.setText("Voltar");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         btnAvancar.setText("Avançar");
         btnAvancar.addActionListener(this::btnAvancarActionPerformed);
@@ -112,7 +114,7 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvancarActionPerformed
-        java.util.Date data = sDataTreino.getDate();
+        Date data = sDataTreino.getDate();
         if(data == null){
             JOptionPane.showMessageDialog(this, "selecione uma data valid");
             return;
@@ -131,6 +133,12 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
     private void sTipoTreinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sTipoTreinoActionPerformed
         
     }//GEN-LAST:event_sTipoTreinoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       ViewRegistros oViewRegistros = new ViewRegistros();   
+        oViewRegistros.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
      * @param args the command line arguments

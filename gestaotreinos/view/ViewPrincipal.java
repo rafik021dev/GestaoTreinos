@@ -49,11 +49,13 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
         jButton2.setText("Registros");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         jButton3.setText("Histórico");
         jButton3.addActionListener(this::jButton3ActionPerformed);
 
         jButton5.setText("Relatórios");
+        jButton5.addActionListener(this::jButton5ActionPerformed);
 
         jButton6.setText("Alertas");
 
@@ -163,12 +165,26 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        ViewUsuario oViewUsuario = new ViewUsuario();   
+        oViewUsuario.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ViewRegistros oViewRegistros = new ViewRegistros();   
+        oViewRegistros.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       ViewRelatorio oViewRelatorio = new ViewRelatorio();   
+       oViewRelatorio.setVisible(true);
+       dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

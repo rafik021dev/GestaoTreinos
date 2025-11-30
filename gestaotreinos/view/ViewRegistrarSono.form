@@ -44,9 +44,9 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="sTipoTreino" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="sDataTreino" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jSpinner1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="sTipoSono" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="sDataSono" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jSHoras" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -71,14 +71,13 @@
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="sDataTreino" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="sDataSono" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="61" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="sTipoTreino" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="sTipoSono" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
@@ -88,7 +87,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jSHoras" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
@@ -110,28 +109,34 @@
         <Property name="text" type="java.lang.String" value="Qualidade"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="sTipoTreino">
+    <Component class="javax.swing.JComboBox" name="sTipoSono">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
-            <StringItem index="0" value="&#xd3;timo"/>
+            <StringItem index="0" value="Otimo"/>
             <StringItem index="1" value="Bom"/>
             <StringItem index="2" value="Regular"/>
             <StringItem index="3" value="Ruim"/>
-            <StringItem index="4" value="P&#xe9;ssimo"/>
+            <StringItem index="4" value="Pessimo"/>
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sTipoSonoActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Avan&#xe7;ar"/>
+        <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="sDataTreino">
+    <Component class="com.toedter.calendar.JDateChooser" name="sDataSono">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -145,7 +150,7 @@
         <Property name="text" type="java.lang.String" value="Horas Dormidas"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JSpinner" name="jSpinner1">
+    <Component class="javax.swing.JSpinner" name="jSHoras">
       <Properties>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
           <SpinnerModel initial="0.0" numberType="java.lang.Double" stepSize="1.0" type="number"/>
@@ -156,6 +161,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Voltar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -4,7 +4,10 @@
  */
 
 package gestaotreinos.view;
-
+import gestaotreinos.controller.entity.SonoController;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 /**
  *
  * @author rafae
@@ -29,13 +32,13 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        sTipoTreino = new javax.swing.JComboBox<>();
+        sTipoSono = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
-        sDataTreino = new com.toedter.calendar.JDateChooser();
+        sDataSono = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        jSHoras = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,17 +47,20 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
 
         jLabel3.setText("Qualidade");
 
-        sTipoTreino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ótimo", "Bom", "Regular", "Ruim", "Péssimo" }));
+        sTipoSono.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Otimo", "Bom", "Regular", "Ruim", "Pessimo" }));
+        sTipoSono.addActionListener(this::sTipoSonoActionPerformed);
 
-        jButton2.setText("Avançar");
+        jButton2.setText("Confirmar");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         jLabel1.setText("Registrar Sono");
 
         jLabel4.setText("Horas Dormidas");
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
+        jSHoras.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
 
         jButton1.setText("Voltar");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,9 +84,9 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(sTipoTreino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(sDataTreino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jSpinner1))))
+                                    .addComponent(sTipoSono, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(sDataSono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jSHoras))))
                         .addGap(0, 131, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -97,13 +103,12 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(sDataTreino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(sDataSono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 43, Short.MAX_VALUE)
+                        .addGap(0, 61, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(sTipoTreino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sTipoSono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(41, 41, 41)
                         .addComponent(jButton2)
@@ -111,7 +116,7 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addContainerGap())))
@@ -119,6 +124,38 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       ViewRegistrarTreino oViewRegistrarTreino = new ViewRegistrarTreino();   
+        oViewRegistrarTreino.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       Date data = sDataSono.getDate();
+        if(data == null){
+            JOptionPane.showMessageDialog(this, "selecione uma data valid");
+            return;
+        }
+        SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
+        String dataTxt = formatar.format(data);
+        
+        double horas =(Double) jSHoras.getValue();
+        String horasTxt = String.valueOf(horas);
+        
+        String qualidade = sTipoSono.getSelectedItem().toString().toUpperCase();
+        
+        int idUsurio = 1;
+        
+        SonoController sCont = new SonoController();
+        String res = sCont.salvarSono(dataTxt, horasTxt, qualidade, idUsurio);
+        
+        JOptionPane.showMessageDialog(this, res);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void sTipoSonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sTipoSonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sTipoSonoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,10 +189,10 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JSpinner jSHoras;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSpinner jSpinner1;
-    private com.toedter.calendar.JDateChooser sDataTreino;
-    private javax.swing.JComboBox<String> sTipoTreino;
+    private com.toedter.calendar.JDateChooser sDataSono;
+    private javax.swing.JComboBox<String> sTipoSono;
     // End of variables declaration//GEN-END:variables
 
 }
