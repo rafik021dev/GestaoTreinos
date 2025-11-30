@@ -130,33 +130,33 @@ public class ViewLogin extends javax.swing.JFrame {
     /**
      * Método responsável por Validar o Login do Usuário.
      */
-private void Login() {
-    try {
-        String sEmailUsuario, sSenhaUsuario;
+    private void Login() {
+        try {
+            String sEmailUsuario, sSenhaUsuario;
 
-        sEmailUsuario = txtEmailUsuario.getText().trim();
-        sSenhaUsuario = txtSenhaUsuario.getText().trim();
+            sEmailUsuario = txtEmailUsuario.getText().trim();
+            sSenhaUsuario = txtSenhaUsuario.getText().trim();
 
-        Usuario oUsuario = new Usuario();
-        oUsuario.setEmail(sEmailUsuario);
-        oUsuario.setSenha(sSenhaUsuario);
+            Usuario oUsuario = new Usuario();
+            oUsuario.setEmail(sEmailUsuario);
+            oUsuario.setSenha(sSenhaUsuario);
 
-        java.sql.Connection conn = ConexaoBD.conectaBD();
-        UsuarioDAO oUsuarioDAO = new UsuarioDAO(conn);
-        ResultSet ResSetUsuarioDAO = oUsuarioDAO.autenticacaoUsuario(oUsuario);
+            java.sql.Connection conn = ConexaoBD.conectaBD();
+            UsuarioDAO oUsuarioDAO = new UsuarioDAO(conn);
+            ResultSet ResSetUsuarioDAO = oUsuarioDAO.autenticacaoUsuario(oUsuario);
 
-        if (ResSetUsuarioDAO.next()) {
-            ViewPrincipal oViewPrincipal = new ViewPrincipal();
-            oViewPrincipal.setVisible(true);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Informações de Login Inválidas");
+            if (ResSetUsuarioDAO.next()) {
+                ViewPrincipal oViewPrincipal = new ViewPrincipal();
+                oViewPrincipal.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Informações de Login Inválidas");
+            }
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "ViewLogin" + erro);
         }
-
-    } catch (SQLException erro) {
-        JOptionPane.showMessageDialog(null, "ViewLogin" + erro);
     }
-}
     /**
      * @param args the command line arguments
      */
