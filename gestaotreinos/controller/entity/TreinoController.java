@@ -31,8 +31,12 @@ public class TreinoController {
     * metodo que gera exercicios predefinidos para o usuario cadastrar
     */
     public List<Exercicio> gerarExercicios(String tipoTexto) {
+        System.out.println("gerarExercicios recebeu: " + tipoTexto);
+   
+         String textoLimpo = tipoTexto.trim().toUpperCase();
+    
         try {
-            TipoTreino tipo = TipoTreino.valueOf(tipoTexto.toUpperCase());
+            TipoTreino tipo = TipoTreino.valueOf(textoLimpo);
             List<Exercicio> lista = new ArrayList<>();
 
             switch (tipo) {
@@ -64,9 +68,12 @@ public class TreinoController {
                 default:
                     break;
             }
+            System.out.println("Controller: Tamanho da lista gerada: " + lista.size());
             return lista;
-            
+           
         } catch (IllegalArgumentException e) {
+            System.out.println("erro: nao existe o Enum ");   
+            e.printStackTrace();        
             return null;
         }
     }
@@ -74,9 +81,7 @@ public class TreinoController {
     private Exercicio criarExercicio(String nome) {
         Exercicio ex = new Exercicio();
         ex.setNome(nome);
-        ex.setCarga(0);
-        ex.setSeries(0);
-        ex.setRepeticoes(0);
+
         return ex;
     }
 

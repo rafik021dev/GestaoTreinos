@@ -44,7 +44,7 @@ public class Exercicio {
 		return carga;
 	}
 	public void setCarga(int carga) {
-		if(carga <= 0) {
+		if(carga < 0) {
 			throw new IllegalArgumentException("A carga deve ser maior que zero.");
 		}
 		this.carga = carga;

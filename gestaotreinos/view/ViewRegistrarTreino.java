@@ -4,6 +4,11 @@
  */
 package gestaotreinos.view;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import gestaotreinos.enums.TipoTreino;
 /**
  *
  * @author rafae
@@ -18,7 +23,6 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
     public ViewRegistrarTreino() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,7 +49,8 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo:");
 
-        sTipoTreino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Peito", "Costas", "Braço", "Ombro", "Pernas" }));
+        sTipoTreino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PEITO", "COSTAS", "BRACO", "OMBRO", "PERNA" }));
+        sTipoTreino.addActionListener(this::sTipoTreinoActionPerformed);
 
         jButton1.setText("Voltar");
 
@@ -73,9 +78,8 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAvancar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(sTipoTreino, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(sDataTreino, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(sTipoTreino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sDataTreino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(127, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(115, 115, 115)
@@ -108,11 +112,26 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvancarActionPerformed
-        ViewRegistrarExercicios oViewRegistrarExercicios = new ViewRegistrarExercicios();
+        java.util.Date data = sDataTreino.getDate();
+        if(data == null){
+            JOptionPane.showMessageDialog(this, "selecione uma data valid");
+            return;
+        }
+        SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
+        String dataTxt = formatar.format(data);
+         
+        String tipo = sTipoTreino.getSelectedItem().toString();
+             
+        ViewRegistrarExercicios oViewRegistrarExercicios = new ViewRegistrarExercicios();   
         oViewRegistrarExercicios.setVisible(true);
-        dispose();
+        oViewRegistrarExercicios.mostrarLista(dataTxt, tipo);
+        dispose();     
     }//GEN-LAST:event_btnAvancarActionPerformed
 
+    private void sTipoTreinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sTipoTreinoActionPerformed
+        
+    }//GEN-LAST:event_sTipoTreinoActionPerformed
+    
     /**
      * @param args the command line arguments
      */
