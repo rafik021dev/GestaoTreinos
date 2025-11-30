@@ -2,9 +2,10 @@ package gestaotreinos.controller.entity;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import gestaotreinos.model.bo.UsuarioBO;
 import gestaotreinos.model.dao.ConexaoBD;
+import gestaotreinos.model.dao.UsuarioDAO;
 import gestaotreinos.model.entity.Usuario;
+import java.util.List;
 
 public class UsuarioController {
 
@@ -18,15 +19,15 @@ public class UsuarioController {
 
     public String cadastrar(String nome, String email, String senha, 
                             String sexoTexto, String idadeTexto, 
-                            String pesoTexto, String alturaTexto, String metaTexto) {
-        try {
-           
+                            String pesoTexto, String alturaTexto,
+                            String metaTexto) throws SQLException {
+        try {          
             if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
-                return "Erro: Nome, Email e Senha são obrigatórios.";
+                return "erro: nome, email e senha sao obrigatorios.";
             }
             
             if (sexoTexto == null || sexoTexto.isEmpty()) {
-                return "Erro: Selecione o sexo (Masculino ou Feminino).";
+                return "erro: selecione o sexo.";
             }
 
             char sexo = sexoTexto.toUpperCase().charAt(0); 
@@ -50,22 +51,47 @@ public class UsuarioController {
             Usuario novoUsuario = new Usuario(nome, sexo, idade, peso, altura, metaPeso);
             novoUsuario.setEmail(email);
             novoUsuario.setSenha(senha);
-
-            UsuarioBO bo = new UsuarioBO(conn);
             
-            if (bo.inserirUsuario(novoUsuario)) {
-                return "Sucesso: Cadastro realizado!";
+            if (inserir(novoUsuario)){
+                return "Cadastro realizado.";
             } else {
-                return "Erro: Falha ao salvar no banco de dados.";
+                return "erro: falha ao salvar no banco de dados.";
             }
-
+            
         } catch (NumberFormatException e) {
-            return "Erro de Formatação: Verifique se Idade, Peso e Altura são números válidos.";
-        } catch (IllegalArgumentException e) {
-            return "Atenção: " + e.getMessage();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "Erro técnico: " + e.getMessage();
+            return e.getMessage();
         }
-    }
+    }    	
+        public boolean inserir(Usuario usuario) throws SQLException {
+            UsuarioDAO dao = new UsuarioDAO(conn);
+
+            List<Usuario> lista = dao.listarUsuarios();
+            if (lista != null) {
+                for(Usuario u : lista){
+
+                    if (u.getEmail() != null && u.getEmail().equalsIgnoreCase(usuario.getEmail())) {
+                        throw new IllegalArgumentException("este email ja esta cadastrado.");
+                    }
+                }
+            }
+         return dao.inserir(usuario);
+        }
+	
+	public boolean atualizarUsuario(Usuario usuario){
+            UsuarioDAO dao = new UsuarioDAO(conn);
+            if(usuario.getIdUsuario() <= 0) {
+		return false;
+            }else {	
+		return dao.atualizar(usuario);	
+            }
+	}
+	
+	public boolean DeletarUsuario(int idUsuario){
+            UsuarioDAO dao = new UsuarioDAO(conn);
+            if(idUsuario <= 0) {
+		return false;
+            }else {
+		return dao.deletar(idUsuario);
+            }
+	}	
 }

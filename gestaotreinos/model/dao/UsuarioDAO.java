@@ -51,10 +51,10 @@ public class UsuarioDAO {
 			ps.executeUpdate();
             return true;
             
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-		}
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
 	}
 	/*
 	 * metodo responsável por atualizar um usuário ja cadastrado no sistema

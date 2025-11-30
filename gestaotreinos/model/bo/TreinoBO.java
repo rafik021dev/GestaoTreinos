@@ -92,20 +92,16 @@ public class TreinoBO {
          * adiciona os exercicios validos ao objeto treino
          */
         treino.setExercicios(exerciciosValidos);
-        // verifica se a lista esta vazia(nao pode estar vazia)
+
         if (treino.getExercicios().isEmpty()) {
             throw new IllegalArgumentException("voce precisa inserir pelo menos um exercicio.");
         }
-        /*
-         * inserir no banco de dados o treino
-         */
+        
         TreinoDAO treinoDAO = new TreinoDAO(conn);    
         treinoDAO.inserirTreino(treino);       
        
-        //pega o id do ultimo treino que foi adicionado
         int idTreino = treinoDAO.buscarUltimoId(treino.getUsuario().getIdUsuario());
-        
-        // adiciona os exercicios usando o id do ultimo treino que foi adicionado
+            
         ExercicioDAO exercicioDAO = new ExercicioDAO(conn);
         
         for (Exercicio exercicio : treino.getExercicios()) {

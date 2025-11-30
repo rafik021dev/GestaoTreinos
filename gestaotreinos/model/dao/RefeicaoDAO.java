@@ -24,7 +24,7 @@ public class RefeicaoDAO {
 	    /*
 	     * inserir na tabela refeicao
 	     */
-	    public boolean inserirRefeicao(Refeicao refeicao) {
+	    public boolean inserir(Refeicao refeicao) {
 	        String sSql = "INSERT INTO refeicao (data, tipo, idusuario) "
 	                   + "VALUES (?, ?, ?)";
 
@@ -122,4 +122,17 @@ public class RefeicaoDAO {
 	        	e.printStackTrace();
 	    		return null;	    }
 	}
+            public int buscarUltimoId(int idUsuario) throws SQLException {
+        String sSql = "SELECT MAX(idrefeicao) as id FROM refeicao WHERE idusuario = ?";
+        
+        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+            ps.setInt(1, idUsuario);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id"); 
+                }
+            }
+        }      
+        return 0;
+        }
 }
