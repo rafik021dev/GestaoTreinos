@@ -11,11 +11,14 @@ public class ViewLogin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewLogin.class.getName());
 
+    private static Usuario usuario;
+    
     /**
      * Creates new form ViewLogin
      */
-    public ViewLogin() {
+    public ViewLogin(Usuario usuario) {
         initComponents();
+        this.usuario = usuario;
     }
 
     /**
@@ -189,10 +192,7 @@ public class ViewLogin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewLogin().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ViewLogin(usuario).setVisible(true));
     }
 
     // Variables declaration - do not modify                     

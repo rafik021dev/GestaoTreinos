@@ -214,7 +214,6 @@ public class ViewCadastro extends JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
 
         EventQueue.invokeLater(() -> (new ViewCadastro()).setVisible(true));
     }

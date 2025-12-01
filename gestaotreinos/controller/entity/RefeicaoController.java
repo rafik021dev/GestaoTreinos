@@ -34,7 +34,8 @@ public class RefeicaoController {
         try {
 
             DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate data = LocalDate.parse(dataTexto, formatar);
+            //@todo converter isso aqui
+            //LocalDate data = dataTexto;
       
             TipoRefeicao tipo = TipoRefeicao.valueOf(tipoTexto.toUpperCase());
 

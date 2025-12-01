@@ -175,7 +175,7 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio(usuario).setVisible(true));
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new ViewRegistrarTreino(usuario).setVisible(true));

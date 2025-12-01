@@ -4,6 +4,8 @@
  */
 package gestaotreinos.view;
 
+import gestaotreinos.model.entity.Usuario;
+
 /**
  *
  * @author rafae
@@ -12,11 +14,14 @@ public class ViewRegistrarRefeicao extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRegistrarRefeicao.class.getName());
 
+    private static Usuario usuario;
+    
     /**
      * Creates new form ViewRegistrarRefeicao
      */
-    public ViewRegistrarRefeicao() {
+    public ViewRegistrarRefeicao(Usuario usuario) {
         initComponents();
+        this.usuario = usuario;
     }
 
     /**
@@ -122,10 +127,10 @@ public class ViewRegistrarRefeicao extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio(usuario).setVisible(true));
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRegistrarRefeicao().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ViewRegistrarRefeicao(usuario).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,6 +5,7 @@
 package gestaotreinos.view;
 import gestaotreinos.controller.entity.TreinoController;
 import gestaotreinos.model.entity.Exercicio;
+import gestaotreinos.model.entity.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -17,7 +18,6 @@ public class ViewRegistrarExercicios extends javax.swing.JFrame {
     String tipoAtual;
     String dataAtual;
     int idAtual = 1;
-    
     
     public void mostrarLista(String data, String tipo){
         tipoAtual = tipo;
@@ -38,11 +38,14 @@ public class ViewRegistrarExercicios extends javax.swing.JFrame {
     }
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRegistrarExercicios.class.getName());
 
+    private static Usuario usuario;
+    
     /**
      * Creates new form ViewRegistrarExercicios
      */
-    public ViewRegistrarExercicios() {
+    public ViewRegistrarExercicios(Usuario usuario) {
         initComponents();
+        this.usuario = usuario;
     }
 
     /**
@@ -278,7 +281,7 @@ public class ViewRegistrarExercicios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ViewRegistrarTreino oViewRegistrarTreino = new ViewRegistrarTreino();   
+        ViewRegistrarTreino oViewRegistrarTreino = new ViewRegistrarTreino(usuario);   
         oViewRegistrarTreino.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -312,9 +315,7 @@ public class ViewRegistrarExercicios extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRegistrarExercicios().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ViewRegistrarExercicios(usuario).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

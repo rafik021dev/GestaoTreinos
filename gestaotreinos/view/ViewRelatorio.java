@@ -9,6 +9,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import gestaotreinos.model.entity.Usuario;
 
 /**
  *
@@ -19,11 +20,14 @@ public class ViewRelatorio extends javax.swing.JFrame {
     int idUsuario = 1;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRelatorio.class.getName());
 
+    private static Usuario usuario;
+    
     /**
      * Creates new form ViewRelatorio
      */
-    public ViewRelatorio() {
+    public ViewRelatorio(Usuario usuario) {
         initComponents();
+        this.usuario = usuario;
     }
 
     /**
@@ -261,7 +265,7 @@ public class ViewRelatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_cbObjetivoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ViewRegistros oViewRegistros = new ViewRegistros();
+        ViewRegistros oViewRegistros = new ViewRegistros(usuario);
         oViewRegistros.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -296,12 +300,12 @@ public class ViewRelatorio extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio(usuario).setVisible(true));
 
         /* Create and display the form */
 
             /* Create and display the form */
-            java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
+            java.awt.EventQueue.invokeLater(() -> new ViewRelatorio(usuario).setVisible(true));
         }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

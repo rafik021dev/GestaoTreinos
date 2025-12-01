@@ -5,6 +5,7 @@
 
 package gestaotreinos.view;
 import gestaotreinos.controller.entity.SonoController;
+import gestaotreinos.model.entity.Usuario;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -16,9 +17,12 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRegistrarSono.class.getName());
 
+    private static Usuario usuario;
+    
     /** Creates new form ViewRegistrarSono */
-    public ViewRegistrarSono() {
+    public ViewRegistrarSono(Usuario usuario) {
         initComponents();
+        this.usuario = usuario;
     }
 
     /** This method is called from within the constructor to
@@ -128,7 +132,7 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       ViewRegistrarTreino oViewRegistrarTreino = new ViewRegistrarTreino();   
+       ViewRegistrarTreino oViewRegistrarTreino = new ViewRegistrarTreino(usuario);   
         oViewRegistrarTreino.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -188,10 +192,10 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio(usuario).setVisible(true));
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRegistrarSono().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ViewRegistrarSono(usuario).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

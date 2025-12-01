@@ -21,7 +21,7 @@ public class ViewRegistrarAlimento extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRegistrarAlimento.class.getName());
 
     private Refeicao refeicao;
-    private Usuario usuario;
+    private static Usuario usuario;
     
     /** Creates new form ViewRegistrarAlimento */
     public ViewRegistrarAlimento(Usuario usuario) {
@@ -168,7 +168,11 @@ public class ViewRegistrarAlimento extends javax.swing.JFrame {
         oViewPrincipal.setVisible(true); 
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(() -> new ViewRegistrarAlimento(usuario).setVisible(true));
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvancar;
     private javax.swing.JButton jButton1;

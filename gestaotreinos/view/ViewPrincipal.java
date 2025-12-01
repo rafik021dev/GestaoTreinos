@@ -9,8 +9,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form ViewPrincipal
      */
-    
-    private Usuario usuario;
+    private static Usuario usuario;
     
     public ViewPrincipal(Usuario usuario) {
         initComponents();
@@ -165,7 +164,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ViewUsuario oViewUsuario = new ViewUsuario();   
+        ViewUsuario oViewUsuario = new ViewUsuario(usuario);   
         oViewUsuario.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -181,7 +180,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       ViewRelatorio oViewRelatorio = new ViewRelatorio();   
+       ViewRelatorio oViewRelatorio = new ViewRelatorio(usuario);   
        oViewRelatorio.setVisible(true);
        dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -190,13 +189,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        try {
-        // Define o tema Escuro Moderno (FlatLaf Mac Dark)
-        javax.swing.UIManager.setLookAndFeel( new com.formdev.flatlaf.themes.FlatMacDarkLaf() );
-    } catch( Exception ex ) {
-        System.err.println( "Falha ao iniciar o tema." );
-    }
+        java.awt.EventQueue.invokeLater(() -> new ViewPrincipal(usuario).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
