@@ -6,7 +6,9 @@ package gestaotreinos.view;
 import gestaotreinos.model.entity.Desempenho;
 import gestaotreinos.controller.entity.DesempenhoController;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+
 /**
  *
  * @author rafae
@@ -34,7 +36,6 @@ public class ViewRelatorio extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         pgbSono = new javax.swing.JProgressBar();
         pgbNota = new javax.swing.JProgressBar();
-        pgbCal = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         pgbCalorias = new javax.swing.JLabel();
@@ -47,6 +48,7 @@ public class ViewRelatorio extends javax.swing.JFrame {
         jTextA = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        pgbCal = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,6 +83,8 @@ public class ViewRelatorio extends javax.swing.JFrame {
 
         jLabel5.setText("Alerta");
 
+        pgbCal.setMaximum(8);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,13 +100,11 @@ public class ViewRelatorio extends javax.swing.JFrame {
                                     .addComponent(btnGerarAnalise, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(21, 21, 21))
                                 .addComponent(jLabel3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(pgbCal, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                                    .addComponent(cbObjetivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cbObjetivo, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(66, 66, 66)
-                                    .addComponent(pgbCalorias)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(pgbCalorias))
+                                .addComponent(pgbCal, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(pgbTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(pgbSono, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -180,59 +182,75 @@ public class ViewRelatorio extends javax.swing.JFrame {
        DesempenhoController dCont = new DesempenhoController();
        
        desAtual = dCont.gerarRelatorioSemanal(1);
+       if(this.desAtual != null){
        
        pgbTreino.setMaximum(7);
        pgbTreino.setValue((int) desAtual.getMediaTreino());
        pgbTreino.setString((int) desAtual.getMediaTreino() + " / 7 Dias");
        definirCor(pgbTreino, (int) desAtual.getMediaTreino(), 3, 5); 
        
-       pgbSono.setMaximum(8);
+       pgbSono.setMaximum(12);
        pgbSono.setValue((int) desAtual.getMediaSono());
        pgbSono.setString((int) desAtual.getMediaSono() + " / 8 horas" );
-       definirCor(pgbSono, (int) desAtual.getMediaSono(), 5, 8); 
+       definirCor(pgbSono, (int) desAtual.getMediaSono(), 6, 8); 
        
        pgbNota.setMaximum(10);
        pgbNota.setValue((int) desAtual.getIndiceDesempenho());
        pgbNota.setString((int) desAtual.getIndiceDesempenho() + " / 10");
        definirCor(pgbNota, (int) desAtual.getIndiceDesempenho(), 3, 5); 
        
-       double tbm = desAtual.getUsuario().calcularTMB();
-       double medConsumo = desAtual.getMediaCalorias();
-       String objetivo = cbObjetivo.getSelectedItem().toString();
+       atualizarBarraCalorias();
        
-       int maxCal =(int)(tbm*1.5);
-       pgbCal.setMaximum((int)maxCal);
-       pgbCal.setValue((int) medConsumo);
-       
-       if(objetivo.equals("Perder Peso")){
-           if(medConsumo > tbm){
-               pgbCal.setForeground(Color.red);
-           }else if(medConsumo < (tbm * 0.5)){
-               pgbCal.setForeground(Color.red);
-           }else{
-               pgbCal.setForeground(Color.green);
-           }
-       }else if(objetivo.equals("Ganhar Massa")){
-            if(medConsumo < tbm){
-                pgbCal.setForeground(Color.orange);
-            }else if(medConsumo >(tbm*1.5)){
-                pgbCal.setForeground(Color.red);
-            }else{
-                pgbCal.setForeground(Color.green);
-            }
+       }else{
+           JOptionPane.showMessageDialog(this, "erro ao gerar relatorio");
        }
+    } 
+    
+       public void atualizarBarraCalorias(){
+            if(this.desAtual == null) {
+                return;
+            }
+
+            double tmb = desAtual.getUsuario().calcularTMB();
+            double medConsumo = desAtual.getMediaCalorias();
+            String objetivo = cbObjetivo.getSelectedItem().toString();
+
+            int maxCal = (int) (tmb * 1.5);
+            pgbCal.setMaximum(maxCal);
+            pgbCal.setValue((int) medConsumo);
+
+            pgbCal.setString(String.format("%.0f / %.0f", medConsumo, tmb));
+
+            if (objetivo.equals("Perder peso")) {
+                if (medConsumo > tmb) {
+                    pgbCal.setForeground(Color.RED);
+                } else if (medConsumo < (tmb * 0.5)) {
+                    pgbCal.setForeground(Color.RED);
+                } else {
+                    pgbCal.setForeground(new Color(0, 153, 0));
+                }
+            } else if (objetivo.equals("Ganhar Massa")) {
+                if (medConsumo < tmb) {
+                    pgbCal.setForeground(Color.ORANGE);
+                } else if (medConsumo > (tmb * 1.5)) {
+                    pgbCal.setForeground(Color.RED);
+                } else {
+                    pgbCal.setForeground(new Color(0, 153, 0));
+                }
+            }
     }//GEN-LAST:event_btnGerarAnaliseActionPerformed
-    private void definirCor(JProgressBar barra, int valor, int minimo, int bom) {
-        if(valor >= bom){
-            barra.setForeground(java.awt.Color.GREEN.darker());
-        }else if(valor >= minimo) {
-            barra.setForeground(java.awt.Color.ORANGE);
-        }else {
-            barra.setForeground(java.awt.Color.RED);
+    
+    private void definirCor(javax.swing.JProgressBar barra, int valor, int minimo, int bom) {
+       if (valor >= bom) {
+            barra.setForeground(new Color(0, 153, 0));
+        } else if (valor >= minimo) {
+            barra.setForeground(Color.ORANGE);
+        } else {
+            barra.setForeground(Color.RED);
         }
     }
     private void cbObjetivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbObjetivoActionPerformed
-        // TODO add your handling code here:
+        atualizarBarraCalorias();
     }//GEN-LAST:event_cbObjetivoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

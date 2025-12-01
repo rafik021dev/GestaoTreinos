@@ -39,15 +39,12 @@
                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="pgbCal" alignment="0" pref="181" max="32767" attributes="0"/>
-                                  <Component id="cbObjetivo" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="cbObjetivo" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                                   <Component id="pgbCalorias" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="73" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="pgbCal" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="pgbTreino" min="-2" pref="181" max="-2" attributes="0"/>
@@ -150,8 +147,6 @@
         <Property name="maximum" type="int" value="10"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JProgressBar" name="pgbCal">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Treino"/>
@@ -232,6 +227,11 @@
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alerta"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JProgressBar" name="pgbCal">
+      <Properties>
+        <Property name="maximum" type="int" value="8"/>
       </Properties>
     </Component>
   </SubComponents>
