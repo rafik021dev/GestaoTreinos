@@ -128,12 +128,12 @@ public class DesempenhoController {
             texto.append(String.format("Média Calorias: %.0f kcal\n", mediaCalorias));
             
             if (qtdTreinos >= 3){
-                texto.append("\notima frequencia de treino\n");
+                texto.append("\n Otima frequencia de treino\n");
             }else{
-                texto.append("tente treinar mais na semana\n");      
+                texto.append("\n Tente treinar mais na semana\n");      
             }     
             if (mediaSono < 6.0){
-                texto.append("tente dormir mais durante as noites\n");
+                texto.append("\n Tente dormir mais durante as noites\n");
             }
             
             if (listaAlertas != null) {
