@@ -145,4 +145,22 @@ public class TreinoController {
             return e.getMessage();
         }
     }
+    public List<Treino> listarHistorico(int idUsuario) {
+        TreinoDAO dao = new TreinoDAO(conn);
+        try {
+            return dao.listarTreinosPorUsuario(idUsuario);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String excluirTreino(int idTreino) {
+        TreinoDAO dao = new TreinoDAO(conn);
+        if (dao.deletarTreino(idTreino)) {
+            return "treino excluido.";
+        } else {
+            return "erro ao excluir treino.";
+        }
+    }
 }

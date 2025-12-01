@@ -17,7 +17,7 @@ import gestaotreinos.model.entity.Usuario;
  */
 public class ViewRelatorio extends javax.swing.JFrame {
     Desempenho desAtual;
-    int idUsuario = 1;
+    int idUsuario = usuario.getIdUsuario();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRelatorio.class.getName());
 
     private static Usuario usuario;
@@ -190,7 +190,7 @@ public class ViewRelatorio extends javax.swing.JFrame {
           
        DesempenhoController dCont = new DesempenhoController();
        
-       desAtual = dCont.gerarRelatorioSemanal(1);
+       desAtual = dCont.gerarRelatorioSemanal(idUsuario);
        if(this.desAtual != null){
        
        pgbTreino.setMaximum(7);
