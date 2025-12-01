@@ -8,6 +8,7 @@ import gestaotreinos.controller.entity.DesempenhoController;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 
 /**
  *
@@ -268,14 +269,15 @@ public class ViewRelatorio extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */    
+
         try {
-            // MÁGICA: Usa o visual nativo do seu Windows (Windows 10 ou 11)
-            // Fica muito mais bonito que o "Classic" e aceita as cores na barra!
-            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            // Se der erro, usa o padrão do Java
-            System.err.println("Não foi possível aplicar o tema do sistema.");
+            // Define o tema FlatLaf Cupertino Dark
+            javax.swing.UIManager.setLookAndFeel( new com.formdev.flatlaf.themes.FlatMacDarkLaf() );
+        } catch( Exception ex ) {
+            System.err.println( "Falha ao iniciar o tema. Usando padrão." );
         }
+
+        /* Create and display the form */
 
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
