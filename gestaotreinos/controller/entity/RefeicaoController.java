@@ -19,6 +19,8 @@ import gestaotreinos.model.dao.RefeicaoDAO;
 import gestaotreinos.model.entity.Alimento;
 import gestaotreinos.model.entity.Refeicao;
 import gestaotreinos.model.entity.Usuario;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -31,10 +33,10 @@ public class RefeicaoController {
         this.conn = conexaoBD.connection("GestaoTreinos", "postgres", "07171826");
     }
 
-    public String salvarRefeicao(String dataTexto, String tipoTexto, int idUsuario, List<Alimento> listaAlimentos) {
+    public String salvarRefeicao(String dataTexto, String tipoTexto, int idUsuario, List<Alimento> listaAlimentos)throws ParseException {
         try {
-
-            java.text.SimpleDateFormat formatar = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            
+            SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
             Date data = formatar.parse(dataTexto);
       
             TipoRefeicao tipo = TipoRefeicao.valueOf(tipoTexto.toUpperCase());

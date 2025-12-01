@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package gestaotreinos.view;
+import gestaotreinos.controller.entity.UsuarioController;
 
 import gestaotreinos.model.entity.Usuario;
 
@@ -54,6 +55,7 @@ public class ViewUsuario extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
         dMetaPeso = new javax.swing.JSpinner();
+        atualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,6 +83,9 @@ public class ViewUsuario extends javax.swing.JFrame {
         jLabel9.setText("Dados Corporais");
 
         jLabel10.setText("Meta de Peso:");
+
+        atualizar.setText("Atualizar");
+        atualizar.addActionListener(this::atualizarActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,7 +137,9 @@ public class ViewUsuario extends javax.swing.JFrame {
                         .addComponent(jLabel8)))
                 .addGap(94, 94, 94))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(atualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Voltar)
                 .addContainerGap())
         );
@@ -181,7 +188,9 @@ public class ViewUsuario extends javax.swing.JFrame {
                     .addComponent(iIdadeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(19, 19, 19)
-                .addComponent(Voltar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Voltar)
+                    .addComponent(atualizar))
                 .addContainerGap())
         );
 
@@ -198,10 +207,36 @@ public class ViewUsuario extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_VoltarActionPerformed
 
+    private void atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarActionPerformed
+        String novoNome = jTextField1.getText();
+        String novoEmail = sEmailUsuario.getText();
+        String novaSenha = new String(sSenhaUsuario.getPassword());
+        int novaIdade = (Integer) iIdadeUsuario.getValue();
+        double novoPeso = ((Number) sPesoAtual.getValue()).doubleValue();
+        double novaAltura = ((Number) iAlturaUsuario.getValue()).doubleValue()/100;
+        double novaMeta = ((Number) dMetaPeso.getValue()).doubleValue();
+
+        usuario.setNome(novoNome);
+        usuario.setEmail(novoEmail);
+        usuario.setSenha(novaSenha);
+        usuario.setIdade(novaIdade);
+        usuario.setPeso(novoPeso);
+        usuario.setAltura(novaAltura);
+        usuario.setMetaPeso(novaMeta);
+        UsuarioController controller = new UsuarioController();
+        boolean sucesso = controller.atualizarUsuario(usuario);
+
+        if (sucesso) {
+            javax.swing.JOptionPane.showMessageDialog(this, "dados atualizados");
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "erro ao atualizar dados.");
+        }
+    }//GEN-LAST:event_atualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void main(String args[]) {
         /* Set the Nimbus look and feel */
      /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -231,6 +266,7 @@ public class ViewUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Voltar;
+    private javax.swing.JButton atualizar;
     private javax.swing.JSpinner dMetaPeso;
     private javax.swing.JSpinner iAlturaUsuario;
     private javax.swing.JSpinner iIdadeUsuario;

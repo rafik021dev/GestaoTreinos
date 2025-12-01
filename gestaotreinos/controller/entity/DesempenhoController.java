@@ -126,18 +126,17 @@ public class DesempenhoController {
             List<Alerta> listaAlertas = alertaDAO.listarPorUsuario(idUsuario);
 
             StringBuilder texto = new StringBuilder();
-            texto.append(String.format("Data: %s\n", hoje));
             texto.append(String.format("Treinos: %d sessões\n", qtdTreinos));
             texto.append(String.format("Média Sono: %.1f h\n", mediaSono));
             texto.append(String.format("Média Calorias: %.0f kcal\n", mediaCalorias));
 
             if (qtdTreinos >= 3) {
-                texto.append("\n Otima frequencia de treino\n");
+                texto.append("\nOtima frequencia de treino\n");
             } else {
-                texto.append("\n Tente treinar mais na semana\n");
+                texto.append("\nTente treinar mais na semana\n");
             }
             if (mediaSono < 6.0) {
-                texto.append("\n Tente dormir mais durante as noites\n");
+                texto.append("\nTente dormir mais durante as noites\n");
             }
 
             if (listaAlertas != null) {

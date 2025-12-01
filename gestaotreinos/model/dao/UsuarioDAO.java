@@ -58,7 +58,7 @@ public class UsuarioDAO {
 	 * metodo responsável por atualizar um usuário ja cadastrado no sistema
 	 */
 	public boolean atualizar(Usuario oUsuario) {
-		String sSql = "UPDATE usuario SET"
+		String sSql = "UPDATE usuario SET "
 				+"nome = ?, sexo = ?, idade = ?, peso = ?,"
 				+ " altura = ?, metapeso = ?, email = ?, senha = ? "
 				+"WHERE idusuario = ?";
