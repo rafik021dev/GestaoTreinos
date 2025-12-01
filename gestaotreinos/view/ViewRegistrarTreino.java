@@ -59,6 +59,8 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
         btnAvancar.setText("Avançar");
         btnAvancar.addActionListener(this::btnAvancarActionPerformed);
 
+        sDataTreino.setDateFormatString("dd/MM/yyyy");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,7 +84,7 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
                     .addComponent(btnAvancar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sTipoTreino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sDataTreino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(115, 115, 115)
                 .addComponent(jButton1)
@@ -145,21 +147,12 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+       try {
+        // Define o tema Escuro Moderno (FlatLaf Mac Dark)
+        javax.swing.UIManager.setLookAndFeel( new com.formdev.flatlaf.themes.FlatMacDarkLaf() );
+    } catch( Exception ex ) {
+        System.err.println( "Falha ao iniciar o tema." );
+    }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new ViewRegistrarTreino().setVisible(true));

@@ -5,12 +5,18 @@
 package gestaotreinos.view;
 import gestaotreinos.model.entity.Desempenho;
 import gestaotreinos.controller.entity.DesempenhoController;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+
 /**
  *
  * @author rafae
  */
 public class ViewRelatorio extends javax.swing.JFrame {
-    
+    Desempenho desAtual;
+    int idUsuario = 1;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRelatorio.class.getName());
 
     /**
@@ -32,24 +38,27 @@ public class ViewRelatorio extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         pgbSono = new javax.swing.JProgressBar();
         pgbNota = new javax.swing.JProgressBar();
-        jCalorias = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         pgbCalorias = new javax.swing.JLabel();
         btnGerarAnalise = new javax.swing.JButton();
         cbObjetivo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        pgbTreino1 = new javax.swing.JProgressBar();
+        pgbTreino = new javax.swing.JProgressBar();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextA = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        pgbCal = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pgbSono.setMaximum(8);
+        pgbSono.setStringPainted(true);
 
         pgbNota.setMaximum(10);
+        pgbNota.setStringPainted(true);
 
         jLabel1.setText("Treino");
 
@@ -65,7 +74,8 @@ public class ViewRelatorio extends javax.swing.JFrame {
 
         jLabel3.setText("objetivo:");
 
-        pgbTreino1.setMaximum(7);
+        pgbTreino.setMaximum(7);
+        pgbTreino.setStringPainted(true);
 
         jLabel4.setText("Nota");
 
@@ -76,99 +86,178 @@ public class ViewRelatorio extends javax.swing.JFrame {
         jButton1.setText("Voltar");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
+        jLabel5.setText("Alertas");
+
+        pgbCal.setMaximum(8);
+        pgbCal.setStringPainted(true);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnGerarAnalise, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGap(36, 36, 36)
+                                    .addComponent(btnGerarAnalise, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(21, 21, 21))
+                                .addComponent(jLabel3)
+                                .addComponent(cbObjetivo, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(66, 66, 66)
+                                    .addComponent(pgbCalorias))
+                                .addComponent(pgbCal, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(pgbTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pgbSono, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 69, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(pgbSono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jCalorias, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                                        .addComponent(cbObjetivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(pgbTreino1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
-                                    .addComponent(jLabel3)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(126, 126, 126)
-                                .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(134, 134, 134)
                                 .addComponent(jLabel2))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(124, 124, 124)
-                                .addComponent(pgbCalorias))
-                            .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jButton1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(jLabel4)
-                        .addGap(157, 157, 157))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(pgbNota, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(pgbNota, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78))))
+                        .addComponent(jLabel5)
+                        .addGap(148, 148, 148))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(154, 154, 154))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pgbNota, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pgbTreino1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(pgbNota, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pgbTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pgbSono, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(37, 37, 37)
                         .addComponent(pgbCalorias)
-                        .addGap(11, 11, 11)
+                        .addGap(2, 2, 2)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbObjetivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pgbCal, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnGerarAnalise, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))))
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerarAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarAnaliseActionPerformed
-       int idUsuario = 1;
+          
+       DesempenhoController dCont = new DesempenhoController();
        
+       desAtual = dCont.gerarRelatorioSemanal(1);
+       if(this.desAtual != null){
        
-    }//GEN-LAST:event_btnGerarAnaliseActionPerformed
+       pgbTreino.setMaximum(7);
+       pgbTreino.setValue((int) desAtual.getMediaTreino());
+       pgbTreino.setString((int) desAtual.getMediaTreino() + " / 7 Treinos");
+       definirCor(pgbTreino, (int) desAtual.getMediaTreino(), 3, 5); 
+       
+       pgbSono.setMaximum(12);
+       pgbSono.setValue((int) desAtual.getMediaSono());
+       pgbSono.setString((int) desAtual.getMediaSono() + " /h por dia" );
+       definirCor(pgbSono, (int) desAtual.getMediaSono(), 6, 8); 
+       
+       pgbNota.setMaximum(10);
+       pgbNota.setValue((int) desAtual.getIndiceDesempenho());
+       pgbNota.setString((int) desAtual.getIndiceDesempenho() + " / 10");
+       definirCor(pgbNota, (int) desAtual.getIndiceDesempenho(), 3, 5);
+       
+       jTextA.setText(this.desAtual.getTextoResumo());
+       
+       atualizarBarraCalorias();
+       
+       }else{
+           JOptionPane.showMessageDialog(this, "erro ao gerar relatorio");
+       }
+    } 
+    
+       public void atualizarBarraCalorias(){
+            if(this.desAtual == null) {
+                return;
+            }
 
+            double tmb = desAtual.getUsuario().calcularTMB();
+            double medConsumo = desAtual.getMediaCalorias();
+            String objetivo = cbObjetivo.getSelectedItem().toString();
+
+            int maxCal = (int) (tmb * 1.5);
+            pgbCal.setMaximum(maxCal);
+            pgbCal.setValue((int) medConsumo);
+
+            pgbCal.setString(String.format("%.0f / %.0f", medConsumo, tmb));
+
+            if (objetivo.equals("Perder peso")) {
+                if (medConsumo > tmb) {
+                    pgbCal.setForeground(Color.RED);
+                } else if (medConsumo < (tmb * 0.5)) {
+                    pgbCal.setForeground(Color.RED);
+                } else {
+                    pgbCal.setForeground(new Color(0, 153, 0));
+                }
+            } else if (objetivo.equals("Ganhar Massa")) {
+                if (medConsumo < tmb) {
+                    pgbCal.setForeground(Color.ORANGE);
+                } else if (medConsumo > (tmb * 1.5)) {
+                    pgbCal.setForeground(Color.RED);
+                } else {
+                    pgbCal.setForeground(new Color(0, 153, 0));
+                }
+            }
+    }//GEN-LAST:event_btnGerarAnaliseActionPerformed
+    
+    private void definirCor(javax.swing.JProgressBar barra, int valor, int minimo, int bom) {
+       if (valor >= bom) {
+            barra.setForeground(new Color(0, 153, 0));
+        } else if (valor >= minimo) {
+            barra.setForeground(Color.ORANGE);
+        } else {
+            barra.setForeground(Color.RED);
+        }
+    }
     private void cbObjetivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbObjetivoActionPerformed
-        // TODO add your handling code here:
+        atualizarBarraCalorias();
     }//GEN-LAST:event_cbObjetivoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -181,42 +270,37 @@ public class ViewRelatorio extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        /* Set the Nimbus look and feel */    
+
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            // Define o tema FlatLaf Cupertino Dark
+            javax.swing.UIManager.setLookAndFeel( new com.formdev.flatlaf.themes.FlatMacDarkLaf() );
+        } catch( Exception ex ) {
+            System.err.println( "Falha ao iniciar o tema. Usando padrão." );
         }
-        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
-    }
+
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGerarAnalise;
     private javax.swing.JComboBox<String> cbObjetivo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JProgressBar jCalorias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextA;
+    private javax.swing.JProgressBar pgbCal;
     private javax.swing.JLabel pgbCalorias;
     private javax.swing.JProgressBar pgbNota;
     private javax.swing.JProgressBar pgbSono;
-    private javax.swing.JProgressBar pgbTreino1;
+    private javax.swing.JProgressBar pgbTreino;
     // End of variables declaration//GEN-END:variables
 }

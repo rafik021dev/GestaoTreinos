@@ -191,14 +191,10 @@ public class ViewCadastro extends JFrame {
 
     public static void main(String[] args) {
         try {
-            for(UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (UnsupportedLookAndFeelException | ReflectiveOperationException ex) {
-            logger.log(Level.SEVERE, (String)null, ex);
+        // Define o tema Escuro Moderno (FlatLaf Mac Dark)
+        javax.swing.UIManager.setLookAndFeel( new com.formdev.flatlaf.themes.FlatMacDarkLaf() );
+        } catch( Exception ex ) {
+            System.err.println( "Falha ao iniciar o tema." );
         }
 
         EventQueue.invokeLater(() -> (new ViewCadastro()).setVisible(true));

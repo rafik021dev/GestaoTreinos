@@ -5,8 +5,6 @@
 
 package gestaotreinos.view;
 
-import gestaotreinos.model.entity.Usuario;
-
 /**
  *
  * @author rafae
@@ -15,12 +13,9 @@ public class ViewRegistros extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRegistros.class.getName());
 
-    private Usuario usuario;
-    
     /** Creates new form ViewRegistros */
     public ViewRegistros() {
         initComponents();
-        this.usuario = usuario;
     }
 
     /** This method is called from within the constructor to
@@ -47,7 +42,6 @@ public class ViewRegistros extends javax.swing.JFrame {
         jBTreino.addActionListener(this::jBTreinoActionPerformed);
 
         jButton2.setText("Refeição");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         jBSono.setText("Sono");
         jBSono.addActionListener(this::jBSonoActionPerformed);
@@ -107,7 +101,7 @@ public class ViewRegistros extends javax.swing.JFrame {
     }//GEN-LAST:event_jBTreinoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      ViewPrincipal oViewPrincipal = new ViewPrincipal(usuario);   
+      ViewPrincipal oViewPrincipal = new ViewPrincipal();   
         oViewPrincipal.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -118,9 +112,21 @@ public class ViewRegistros extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jBSonoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        try {
+        // Define o tema Escuro Moderno (FlatLaf Mac Dark)
+        javax.swing.UIManager.setLookAndFeel( new com.formdev.flatlaf.themes.FlatMacDarkLaf() );
+    } catch( Exception ex ) {
+        System.err.println( "Falha ao iniciar o tema." );
+    }
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new ViewRegistros().setVisible(true));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBSono;

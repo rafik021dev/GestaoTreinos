@@ -55,7 +55,7 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
 
         jLabel1.setText("Registrar Sono");
 
-        jLabel4.setText("Horas Dormidas");
+        jLabel4.setText("Horas Dormidas:");
 
         jSHoras.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
 
@@ -87,7 +87,7 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
                                     .addComponent(sTipoSono, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(sDataSono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jSHoras))))
-                        .addGap(0, 131, Short.MAX_VALUE))
+                        .addGap(0, 128, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)))
@@ -122,6 +122,8 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
+        jLabel4.getAccessibleContext().setAccessibleName("Horas Dormidas:");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -154,7 +156,7 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void sTipoSonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sTipoSonoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_sTipoSonoActionPerformed
 
     /**
@@ -162,21 +164,12 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+       try {
+        // Define o tema Escuro Moderno (FlatLaf Mac Dark)
+        javax.swing.UIManager.setLookAndFeel( new com.formdev.flatlaf.themes.FlatMacDarkLaf() );
+    } catch( Exception ex ) {
+        System.err.println( "Falha ao iniciar o tema." );
+    }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new ViewRegistrarSono().setVisible(true));

@@ -20,6 +20,8 @@ import gestaotreinos.model.entity.Refeicao;
 import gestaotreinos.model.entity.Sono;
 import gestaotreinos.model.entity.Treino;
 import gestaotreinos.model.entity.Usuario;
+import gestaotreinos.model.dao.AlertaDAO;
+import gestaotreinos.model.entity.Alerta;
 
 public class DesempenhoController {
 
@@ -116,15 +118,17 @@ public class DesempenhoController {
             }
             double notaF = (notaS + notaT)/2;
             
+            AlertaDAO alertaDAO = new AlertaDAO(conn);
+            List<Alerta> listaAlertas = alertaDAO.listarPorUsuario(idUsuario);
 
             StringBuilder texto = new StringBuilder();
-            texto.append("Data: ").append(hoje).append("\n");
-            texto.append("Treinos: ").append(qtdTreinos).append("\n");
-            texto.append("Média Sono: ").append(String.format("%.1f", mediaSono)).append("h\n");
-            texto.append("Média Calorias: ").append(String.format("%.0f", mediaCalorias)).append("kcal\n\n");
+            texto.append(String.format("Data: %s\n", hoje));
+            texto.append(String.format("Treinos: %d sessões\n", qtdTreinos));
+            texto.append(String.format("Média Sono: %.1f h\n", mediaSono));
+            texto.append(String.format("Média Calorias: %.0f kcal\n", mediaCalorias));
             
             if (qtdTreinos >= 3){
-                texto.append("otima frequencia de treino\n");
+                texto.append("\notima frequencia de treino\n");
             }else{
                 texto.append("tente treinar mais na semana\n");      
             }     
@@ -132,23 +136,37 @@ public class DesempenhoController {
                 texto.append("tente dormir mais durante as noites\n");
             }
             
+            if (listaAlertas != null) {
+                texto.append("\n ALERTAS: \n");
+                
+                int numeroAlertas = Math.min(listaAlertas.size(), 4);
+                for (int i = 0; i < numeroAlertas; i++) {
+                    texto.append(listaAlertas.get(i).getMensagem()).append("\n");
+                }
+            }
+            
             Desempenho des = new Desempenho();
-            Usuario u = new Usuario();
-            u.setIdUsuario(idUsuario);
-            des.setUsuario(u);          
+            gestaotreinos.model.dao.UsuarioDAO usuarioDAO = new gestaotreinos.model.dao.UsuarioDAO(conn);
+            Usuario usuario = usuarioDAO.buscarPorId(idUsuario);
+           
+            if (usuario == null) {
+                return null; 
+            }
+            des.setUsuario(usuario);
+          
             des.setDataGeracao(hoje);
             des.setTipo(TipoRelatorio.SEMANAL);
             des.setMediaTreino(qtdTreinos);
             des.setMediaSono(mediaSono);
             des.setMediaCalorias(mediaCalorias);
-            des.setIndiceDesempenho(notaF);
+            des.setIndiceDesempenho(notaF); 
             des.setTextoResumo(texto.toString());
 
             DesempenhoDAO dao = new DesempenhoDAO(conn);
             dao.inserirDesempenho(des);
-
             return des;
-
+            
+                        
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

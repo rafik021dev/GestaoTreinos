@@ -27,7 +27,7 @@ public class DesempenhoDAO {
      * inserir na tabela desempenho
      */
     public boolean inserirDesempenho(Desempenho oDesempenho) {
-        String sSql = "INSERT INTO desempenho (mediasono, mediacalorias, mediatreino, indicedesempenho, idusuario, datageracao, tipo, textoresumo) "
+        String sSql = "INSERT INTO desempenho (mediasono, mediacalorias, mediatreinos, indicedesempenho, idusuario, data, tipo, textoresumo) "
                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = conn.prepareStatement(sSql)) {
@@ -118,8 +118,8 @@ public class DesempenhoDAO {
      * listar desempenho por usuário
      */
     public List<Desempenho> listarDesempenhoPorUsuario(int idUsuario) throws SQLException {
-        String sSql = "SELECT iddesempenho, mediasono, mediacalorias, mediatreino, indicedesempenho, idusuario "
-                   + "FROM desempenho WHERE idusuario = ? ORDER BY iddesempenho";
+        String sSql = "SELECT iddesempenho, mediasono, mediacalorias, mediatreinos, indicedesempenho, idusuario, data, tipo, textoresumo "
+               + "FROM desempenho WHERE idusuario = ? ORDER BY data DESC"; 
 
         List<Desempenho> lista = new ArrayList<>();
 
@@ -131,10 +131,13 @@ public class DesempenhoDAO {
                     desempenhoRS.setIdDesempenho(rs.getInt("iddesempenho"));
                     desempenhoRS.setMediaSono(rs.getDouble("mediasono"));
                     desempenhoRS.setMediaCalorias(rs.getDouble("mediacalorias"));
-                    desempenhoRS.setMediaTreino(rs.getDouble("mediatreino"));
+                    desempenhoRS.setMediaTreino(rs.getDouble("mediatreinos"));
                     desempenhoRS.setIndiceDesempenho(rs.getDouble("indicedesempenho"));         
-                    desempenhoRS.setDataGeracao(rs.getDate("datageracao").toLocalDate());
+                    desempenhoRS.setDataGeracao(rs.getDate("data").toLocalDate());
                     desempenhoRS.setTipo(TipoRelatorio.valueOf(rs.getString("tipo")));
+                    desempenhoRS.setTextoResumo(rs.getString("textoresumo"));
+                    desempenhoRS.setDataGeracao(rs.getDate("data").toLocalDate());
+                    desempenhoRS.setTipo(TipoRelatorio.valueOf("tipo"));
                     desempenhoRS.setTextoResumo(rs.getString("textoresumo"));
                     
                     Usuario usuario = new Usuario();
