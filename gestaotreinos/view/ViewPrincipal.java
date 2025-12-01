@@ -1,5 +1,7 @@
 package gestaotreinos.view;
 
+import gestaotreinos.model.entity.Usuario;
+
 public class ViewPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewPrincipal.class.getName());
@@ -7,8 +9,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form ViewPrincipal
      */
-    public ViewPrincipal() {
+    
+    private Usuario usuario;
+    
+    public ViewPrincipal(Usuario usuario) {
         initComponents();
+        this.usuario = usuario;
     }
 
     /**
@@ -169,7 +175,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ViewRegistros oViewRegistros = new ViewRegistros();   
+        ViewRegistros oViewRegistros = new ViewRegistros(usuario);   
         oViewRegistros.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -185,34 +191,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-    /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewRelatorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewRelatorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewRelatorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewRelatorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewPrincipal().setVisible(true));
+        // Define o tema Escuro Moderno (FlatLaf Mac Dark)
+        javax.swing.UIManager.setLookAndFeel( new com.formdev.flatlaf.themes.FlatMacDarkLaf() );
+    } catch( Exception ex ) {
+        System.err.println( "Falha ao iniciar o tema." );
+    }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

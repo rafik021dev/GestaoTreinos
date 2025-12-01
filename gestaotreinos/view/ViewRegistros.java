@@ -5,6 +5,8 @@
 
 package gestaotreinos.view;
 
+import gestaotreinos.model.entity.Usuario;
+
 /**
  *
  * @author rafae
@@ -13,9 +15,12 @@ public class ViewRegistros extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRegistros.class.getName());
 
+    private Usuario usuario;
+    
     /** Creates new form ViewRegistros */
-    public ViewRegistros() {
+    public ViewRegistros(Usuario usuario) {
         initComponents();
+        this.usuario = usuario;
     }
 
     /** This method is called from within the constructor to
@@ -101,7 +106,7 @@ public class ViewRegistros extends javax.swing.JFrame {
     }//GEN-LAST:event_jBTreinoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      ViewPrincipal oViewPrincipal = new ViewPrincipal();   
+      ViewPrincipal oViewPrincipal = new ViewPrincipal(usuario);   
         oViewPrincipal.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -144,7 +149,7 @@ public class ViewRegistros extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRegistros().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ViewRegistros(usuario).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

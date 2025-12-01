@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import gestaotreinos.enums.TipoTreino;
+import gestaotreinos.model.entity.Usuario;
 import java.util.Date;
 /**
  *
@@ -18,11 +19,14 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRegistrarTreino.class.getName());
 
+    private static Usuario usuario;
+    
     /**
      * Creates new form ViewRegistrarTreino
      */
-    public ViewRegistrarTreino() {
+    public ViewRegistrarTreino(Usuario usuario) {
         initComponents();
+        this.usuario = usuario;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,7 +130,7 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
          
         String tipo = sTipoTreino.getSelectedItem().toString();
              
-        ViewRegistrarExercicios oViewRegistrarExercicios = new ViewRegistrarExercicios();   
+        ViewRegistrarExercicios oViewRegistrarExercicios = new ViewRegistrarExercicios(usuario);   
         oViewRegistrarExercicios.setVisible(true);
         oViewRegistrarExercicios.mostrarLista(dataTxt, tipo);
         dispose();     
@@ -137,7 +141,7 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
     }//GEN-LAST:event_sTipoTreinoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       ViewRegistros oViewRegistros = new ViewRegistros();   
+       ViewRegistros oViewRegistros = new ViewRegistros(usuario);   
         oViewRegistros.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -174,7 +178,7 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRegistrarTreino().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ViewRegistrarTreino(usuario).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
