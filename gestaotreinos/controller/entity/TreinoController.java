@@ -77,7 +77,6 @@ public class TreinoController {
             return null;
         }
     }
-
     private Exercicio criarExercicio(String nome) {
         Exercicio ex = new Exercicio();
         ex.setNome(nome);
