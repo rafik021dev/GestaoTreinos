@@ -21,12 +21,13 @@ public class ViewRegistrarAlimento extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRegistrarAlimento.class.getName());
 
     private Refeicao refeicao;
-    private static Usuario usuario;
+    private Usuario usuario;
     
     /** Creates new form ViewRegistrarAlimento */
-    public ViewRegistrarAlimento(Usuario usuario) {
+    public ViewRegistrarAlimento(Usuario usuario, Refeicao refeicao) {
         initComponents();
         this.refeicao = refeicao;
+        this.usuario = usuario;
     }
 
     /** This method is called from within the constructor to
@@ -140,7 +141,7 @@ public class ViewRegistrarAlimento extends javax.swing.JFrame {
         AlimentoDAO alimentoDAO = new AlimentoDAO(ConexaoBD.conectaBD());
         alimentoDAO.inserir(alimento);
         
-        ViewRegistrarAlimento oViewRegistrarAlimento = new ViewRegistrarAlimento(usuario);   
+        ViewRegistrarAlimento oViewRegistrarAlimento = new ViewRegistrarAlimento(usuario, refeicao);   
         oViewRegistrarAlimento.setVisible(true);
         dispose();
         
@@ -170,7 +171,7 @@ public class ViewRegistrarAlimento extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> new ViewRegistrarAlimento(usuario).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ViewRegistrarAlimento(usuario, refeicao).setVisible(true));
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

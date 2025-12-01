@@ -35,9 +35,9 @@ public class ViewRegistros extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jBTreino = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jBSono = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,13 +46,14 @@ public class ViewRegistros extends javax.swing.JFrame {
         jBTreino.setText("Treino");
         jBTreino.addActionListener(this::jBTreinoActionPerformed);
 
-        jButton2.setText("Refeição");
-
         jBSono.setText("Sono");
         jBSono.addActionListener(this::jBSonoActionPerformed);
 
         jButton4.setText("Voltar");
         jButton4.addActionListener(this::jButton4ActionPerformed);
+
+        jButton1.setText("Refeição");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,8 +75,8 @@ public class ViewRegistros extends javax.swing.JFrame {
                 .addGap(128, 128, 128)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBTreino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBSono, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBSono, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(134, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -88,7 +89,7 @@ public class ViewRegistros extends javax.swing.JFrame {
                 .addGap(49, 49, 49)
                 .addComponent(jBTreino)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jBSono)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
@@ -117,6 +118,12 @@ public class ViewRegistros extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jBSonoActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ViewRegistrarRefeicao oViewRegistrarRefeicao = new ViewRegistrarRefeicao(usuario);   
+        oViewRegistrarRefeicao.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -128,7 +135,7 @@ public class ViewRegistros extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBSono;
     private javax.swing.JButton jBTreino;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;

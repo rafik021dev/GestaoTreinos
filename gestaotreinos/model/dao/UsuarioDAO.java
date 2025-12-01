@@ -13,11 +13,11 @@ import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
 
-	static Connection conn;
+	private Connection conn;
 	
 	public UsuarioDAO(Connection conn) {
-        this.conn = conn;
-	}
+            this.conn = conn;
+        }
 
     /**
      * Método responsável por Cadastrar o Usuario no Sistema
@@ -207,35 +207,37 @@ public class UsuarioDAO {
                 return null;
             }
         }
-        public static Usuario buscarUsuarioPorEmailSenha(String email, String senha) {
-            String sql = "SELECT * FROM usuario WHERE email = ? AND senha = ?";
+        public Usuario buscarUsuarioPorEmailSenha(String email, String senha) {
 
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, email);
-                ps.setString(2, senha);
+        String sql = "SELECT * FROM usuario WHERE email = ? AND senha = ?";
 
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        Usuario u = new Usuario();
-                        u.setIdUsuario(rs.getInt("idusuario"));
-                        u.setNome(rs.getString("nome"));
-                        u.setSexo(rs.getString("sexo").charAt(0));
-                        u.setIdade(rs.getInt("idade"));
-                        u.setPeso(rs.getDouble("peso"));
-                        u.setAltura(rs.getDouble("altura"));
-                        u.setMetaPeso(rs.getDouble("metapeso"));
-                        u.setEmail(rs.getString("email"));
-                        u.setSenha(rs.getString("senha"));
-                        return u;
-                    }
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ps.setString(2, senha);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Usuario u = new Usuario();
+                    u.setIdUsuario(rs.getInt("idusuario"));
+                    u.setNome(rs.getString("nome"));
+                    u.setSexo(rs.getString("sexo").charAt(0));
+                    u.setIdade(rs.getInt("idade"));
+                    u.setPeso(rs.getDouble("peso"));
+                    u.setAltura(rs.getDouble("altura"));
+                    u.setMetaPeso(rs.getObject("metapeso", Double.class));
+                    u.setEmail(rs.getString("email"));
+                    u.setSenha(rs.getString("senha"));
+                    return u;
                 }
+            }
 
-    } catch (SQLException e) {
-        e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
-    return null;
-}
 }
 	
 

@@ -23,5 +23,18 @@ public enum TipoRefeicao {
     public String toString() {
         return label;
     }
+    
+    public static TipoRefeicao fromLabel(String label) {
+        for (TipoRefeicao t : values()) {
+            if (t.label.equalsIgnoreCase(label)) {
+                return t;
+            }
+        }
+        throw new IllegalArgumentException("Nenhum tipo encontrado para: " + label);
+    }
+
+    public String getLabel() {
+        return label;
+    }
 }
 

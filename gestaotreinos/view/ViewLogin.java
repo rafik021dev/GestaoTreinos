@@ -6,19 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import gestaotreinos.model.dao.ConexaoBD;
+import java.sql.Connection;
 
 public class ViewLogin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewLogin.class.getName());
-
-    private static Usuario usuario;
     
     /**
      * Creates new form ViewLogin
      */
-    public ViewLogin(Usuario usuario) {
+    public ViewLogin() {
         initComponents();
-        this.usuario = usuario;
     }
 
     /**
@@ -134,6 +132,7 @@ public class ViewLogin extends javax.swing.JFrame {
      * Método responsável por Validar o Login do Usuário.
      */
     private void Login() {
+        
         try {
             String sEmailUsuario, sSenhaUsuario;
 
@@ -144,14 +143,13 @@ public class ViewLogin extends javax.swing.JFrame {
             oUsuario.setEmail(sEmailUsuario);
             oUsuario.setSenha(sSenhaUsuario);
 
-            Usuario oUsuarioLogado = UsuarioDAO.buscarUsuarioPorEmailSenha(sEmailUsuario, sSenhaUsuario);
      
-            java.sql.Connection conn = ConexaoBD.conectaBD();
-            
+            Connection conn = ConexaoBD.conectaBD();      
             UsuarioDAO oUsuarioDAO = new UsuarioDAO(conn);
-            ResultSet ResSetUsuarioDAO = oUsuarioDAO.autenticacaoUsuario(oUsuario);
+            
+            Usuario oUsuarioLogado = oUsuarioDAO.buscarUsuarioPorEmailSenha(sEmailUsuario, sSenhaUsuario);
 
-            if (ResSetUsuarioDAO.next()) {
+            if (oUsuarioLogado != null) {
                 ViewPrincipal oViewPrincipal = new ViewPrincipal(oUsuarioLogado);
                 oViewPrincipal.setVisible(true);
                 dispose();
@@ -159,7 +157,7 @@ public class ViewLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Informações de Login Inválidas");
             }
 
-        } catch (SQLException erro) {
+        } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "ViewLogin" + erro);
         }
     }
@@ -192,7 +190,7 @@ public class ViewLogin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewLogin(usuario).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ViewLogin().setVisible(true));
     }
 
     // Variables declaration - do not modify                     

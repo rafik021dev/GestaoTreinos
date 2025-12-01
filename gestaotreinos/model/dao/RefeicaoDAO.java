@@ -84,25 +84,31 @@ public class RefeicaoDAO {
             }
 
 	    /*
-	     * inserir na tabela refeicao
-	     * @Deprecated
-            */
-	    public boolean inserirRefeicao(Refeicao refeicao) {
-	        String sSql = "INSERT INTO refeicao (data, tipo, idusuario) "
-	                   + "VALUES (?, ?, ?)";
+	     * Inserir na tabela refeicao
+	     * @param Refeicao
+             * @return int
+             */
+            public int inserirRefeicao(Refeicao r) {
+                String sql = "INSERT INTO refeicao (data, tipo, idusuario) VALUES (?, ?, ?) RETURNING idrefeicao";
 
-	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
-	            ps.setDate(1, new java.sql.Date(refeicao.getData().getTime()));
-	            ps.setString(2, refeicao.getTipo().name());
-	            ps.setInt(3, refeicao.getUsuario().getIdUsuario());
-	            ps.executeUpdate();
-	            return true;
-	            
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	            return false;
-	        }
-	    }
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                            
+                    ps.setDate(1, (Date) r.getData());
+                    ps.setString(2, r.getTipo().name());
+                    ps.setInt(3, r.getUsuario().getIdUsuario());
+
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            return rs.getInt("idrefeicao");
+                        }
+                    }
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+
 	    /*
 	     * atualizar na tabela refeicao
 	     */

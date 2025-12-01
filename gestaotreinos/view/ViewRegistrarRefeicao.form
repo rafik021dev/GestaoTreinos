@@ -37,16 +37,16 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="cmbTipoRefeicao" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnAvancar" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtData" pref="123" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="134" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jSeparator1" min="-2" pref="94" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jLabel1" max="32767" attributes="0"/>
+                  <Component id="jSeparator1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
           </Group>
@@ -70,7 +70,7 @@
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+              <Component id="btnAvancar" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="78" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -108,12 +108,12 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;gestaotreinos.enums.TipoRefeicao&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnAvancar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Avan&#xe7;ar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvancarActionPerformed"/>
       </Events>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="txtData">
