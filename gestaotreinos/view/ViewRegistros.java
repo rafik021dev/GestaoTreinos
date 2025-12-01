@@ -107,13 +107,13 @@ public class ViewRegistros extends javax.swing.JFrame {
     }//GEN-LAST:event_jBTreinoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      ViewPrincipal oViewPrincipal = new ViewPrincipal(usuario);   
+        ViewPrincipal oViewPrincipal = new ViewPrincipal(usuario);   
         oViewPrincipal.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jBSonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSonoActionPerformed
-         ViewRegistrarSono oViewRegistrarSono = new ViewRegistrarSono(usuario);   
+        ViewRegistrarSono oViewRegistrarSono = new ViewRegistrarSono(usuario);   
         oViewRegistrarSono.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBSonoActionPerformed

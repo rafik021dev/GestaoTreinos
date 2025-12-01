@@ -181,9 +181,9 @@ public class ViewCadastro extends JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Erro ao cadastrar usuário.");
         }
-        ViewPrincipal oViewPrincipal = new ViewPrincipal(usuario);
-                oViewPrincipal.setVisible(true);
-                dispose();
+        ViewLogin oViewLogin = new ViewLogin();
+        oViewLogin.setVisible(true);
+        dispose();
     }
 
     private void txtSenhaActionPerformed(ActionEvent evt) {

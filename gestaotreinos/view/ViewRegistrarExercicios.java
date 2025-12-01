@@ -15,9 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class ViewRegistrarExercicios extends javax.swing.JFrame {
     
-    String tipoAtual;
-    String dataAtual;
-    int idAtual = usuario.getIdUsuario();
+
     
     public void mostrarLista(String data, String tipo){
         tipoAtual = tipo;
@@ -37,16 +35,19 @@ public class ViewRegistrarExercicios extends javax.swing.JFrame {
         }
     }
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRegistrarExercicios.class.getName());
-
-    private static Usuario usuario;
     
+    private Usuario usuario;
     /**
      * Creates new form ViewRegistrarExercicios
      */
     public ViewRegistrarExercicios(Usuario usuario) {
-        initComponents();
         this.usuario = usuario;
+        //this.idAtual = this.usuario.getIdUsuario();
+        this.initComponents();
     }
+        String tipoAtual;
+        String dataAtual;
+        //int idAtual = usuario.getIdUsuario();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -276,7 +277,7 @@ public class ViewRegistrarExercicios extends javax.swing.JFrame {
             exercicios.add(e3);
         }
         TreinoController tCont = new TreinoController();
-        String res = tCont.salvarTreino(dataAtual, tipoAtual, idAtual, exercicios);
+        String res = tCont.salvarTreino(dataAtual, tipoAtual, this.usuario.getIdUsuario(), exercicios);
         JOptionPane.showMessageDialog(this, res);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -315,7 +316,9 @@ public class ViewRegistrarExercicios extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRegistrarExercicios(usuario).setVisible(true));
+        Usuario usuarioTeste = new Usuario();
+        usuarioTeste.setIdUsuario(1); 
+        java.awt.EventQueue.invokeLater(() -> new ViewRegistrarExercicios(usuarioTeste).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

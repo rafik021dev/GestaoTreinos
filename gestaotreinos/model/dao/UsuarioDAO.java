@@ -2,6 +2,7 @@ package gestaotreinos.model.dao;
 
 import gestaotreinos.model.dao.ConexaoBD;
 import gestaotreinos.model.entity.Usuario;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -222,9 +223,14 @@ public class UsuarioDAO {
                     u.setNome(rs.getString("nome"));
                     u.setSexo(rs.getString("sexo").charAt(0));
                     u.setIdade(rs.getInt("idade"));
-                    u.setPeso(rs.getDouble("peso"));
-                    u.setAltura(rs.getDouble("altura"));
-                    u.setMetaPeso(rs.getObject("metapeso", Double.class));
+
+                    u.setPeso(rs.getBigDecimal("peso").doubleValue());
+                    u.setAltura(rs.getBigDecimal("altura").doubleValue());
+
+                    BigDecimal meta = rs.getBigDecimal("metapeso");
+                    u.setMetaPeso(meta != null ? meta.doubleValue() : null);
+                    
+                    
                     u.setEmail(rs.getString("email"));
                     u.setSenha(rs.getString("senha"));
                     return u;
