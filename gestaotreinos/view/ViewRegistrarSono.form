@@ -149,9 +149,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Horas Dormidas:"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Horas Dormidas:"/>
-      </AccessibilityProperties>
     </Component>
     <Component class="javax.swing.JSpinner" name="jSHoras">
       <Properties>

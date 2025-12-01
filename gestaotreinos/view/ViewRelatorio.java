@@ -16,6 +16,7 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
  */
 public class ViewRelatorio extends javax.swing.JFrame {
     Desempenho desAtual;
+    int idUsuario = 1;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRelatorio.class.getName());
 
     /**
@@ -85,7 +86,7 @@ public class ViewRelatorio extends javax.swing.JFrame {
         jButton1.setText("Voltar");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
-        jLabel5.setText("Alerta");
+        jLabel5.setText("Alertas");
 
         pgbCal.setMaximum(8);
         pgbCal.setStringPainted(true);
@@ -182,8 +183,7 @@ public class ViewRelatorio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerarAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarAnaliseActionPerformed
-       int idUsuario = 1;
-       
+          
        DesempenhoController dCont = new DesempenhoController();
        
        desAtual = dCont.gerarRelatorioSemanal(1);
@@ -202,7 +202,9 @@ public class ViewRelatorio extends javax.swing.JFrame {
        pgbNota.setMaximum(10);
        pgbNota.setValue((int) desAtual.getIndiceDesempenho());
        pgbNota.setString((int) desAtual.getIndiceDesempenho() + " / 10");
-       definirCor(pgbNota, (int) desAtual.getIndiceDesempenho(), 3, 5); 
+       definirCor(pgbNota, (int) desAtual.getIndiceDesempenho(), 3, 5);
+       
+       jTextA.setText(this.desAtual.getTextoResumo());
        
        atualizarBarraCalorias();
        

@@ -13,13 +13,14 @@ import java.sql.Date;
 import gestaotreinos.enums.TipoAlerta;
 import gestaotreinos.model.entity.Alerta;
 import gestaotreinos.model.entity.Usuario;
+import java.time.LocalDate;
 
 public class AlertaDAO {
 
 	 private Connection conn;
 
 	    public AlertaDAO(Connection conn) {
-	        this.conn = conn;
+                this.conn = conn;
 	    }
 	    /* 
 	     * inserir na tabela alerta
@@ -106,4 +107,55 @@ public class AlertaDAO {
 	        }
 	        return null;
 	    }
-}
+            public java.util.List<Alerta> listarPorUsuario(int idUsuario) {
+                String sSql = "SELECT idalerta, data, tipo, mensagem, idusuario FROM alerta "
+                   + "WHERE idusuario = ? ORDER BY data DESC";
+        
+                    java.util.List<Alerta> lista = new java.util.ArrayList<>();
+
+                try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+                ps.setInt(1, idUsuario);
+            
+                    try (ResultSet rs = ps.executeQuery()) {
+                        while (rs.next()) {
+                            Alerta alertaRS = new Alerta();
+                            alertaRS.setIdAlerta(rs.getInt("idalerta"));
+                            alertaRS.setData(rs.getDate("data").toLocalDate());
+                            alertaRS.setTipo(gestaotreinos.enums.TipoAlerta.valueOf(rs.getString("tipo")));
+                            alertaRS.setMensagem(rs.getString("mensagem"));
+
+                            Usuario usuario = new Usuario();
+                            usuario.setIdUsuario(rs.getInt("idusuario"));
+                            alertaRS.setUsuario(usuario);
+
+                            lista.add(alertaRS);
+                }
+            }
+            return lista;           
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+            /*
+             *
+            */
+            public boolean ExisteAlerta(int idUsuario, TipoAlerta tipo) throws SQLException {
+                String sql = "SELECT idalerta FROM alerta WHERE idusuario = ? AND tipo = ? AND data = ?";
+    
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                   ps.setInt(1, idUsuario);
+                    ps.setString(2, tipo.name());
+                    ps.setDate(3, Date.valueOf(LocalDate.now()));
+        
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return true;
+                    }
+                }
+                }catch (SQLException e) {
+                e.printStackTrace();
+                }
+                return false;
+                }
+            }          
