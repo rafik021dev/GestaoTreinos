@@ -4,6 +4,8 @@
  */
 package gestaotreinos.view;
 
+import gestaotreinos.model.entity.Usuario;
+
 /**
  *
  * @author rafae
@@ -12,11 +14,14 @@ public class ViewUsuario extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewUsuario.class.getName());
 
+    private Usuario usuario;
+    
     /**
      * Creates new form ViewUsuario
      */
     public ViewUsuario() {
         initComponents();
+        this.usuario = usuario;
     }
 
     /**
@@ -188,7 +193,7 @@ public class ViewUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_sSenhaUsuarioActionPerformed
 
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
-        ViewPrincipal oViewPrincipal = new ViewPrincipal();
+        ViewPrincipal oViewPrincipal = new ViewPrincipal(usuario);
         oViewPrincipal.setVisible(true);
         dispose();
     }//GEN-LAST:event_VoltarActionPerformed

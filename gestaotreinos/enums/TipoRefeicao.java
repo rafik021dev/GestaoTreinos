@@ -5,10 +5,23 @@
 package gestaotreinos.enums;
 
 public enum TipoRefeicao {
-	CAFEDAMANHA,
-	ALMOCO,
-	LANCHE,
-	JANTA,
-	CEIA,
+
+    CAFEDAMANHA("Café da Manhã"),
+    ALMOCO("Almoço"),
+    JANTA("Janta"),
+    LANCHE("Lanche"),
+    CEIA("Ceia");
+ 
+
+    private final String label;
+
+    TipoRefeicao(String label) {
+        this.label = label;
+    }
+
+    @Override
+    public String toString() {
+        return label;
+    }
 }
 

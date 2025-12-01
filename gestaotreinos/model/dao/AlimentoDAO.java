@@ -20,26 +20,60 @@ public class AlimentoDAO {
 	    public AlimentoDAO(Connection conn) {
 	        this.conn = conn;
 	    }
-	    /*
-	     * inserir na tabela alimento
-	     */
-	    public boolean inserirAlimento(Alimento oAlimento, int idRefeicao){
-	        String sSql = "INSERT INTO alimento (nome, quantidade, calorias, idrefeicao) "
-	                   + "VALUES (?, ?, ?, ?)";
+	    
+            /**
+             * Insere o Alimento no Banco de Dados
+             * @param alimento
+             * @return boolean
+             */
+            public boolean inserir(Alimento alimento) {
+                String sql = "INSERT INTO alimento (nome, quantidade, calorias, idRefeicao) "
+                            + "VALUES (?, ?, ?, ?, ?)";
 
-	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
-	            ps.setString(1, oAlimento.getNomeAlimento());
-	            ps.setDouble(2, oAlimento.getQuantidade());
-	            ps.setInt(3, oAlimento.getCalorias());
-	            ps.setInt(4, idRefeicao);
-	            ps.executeUpdate();
-	            return true;
-	            
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	            return false;
-	        }
-	    }
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                    ps.setString(1, alimento.getNomeAlimento());
+                    ps.setDouble(2, alimento.getQuantidade());
+                    ps.setInt(3, alimento.getCalorias());
+
+                    ps.setInt(4, alimento.getRefeicao().getIdRefeicao());
+
+                    ps.executeUpdate();
+                    return true;
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+            
+            /*
+	     * inserir na tabela alimento
+             * @Deprecated
+             */
+            public Alimento inserirAlimento(Alimento alimento, int idRefeicao) {
+                String sql = "INSERT INTO alimento (nome, quantidade, calorias, idRefeicao) "
+               + "VALUES (?, ?, ?, ?, ?) RETURNING idAlimento";
+
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                    ps.setString(1, alimento.getNomeAlimento());
+                    ps.setDouble(2, alimento.getQuantidade());
+                    ps.setInt(3, alimento.getCalorias());
+                    ps.setInt(4, alimento.getRefeicao().getIdRefeicao());
+
+                    ResultSet rs = ps.executeQuery();
+
+                    if (rs.next()) {
+                        alimento.setIdAlimento(rs.getInt("idAlimento"));
+                    }
+
+                    return alimento;
+
+                } catch (SQLException e) {
+                    throw new RuntimeException("Erro ao inserir alimento: " + e.getMessage());
+                }
+            }
 	    /*
 	     * atualizar na tabela alimento
 	     */

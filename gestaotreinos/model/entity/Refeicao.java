@@ -4,24 +4,24 @@
  */
 package gestaotreinos.model.entity;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import gestaotreinos.enums.TipoRefeicao;
+import java.util.Date;
 
 public class Refeicao {
 	Usuario usuario;
 	private int idRefeicao;
 	List<Alimento>alimentos = new ArrayList<>();
-	private LocalDate data;
+	private Date data;
 	private TipoRefeicao tipo;
 	
 	public Refeicao(){
 		
 	}
 	
-	public Refeicao(Usuario usuario,LocalDate data, TipoRefeicao tipo) {
+	public Refeicao(Usuario usuario, Date data, TipoRefeicao tipo) {
 		setUsuario(usuario);
 		setData(data);
 		setTipo(tipo);
@@ -50,10 +50,10 @@ public class Refeicao {
 	public void setIdRefeicao(int idRefeicao) {
 		this.idRefeicao = idRefeicao;
 	}
-	public LocalDate getData() {
+	public Date getData() {
 		return data;
 	}
-	public void setData(LocalDate data) {
+	public void setData(Date data) {
 		if(data == null) {
 			throw new IllegalArgumentException("A data não pode ser nulo.");
 		}

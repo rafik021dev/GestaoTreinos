@@ -21,15 +21,78 @@ public class RefeicaoDAO {
 	    public RefeicaoDAO(Connection conn) {
 	        this.conn = conn;
 	    }
+            
+            
+            /**
+             * Método Responsável por Inserir a Refeição no Banco de Dados
+             * @param refeicao
+             * @return refeicao
+             */
+            public Refeicao inserir(Refeicao refeicao) {
+                String sql = "INSERT INTO refeicao (data, tipo, idUsuario) "
+                            + "VALUES (?, ?, ?) RETURNING idRefeicao";
+
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                ps.setDate(1, new java.sql.Date(refeicao.getData().getTime()));
+                ps.setString(2, refeicao.getTipo().name());
+                ps.setInt(3, refeicao.getUsuario().getIdUsuario());
+
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    refeicao.setIdRefeicao(rs.getInt("idRefeicao"));
+                }
+
+                return refeicao;
+
+                } catch (SQLException e) {
+                    throw new RuntimeException("Erro ao inserir refeição: " + e.getMessage());
+                }
+            }
+            
+            /**
+             * Busca pela última Refeição 
+             * @param id
+             * @return refeicao | null 
+             */
+            public Refeicao buscarPorId(int id) {
+
+                String sql = "SELECT * FROM refeicao WHERE idRefeicao = ?";
+
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                    ps.setInt(1, id);
+                    ResultSet rs = ps.executeQuery();
+
+                    if (rs.next()) {
+
+                        Refeicao refeicao = new Refeicao();
+                        refeicao.setIdRefeicao(rs.getInt("idRefeicao"));
+                        refeicao.setData(rs.getDate("data"));
+                        refeicao.setTipo(TipoRefeicao.valueOf(rs.getString("tipo")));
+
+                        return refeicao;
+                    }
+
+                    return null;
+
+                } catch (SQLException e) {
+                    throw new RuntimeException("Erro ao buscar refeição: " + e.getMessage());
+                }
+                
+            }
+
 	    /*
 	     * inserir na tabela refeicao
-	     */
-	    public boolean inserir(Refeicao refeicao) {
+	     * @Deprecated
+            */
+	    public boolean inserirRefeicao(Refeicao refeicao) {
 	        String sSql = "INSERT INTO refeicao (data, tipo, idusuario) "
 	                   + "VALUES (?, ?, ?)";
 
 	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
-	            ps.setDate(1, Date.valueOf(refeicao.getData()));
+	            ps.setDate(1, new java.sql.Date(refeicao.getData().getTime()));
 	            ps.setString(2, refeicao.getTipo().name());
 	            ps.setInt(3, refeicao.getUsuario().getIdUsuario());
 	            ps.executeUpdate();
@@ -48,7 +111,7 @@ public class RefeicaoDAO {
 	                   + "WHERE idrefeicao = ?";
 
 	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
-	            ps.setDate(1, Date.valueOf(refeicao.getData()));
+	            ps.setDate(1, new java.sql.Date(refeicao.getData().getTime()));
 	            ps.setString(2, refeicao.getTipo().name());
 	            ps.setInt(3, refeicao.getUsuario().getIdUsuario());
 	            ps.setInt(4, refeicao.getIdRefeicao());
@@ -106,7 +169,7 @@ public class RefeicaoDAO {
 	                while (rs.next()) {
 	                    Refeicao refeicao = new Refeicao();
 	                    refeicao.setIdRefeicao(rs.getInt("idrefeicao")); 
-	                    refeicao.setData(rs.getDate("data").toLocalDate());
+	                    refeicao.setData(rs.getDate("data"));
 	                    refeicao.setTipo(TipoRefeicao.valueOf(rs.getString("tipo")));
 	                    
 	                    

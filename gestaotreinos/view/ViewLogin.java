@@ -141,12 +141,15 @@ public class ViewLogin extends javax.swing.JFrame {
             oUsuario.setEmail(sEmailUsuario);
             oUsuario.setSenha(sSenhaUsuario);
 
+            Usuario oUsuarioLogado = UsuarioDAO.buscarUsuarioPorEmailSenha(sEmailUsuario, sSenhaUsuario);
+     
             java.sql.Connection conn = ConexaoBD.conectaBD();
+            
             UsuarioDAO oUsuarioDAO = new UsuarioDAO(conn);
             ResultSet ResSetUsuarioDAO = oUsuarioDAO.autenticacaoUsuario(oUsuario);
 
             if (ResSetUsuarioDAO.next()) {
-                ViewPrincipal oViewPrincipal = new ViewPrincipal();
+                ViewPrincipal oViewPrincipal = new ViewPrincipal(oUsuarioLogado);
                 oViewPrincipal.setVisible(true);
                 dispose();
             } else {

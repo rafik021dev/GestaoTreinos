@@ -5,6 +5,8 @@
 
 package gestaotreinos.view;
 
+import gestaotreinos.model.entity.Usuario;
+
 /**
  *
  * @author rafae
@@ -13,9 +15,12 @@ public class ViewRegistros extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRegistros.class.getName());
 
+    private Usuario usuario;
+    
     /** Creates new form ViewRegistros */
     public ViewRegistros() {
         initComponents();
+        this.usuario = usuario;
     }
 
     /** This method is called from within the constructor to
@@ -42,6 +47,7 @@ public class ViewRegistros extends javax.swing.JFrame {
         jBTreino.addActionListener(this::jBTreinoActionPerformed);
 
         jButton2.setText("Refeição");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         jBSono.setText("Sono");
         jBSono.addActionListener(this::jBSonoActionPerformed);
@@ -101,7 +107,7 @@ public class ViewRegistros extends javax.swing.JFrame {
     }//GEN-LAST:event_jBTreinoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      ViewPrincipal oViewPrincipal = new ViewPrincipal();   
+      ViewPrincipal oViewPrincipal = new ViewPrincipal(usuario);   
         oViewPrincipal.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -112,30 +118,9 @@ public class ViewRegistros extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jBSonoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRegistros().setVisible(true));
-    }
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBSono;
