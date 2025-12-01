@@ -140,7 +140,7 @@ public class AlertaDAO {
             /*
              *
             */
-            public boolean ExisteAlerta(int idUsuario, TipoAlerta tipo) throws SQLException {
+            public boolean existeAlerta(int idUsuario, TipoAlerta tipo) throws SQLException {
                 String sql = "SELECT idalerta FROM alerta WHERE idusuario = ? AND tipo = ? AND data = ?";
     
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
