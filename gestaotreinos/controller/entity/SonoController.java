@@ -97,4 +97,17 @@ public class SonoController {
             return e.getMessage();
         }
     }
+    public List<Sono> listarHistorico(int idUsuario) {
+        SonoDAO dao = new SonoDAO(conn);
+        return dao.listarSonoPorUsuario(idUsuario);
+    }
+
+    public String excluirSono(int idSono) {
+        SonoDAO dao = new SonoDAO(conn);
+        if (dao.deletarSono(idSono)) {
+            return "Registro de sono excluido.";
+        } else {
+            return "erro ao excluir sono.";
+        }
+    }
 }

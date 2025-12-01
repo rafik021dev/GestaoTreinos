@@ -84,4 +84,32 @@ public class RefeicaoController {
             return e.getMessage();
         }
     }
+    public List<Refeicao> listarHistorico(int idUsuario) {
+        try {
+            RefeicaoDAO rDao = new RefeicaoDAO(conn);
+            List<Refeicao> lista = rDao.listarPorUsuario(idUsuario);
+            
+            if (lista != null) {
+                AlimentoDAO aDao = new AlimentoDAO(conn);
+                for (Refeicao r : lista) {
+                    List<Alimento> alimentos = aDao.listaPorRefeicao(r.getIdRefeicao());
+                    r.setAlimentos(alimentos);
+                }
+            }
+            return lista;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String excluirRefeicao(int idRefeicao) {
+        RefeicaoDAO dao = new RefeicaoDAO(conn);
+        if (dao.deletarRefeicao(idRefeicao)) {
+            return "Refeiçao excluída.";
+        } else {
+            return "erro ao excluir refeicao.";
+        }
+    }
 }

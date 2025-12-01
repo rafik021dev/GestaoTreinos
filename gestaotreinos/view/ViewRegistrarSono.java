@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author rafae
  */
 public class ViewRegistrarSono extends javax.swing.JFrame {
-
+int idUsurio = usuario.getIdUsuario();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRegistrarSono.class.getName());
 
     private static Usuario usuario;
@@ -151,7 +151,6 @@ public class ViewRegistrarSono extends javax.swing.JFrame {
         
         String qualidade = sTipoSono.getSelectedItem().toString().toUpperCase();
         
-        int idUsurio = 1;
         
         SonoController sCont = new SonoController();
         String res = sCont.salvarSono(dataTxt, horasTxt, qualidade, idUsurio);

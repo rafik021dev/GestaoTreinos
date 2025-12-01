@@ -17,7 +17,7 @@ public class ViewRegistrarExercicios extends javax.swing.JFrame {
     
     String tipoAtual;
     String dataAtual;
-    int idAtual = 1;
+    int idAtual = usuario.getIdUsuario();
     
     public void mostrarLista(String data, String tipo){
         tipoAtual = tipo;
