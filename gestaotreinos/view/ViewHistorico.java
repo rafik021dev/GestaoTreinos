@@ -17,6 +17,7 @@ import gestaotreinos.model.entity.Treino;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import gestaotreinos.controller.entity.UsuarioController;
 /**
  *
  * @author gusta
@@ -26,7 +27,7 @@ public class ViewHistorico extends javax.swing.JFrame {
     private List<Treino> listaTreinos;
     private List<Sono> listaSonos;
     private List<Refeicao> listaRefeicoes;
-    Usuario usuario;
+    private Usuario usuario;
     private int idAtual;
     
     
@@ -311,9 +312,12 @@ public class ViewHistorico extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewHistorico(usuario).setVisible(true));
+ // ... look and feel code ...
+    java.awt.EventQueue.invokeLater(() -> {
+        UsuarioController uCont = new UsuarioController();
+        Usuario usuario = uCont.buscarUsuario(idAtual); 
+        new ViewHistorico(usuario).setVisible(true);
+    });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
