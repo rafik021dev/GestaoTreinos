@@ -3,22 +3,85 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package gestaotreinos.view;
-
+import java.util.List;
+import gestaotreinos.model.entity.Sono;
+import gestaotreinos.model.entity.Refeicao;
+import gestaotreinos.model.entity.Treino;
+import gestaotreinos.model.entity.Usuario;
+import gestaotreinos.controller.entity.RefeicaoController;
+import gestaotreinos.controller.entity.SonoController;
+import gestaotreinos.controller.entity.TreinoController;
+import gestaotreinos.model.entity.Refeicao;
+import gestaotreinos.model.entity.Sono;
+import gestaotreinos.model.entity.Treino;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author gusta
  */
 public class ViewHistorico extends javax.swing.JFrame {
     
+    private List<Treino> listaTreinos;
+    private List<Sono> listaSonos;
+    private List<Refeicao> listaRefeicoes;
+    Usuario usuario;
+    private int idAtual;
+    
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewHistorico.class.getName());
 
     /**
      * Creates new form ViewHistorico
      */
-    public ViewHistorico() {
+    public ViewHistorico(Usuario usuario) {
         initComponents();
+        this.usuario = usuario;
+        idAtual = usuario.getIdUsuario();
+        carregarTabelas();
     }
-
+    public void carregarTabelas() {
+        
+        TreinoController tCont = new TreinoController();
+        
+        this.listaTreinos = tCont.listarHistorico(idAtual);
+        
+        DefaultTableModel modelTreino = (DefaultTableModel) principal.getModel();
+        modelTreino.setRowCount(0); 
+        
+        if (listaTreinos != null) {
+            for (Treino t : listaTreinos) {            
+                modelTreino.addRow(new Object[]{ t.getData(), t.getTipo() });
+            }
+        }
+        SonoController sCont = new SonoController();
+        
+        this.listaSonos = sCont.listarHistorico(idAtual);
+        
+        DefaultTableModel modelSono = (DefaultTableModel) tbltr.getModel();
+        modelSono.setRowCount(0);
+        
+        if (listaSonos != null) {
+            for (Sono s : listaSonos) {
+                modelSono.addRow(new Object[]{ s.getData(), s.getHorasDormidas() + "h", s.getQualidade() });
+            }
+        }
+        RefeicaoController rCont = new RefeicaoController();
+        this.listaRefeicoes = rCont.listarHistorico(idAtual);
+        
+        DefaultTableModel modelRef = (DefaultTableModel) tblRefeicao.getModel();
+        modelRef.setRowCount(0);
+        
+        if (listaRefeicoes != null) {
+            for (Refeicao r : listaRefeicoes) {    
+                modelRef.addRow(new Object[]{ r.getData(), r.getTipo() });
+            }
+        }
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,21 +91,205 @@ public class ViewHistorico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        principal = new javax.swing.JTabbedPane();
+        pnTreino = new javax.swing.JPanel();
+        tblTreino = new javax.swing.JScrollPane();
+        tbltr = new javax.swing.JTable();
+        pnSono = new javax.swing.JPanel();
+        tblSono = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        pnRefeicao = new javax.swing.JPanel();
+        tblRefe = new javax.swing.JScrollPane();
+        tblRefeicao = new javax.swing.JTable();
+        excluir = new javax.swing.JButton();
+        voltar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        principal.setToolTipText("");
+
+        tbltr.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblTreino.setViewportView(tbltr);
+
+        javax.swing.GroupLayout pnTreinoLayout = new javax.swing.GroupLayout(pnTreino);
+        pnTreino.setLayout(pnTreinoLayout);
+        pnTreinoLayout.setHorizontalGroup(
+            pnTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tblTreino, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+        );
+        pnTreinoLayout.setVerticalGroup(
+            pnTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnTreinoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tblTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        principal.addTab("Treino", pnTreino);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblSono.setViewportView(jTable2);
+
+        javax.swing.GroupLayout pnSonoLayout = new javax.swing.GroupLayout(pnSono);
+        pnSono.setLayout(pnSonoLayout);
+        pnSonoLayout.setHorizontalGroup(
+            pnSonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSonoLayout.createSequentialGroup()
+                .addComponent(tblSono, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnSonoLayout.setVerticalGroup(
+            pnSonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnSonoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tblSono, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        principal.addTab("Sono", pnSono);
+
+        tblRefeicao.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblRefe.setViewportView(tblRefeicao);
+
+        javax.swing.GroupLayout pnRefeicaoLayout = new javax.swing.GroupLayout(pnRefeicao);
+        pnRefeicao.setLayout(pnRefeicaoLayout);
+        pnRefeicaoLayout.setHorizontalGroup(
+            pnRefeicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tblRefe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+        );
+        pnRefeicaoLayout.setVerticalGroup(
+            pnRefeicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnRefeicaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tblRefe, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
+        );
+
+        principal.addTab("Alimentação", pnRefeicao);
+
+        excluir.setText("Excluir");
+        excluir.addActionListener(this::excluirActionPerformed);
+
+        voltar.setText("Voltar");
+        voltar.addActionListener(this::voltarActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 665, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(principal)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(voltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(excluir)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(principal, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(excluir)
+                    .addComponent(voltar))
+                .addContainerGap())
         );
+
+        principal.getAccessibleContext().setAccessibleName("a");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
+
+        int aba = principal.getSelectedIndex(); 
+        if (aba == 0) {
+            int linha = tbltr.getSelectedRow();
+            if (linha == -1) { 
+                JOptionPane.showMessageDialog(this, "Selecione um treino para excluir."); 
+                return; 
+            }
+            
+            if (JOptionPane.showConfirmDialog(this, "Tem certeza?", "Excluir Treino", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                Treino t = listaTreinos.get(linha);
+                TreinoController tCont = new TreinoController();
+                
+                String msg = tCont.excluirTreino(t.getIdTreino());
+                JOptionPane.showMessageDialog(this, msg);
+                
+                carregarTabelas(); 
+            }
+        }
+        else if (aba == 1) {
+            int linha = jTable2.getSelectedRow();
+            if (linha == -1) { 
+                JOptionPane.showMessageDialog(this, "Selecione um registro de sono."); 
+                return; 
+            }
+            
+            if (JOptionPane.showConfirmDialog(this, "excluir sono?", "Confirma", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                Sono s = listaSonos.get(linha);
+                SonoController sCont = new SonoController();
+                String msg = sCont.excluirSono(s.getIdSono());
+                JOptionPane.showMessageDialog(this, msg);
+                carregarTabelas();
+            }
+        }
+
+        else if (aba == 2) {
+            int linha = tblRefeicao.getSelectedRow();
+            if (linha == -1) { 
+                JOptionPane.showMessageDialog(this, "Selecione uma refeição."); 
+                return; 
+            } 
+            if (JOptionPane.showConfirmDialog(this, "Excluir refeição?", "Confirma", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                Refeicao r = listaRefeicoes.get(linha);
+                RefeicaoController rCont = new RefeicaoController();
+                String msg = rCont.excluirRefeicao(r.getIdRefeicao());
+                JOptionPane.showMessageDialog(this, msg);
+                carregarTabelas();
+            }
+        }
+    }//GEN-LAST:event_excluirActionPerformed
+
+    private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
+        ViewPrincipal oViewPrincipal = new ViewPrincipal(usuario);
+        oViewPrincipal.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_voltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -66,9 +313,21 @@ public class ViewHistorico extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewHistorico().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ViewHistorico(usuario).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton excluir;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JPanel pnRefeicao;
+    private javax.swing.JPanel pnSono;
+    private javax.swing.JPanel pnTreino;
+    private javax.swing.JTabbedPane principal;
+    private javax.swing.JScrollPane tblRefe;
+    private javax.swing.JTable tblRefeicao;
+    private javax.swing.JScrollPane tblSono;
+    private javax.swing.JScrollPane tblTreino;
+    private javax.swing.JTable tbltr;
+    private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 }
