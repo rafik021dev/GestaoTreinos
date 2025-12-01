@@ -14,16 +14,16 @@ import javax.swing.JOptionPane;
  * @author rafae
  */
 public class ViewRegistrarSono extends javax.swing.JFrame {
-int idUsurio = usuario.getIdUsuario();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRegistrarSono.class.getName());
 
-    private static Usuario usuario;
+    private Usuario usuario;
     
     /** Creates new form ViewRegistrarSono */
     public ViewRegistrarSono(Usuario usuario) {
         initComponents();
         this.usuario = usuario;
     }
+    //int idUsuario = usuario.getIdUsuario();
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -153,7 +153,7 @@ int idUsurio = usuario.getIdUsuario();
         
         
         SonoController sCont = new SonoController();
-        String res = sCont.salvarSono(dataTxt, horasTxt, qualidade, idUsurio);
+        String res = sCont.salvarSono(dataTxt, horasTxt, qualidade, usuario.getIdUsuario());
         
         JOptionPane.showMessageDialog(this, res);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -165,7 +165,7 @@ int idUsurio = usuario.getIdUsuario();
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void main(String args[]) {
         /* Set the Nimbus look and feel */
       /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -189,9 +189,6 @@ int idUsurio = usuario.getIdUsuario();
             java.util.logging.Logger.getLogger(ViewRelatorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio(usuario).setVisible(true));
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new ViewRegistrarSono(usuario).setVisible(true));

@@ -18,6 +18,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import gestaotreinos.controller.entity.UsuarioController;
+import gestaotreinos.model.dao.ConexaoBD;
+import gestaotreinos.model.dao.UsuarioDAO;
+import java.sql.Connection;
 /**
  *
  * @author gusta
@@ -28,7 +31,6 @@ public class ViewHistorico extends javax.swing.JFrame {
     private List<Sono> listaSonos;
     private List<Refeicao> listaRefeicoes;
     private Usuario usuario;
-    private int idAtual;
     
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewHistorico.class.getName());
@@ -39,16 +41,16 @@ public class ViewHistorico extends javax.swing.JFrame {
     public ViewHistorico(Usuario usuario) {
         initComponents();
         this.usuario = usuario;
-        idAtual = usuario.getIdUsuario();
         carregarTabelas();
     }
     public void carregarTabelas() {
         
         TreinoController tCont = new TreinoController();
         
-        this.listaTreinos = tCont.listarHistorico(idAtual);
+        this.listaTreinos = tCont.listarHistorico(usuario.getIdUsuario());
         
-        DefaultTableModel modelTreino = (DefaultTableModel) principal.getModel();
+        //DefaultTableModel modelTreino = (DefaultTableModel) principal.getModel();
+        DefaultTableModel modelTreino = (DefaultTableModel) tbltr.getModel();
         modelTreino.setRowCount(0); 
         
         if (listaTreinos != null) {
@@ -58,7 +60,7 @@ public class ViewHistorico extends javax.swing.JFrame {
         }
         SonoController sCont = new SonoController();
         
-        this.listaSonos = sCont.listarHistorico(idAtual);
+        this.listaSonos = sCont.listarHistorico(usuario.getIdUsuario());
         
         DefaultTableModel modelSono = (DefaultTableModel) tbltr.getModel();
         modelSono.setRowCount(0);
@@ -69,7 +71,7 @@ public class ViewHistorico extends javax.swing.JFrame {
             }
         }
         RefeicaoController rCont = new RefeicaoController();
-        this.listaRefeicoes = rCont.listarHistorico(idAtual);
+        this.listaRefeicoes = rCont.listarHistorico(usuario.getIdUsuario());
         
         DefaultTableModel modelRef = (DefaultTableModel) tblRefeicao.getModel();
         modelRef.setRowCount(0);
@@ -295,7 +297,7 @@ public class ViewHistorico extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -313,10 +315,14 @@ public class ViewHistorico extends javax.swing.JFrame {
         }
         //</editor-fold>
  // ... look and feel code ...
-    java.awt.EventQueue.invokeLater(() -> {
-        UsuarioController uCont = new UsuarioController();
-        Usuario usuario = uCont.buscarUsuario(idAtual); 
-        new ViewHistorico(usuario).setVisible(true);
+        java.awt.EventQueue.invokeLater(() -> {
+        //UsuarioController uCont = new UsuarioController();
+        
+        Connection conn = ConexaoBD.conectaBD();      
+        UsuarioDAO oUsuarioDAO = new UsuarioDAO(conn);
+        Usuario oUsuario = oUsuarioDAO.buscarPorId(usuario.getIdUsuario());
+        
+        new ViewHistorico(oUsuario).setVisible(true);
     });
     }
 

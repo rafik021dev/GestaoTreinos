@@ -17,6 +17,7 @@ import gestaotreinos.model.dao.TreinoDAO;
 import gestaotreinos.model.entity.Exercicio;
 import gestaotreinos.model.entity.Treino;
 import gestaotreinos.model.entity.Usuario;
+import java.util.Date;
 
 public class TreinoController {
 
@@ -86,10 +87,9 @@ public class TreinoController {
 
     public String salvarTreino(String dataTexto, String tipoTexto, int idUsuario, List<Exercicio> listaExercicios) {
         try {
- 
-            DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate data = LocalDate.parse(dataTexto, formatar);
-            
+            java.text.SimpleDateFormat formatar = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            Date data = formatar.parse(dataTexto);
+
             TipoTreino tipo = TipoTreino.valueOf(tipoTexto.toUpperCase());
 
             Usuario usuario = new Usuario();
@@ -109,34 +109,32 @@ public class TreinoController {
             }
             treino.setExercicios(exerciciosValidos);
 
-
             if (treino.getExercicios().isEmpty()) {
                 return "erro: precisa preencher pelo menos um exercicio.";
             }
 
             TreinoDAO treinoDAO = new TreinoDAO(conn);
             List<Treino> listaTreinos = treinoDAO.listarTreinosPorUsuario(idUsuario);
-              if (listaTreinos != null) {
+            if (listaTreinos != null) {
                 for (Treino t : listaTreinos) {
-                  if (t.getData().isEqual(treino.getData()) && t.getTipo() == treino.getTipo()) {
-                    return "erro: ja tem um treino de " + treino.getTipo() + " nessa data.";
+                    if (t.getData().equals(treino.getData()) && t.getTipo() == treino.getTipo()) {
+                        return "erro: ja tem um treino de " + treino.getTipo() + " nessa data.";
                     }
                 }
-            } 
+            }
             if (treinoDAO.inserirTreino(treino)) {
-                              
                 int ultimoTreino = treinoDAO.buscarUltimoId(idUsuario);
-                
+
                 ExercicioDAO exercicioDAO = new ExercicioDAO(conn);
                 for (Exercicio e : treino.getExercicios()) {
                     exercicioDAO.inserirExercicio(e, ultimoTreino);
-                }             
+                }
                 return "Treino registrado";
             } else {
                 return "erro: falha ao salvar no banco de dados.";
             }
 
-        } catch (DateTimeParseException e) {
+        } catch (java.text.ParseException e) {
             return "erro: data invalida";
         } catch (IllegalArgumentException e) {
             return e.getMessage();
@@ -144,6 +142,7 @@ public class TreinoController {
             return e.getMessage();
         }
     }
+    
     public List<Treino> listarHistorico(int idUsuario) {
         TreinoDAO dao = new TreinoDAO(conn);
         try {

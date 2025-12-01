@@ -7,12 +7,13 @@ package gestaotreinos.model.entity;
 import java.time.LocalDate;
 
 import gestaotreinos.enums.QualidadeSono;
+import java.util.Date;
 
 public class Sono {
 	
 	private Usuario usuario;
 	private int idSono;
-	private LocalDate data;
+	private Date data;
 	private double horasDormidas;
 	private QualidadeSono qualidade;
 	
@@ -20,7 +21,7 @@ public class Sono {
 		
 	}
 	
-	public Sono(LocalDate data, double horasDormidas, QualidadeSono qualidade, Usuario usuario) {
+	public Sono(Date data, double horasDormidas, QualidadeSono qualidade, Usuario usuario) {
 		setUsuario(usuario);
 	    setData(data);
 	    setHorasDormidas(horasDormidas);
@@ -43,10 +44,10 @@ public class Sono {
 	public void setIdSono(int idSono) {
 		this.idSono = idSono;
 	}
-	public LocalDate getData() {
+	public Date getData() {
 		return data;
 	}
-	public void setData(LocalDate data) {
+	public void setData(Date data) {
 		if(data == null) {
 			throw new IllegalArgumentException("A data não pode ser nulo.");
 		}

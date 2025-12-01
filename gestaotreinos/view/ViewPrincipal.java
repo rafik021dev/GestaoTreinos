@@ -9,7 +9,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form ViewPrincipal
      */
-    private static Usuario usuario;
+    private Usuario usuario;
     
     public ViewPrincipal(Usuario usuario) {
         initComponents();
@@ -58,7 +58,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jButton3.setText("Histórico");
         jButton3.addActionListener(this::jButton3ActionPerformed);
 
-        jButton5.setText("Relatórios e Alertas");
+        jButton5.setText("Relatórios/Alertas");
         jButton5.addActionListener(this::jButton5ActionPerformed);
 
         jLabel2.setText("Dashboard");
@@ -124,7 +124,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jSeparator1)
                                     .addComponent(jLabel1))))))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +170,9 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        ViewHistorico oViewHistorico = new ViewHistorico(usuario);
+        oViewHistorico.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -188,7 +190,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new ViewPrincipal(usuario).setVisible(true));
     }
 

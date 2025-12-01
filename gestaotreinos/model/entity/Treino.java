@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gestaotreinos.enums.TipoTreino;
+import java.util.Date;
 
 public class Treino {
 
 	private int idTreino;
-	private LocalDate data;
+	private Date data;
 	private TipoTreino tipo;
 	private Usuario usuario;
 	private List<Exercicio> exercicios = new ArrayList<>();
@@ -23,7 +24,7 @@ public class Treino {
 		
 	}
 	
-	public Treino(Usuario usuario,LocalDate data,TipoTreino tipo) {
+	public Treino(Usuario usuario,Date data,TipoTreino tipo) {
 		setUsuario(usuario);
 		setData(data);
 		setTipo(tipo);
@@ -35,10 +36,10 @@ public class Treino {
 	public void setIdTreino(int idTreino) {
 		this.idTreino = idTreino;
 	}
-	public LocalDate getData() {
+	public Date getData() {
 		return data;
 	}
-	public void setData(LocalDate data) {
+	public void setData(Date data) {
 		if (data == null) {
 		    throw new IllegalArgumentException("A data não pode ser nula");
 		}

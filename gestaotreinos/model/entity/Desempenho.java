@@ -6,6 +6,7 @@ package gestaotreinos.model.entity;
 
 import java.time.LocalDate;
 import gestaotreinos.enums.TipoRelatorio;
+import java.util.Date;
 
 public class Desempenho {
     private int idDesempenho;
@@ -14,7 +15,7 @@ public class Desempenho {
     private double mediaTreino;
     private double indiceDesempenho;
     private Usuario usuario;
-    private LocalDate dataGeracao;
+    private Date dataGeracao;
     private TipoRelatorio tipo;
     private String textoResumo;
 
@@ -61,10 +62,10 @@ public class Desempenho {
     public void setIndiceDesempenho(double indiceDesempenho) {
         this.indiceDesempenho = indiceDesempenho;
     }
-    public LocalDate getDataGeracao() {
+    public Date getDataGeracao() {
         return dataGeracao;
     }
-    public void setDataGeracao(LocalDate dataGeracao) {
+    public void setDataGeracao(Date dataGeracao) {
         this.dataGeracao = dataGeracao;
     }
     public TipoRelatorio getTipo() {

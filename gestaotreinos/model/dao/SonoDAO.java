@@ -30,7 +30,7 @@ public class SonoDAO {
         String sSql = "INSERT INTO sono (data, horasdormidas, qualidade, idusuario) VALUES (?,?,?,?)";
 
         try (PreparedStatement ps = conn.prepareStatement(sSql)) {
-            ps.setDate(1, Date.valueOf(sono.getData()));
+            ps.setDate(1, new java.sql.Date(sono.getData().getTime()));
             ps.setDouble(2, sono.getHorasDormidas());        
             ps.setString(3, sono.getQualidade().name()); 
             ps.setInt(4, sono.getUsuario().getIdUsuario()); 
@@ -51,7 +51,7 @@ public class SonoDAO {
         String sSql = "UPDATE sono SET data =?, horasdormidas =?, qualidade =?, idusuario =? WHERE idsono =?";
 
         try (PreparedStatement ps = conn.prepareStatement(sSql)) {
-            ps.setDate(1, Date.valueOf(sono.getData()));
+            ps.setDate(1, new java.sql.Date(sono.getData().getTime()));
             ps.setDouble(2, sono.getHorasDormidas());
             ps.setString(3, sono.getQualidade().name()); 
             ps.setInt(4, sono.getUsuario().getIdUsuario());
@@ -96,7 +96,7 @@ public class SonoDAO {
                 while (rs.next()) {
                     Sono oSono = new Sono();
                     oSono.setIdSono(rs.getInt("idsono"));
-                    oSono.setData(rs.getDate("data").toLocalDate());
+                    oSono.setData(rs.getDate("data"));
                     oSono.setHorasDormidas(rs.getDouble("horasdormidas"));                    
                     oSono.setQualidade(QualidadeSono.valueOf(rs.getString("qualidade")));
 

@@ -20,6 +20,7 @@ import gestaotreinos.model.entity.Alimento;
 import gestaotreinos.model.entity.Refeicao;
 import gestaotreinos.model.entity.Usuario;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class RefeicaoController {
 
@@ -33,9 +34,8 @@ public class RefeicaoController {
     public String salvarRefeicao(String dataTexto, String tipoTexto, int idUsuario, List<Alimento> listaAlimentos) {
         try {
 
-            DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            //@todo converter isso aqui
-            //LocalDate data = dataTexto;
+            java.text.SimpleDateFormat formatar = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            Date data = formatar.parse(dataTexto);
       
             TipoRefeicao tipo = TipoRefeicao.valueOf(tipoTexto.toUpperCase());
 

@@ -33,7 +33,7 @@ public class TreinoDAO {
 	                   + "VALUES (?, ?, ?)";
 
 	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
-	            ps.setDate(1, Date.valueOf(treino.getData()));
+	            ps.setDate(1, new java.sql.Date(treino.getData().getTime()));
 	            ps.setString(2, treino.getTipo().name());
 	            ps.setInt(3, treino.getUsuario().getIdUsuario());
 	            ps.executeUpdate();
@@ -52,7 +52,7 @@ public class TreinoDAO {
 	                   + "WHERE idtreino = ?";
 
 	        try (PreparedStatement ps = conn.prepareStatement(sSql)) {
-	            ps.setDate(1, Date.valueOf(treino.getData()));
+                    ps.setDate(1, new java.sql.Date(treino.getData().getTime()));
 	            ps.setString(2, treino.getTipo().name());
 	            ps.setInt(3, treino.getUsuario().getIdUsuario());
 	            ps.setInt(4, treino.getIdTreino());
@@ -92,7 +92,7 @@ public class TreinoDAO {
 	                    if (rs.next()) {
 	                        Treino treinoRS = new Treino();
 	                        
-	                        treinoRS.setData(rs.getDate("data").toLocalDate());
+	                        treinoRS.setData(rs.getDate("data"));
 	                        treinoRS.setIdTreino(rs.getInt("idtreino"));
 	                        treinoRS.setTipo(TipoTreino.valueOf(rs.getString("tipo")));
 	                        
@@ -119,15 +119,15 @@ public class TreinoDAO {
 	                ps.setInt(1, idUsuario);
 	                try (ResultSet rs = ps.executeQuery()) {
 	                    while (rs.next()) {
-	                        Treino treinoRS = new Treino();
-	                        treinoRS.setIdTreino(rs.getInt("idtreino"));
-	                        treinoRS.setData(rs.getDate("data").toLocalDate());
-	                        treinoRS.setTipo(TipoTreino.valueOf(rs.getString("tipo")));
-	                        List<Exercicio> exerciciosTreino = exercicioDAO.listarPorTreino(treinoRS.getIdTreino());
-	                        treinoRS.setExercicios(exerciciosTreino);
-	                        
-	                        lista.add(treinoRS);
-	                    }
+                                Treino treinoRS = new Treino();
+                                treinoRS.setIdTreino(rs.getInt("idtreino"));
+                                treinoRS.setData(rs.getDate("data")); // CORRIGIDO
+                                treinoRS.setTipo(TipoTreino.valueOf(rs.getString("tipo")));
+                                List<Exercicio> exerciciosTreino = exercicioDAO.listarPorTreino(treinoRS.getIdTreino());
+                                treinoRS.setExercicios(exerciciosTreino);
+
+                                lista.add(treinoRS);
+}
 	                }
 	            }
 	            return lista;

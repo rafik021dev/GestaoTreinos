@@ -104,21 +104,21 @@ public class ViewRegistrarExercicios extends javax.swing.JFrame {
         jL3.setText("jLabel2");
         jL3.setPreferredSize(new java.awt.Dimension(120, 20));
 
-        jSerie1.setModel(new javax.swing.SpinnerNumberModel());
+        jSerie1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jReps1.setModel(new javax.swing.SpinnerNumberModel());
+        jReps1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jCarga2.setModel(new javax.swing.SpinnerNumberModel());
+        jCarga2.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jSerie2.setModel(new javax.swing.SpinnerNumberModel());
+        jSerie2.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jReps2.setModel(new javax.swing.SpinnerNumberModel());
+        jReps2.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jCarga3.setModel(new javax.swing.SpinnerNumberModel());
+        jCarga3.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jSerie3.setModel(new javax.swing.SpinnerNumberModel());
+        jSerie3.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jReps3.setModel(new javax.swing.SpinnerNumberModel());
+        jReps3.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         jLabel2.setText("Carga:");
         jLabel2.setName(""); // NOI18N
@@ -129,6 +129,8 @@ public class ViewRegistrarExercicios extends javax.swing.JFrame {
 
         jButton2.setText("Voltar");
         jButton2.addActionListener(this::jButton2ActionPerformed);
+
+        jCarga1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

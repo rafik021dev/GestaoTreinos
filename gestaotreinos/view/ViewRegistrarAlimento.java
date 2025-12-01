@@ -170,7 +170,7 @@ public class ViewRegistrarAlimento extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    public static void main(String args[]) {
+    public void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new ViewRegistrarAlimento(usuario, refeicao).setVisible(true));
     }
     

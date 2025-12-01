@@ -28,7 +28,7 @@ public class AlimentoDAO {
              */
             public boolean inserir(Alimento alimento) {
                 String sql = "INSERT INTO alimento (nome, quantidade, calorias, idRefeicao) "
-                            + "VALUES (?, ?, ?, ?, ?)";
+                            + "VALUES (?, ?, ?, ?)";
 
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
 

@@ -36,7 +36,7 @@ public class DesempenhoDAO {
             ps.setDouble(3, oDesempenho.getMediaTreino());
             ps.setDouble(4, oDesempenho.getIndiceDesempenho());
             ps.setInt(5, oDesempenho.getUsuario().getIdUsuario());
-            ps.setDate(6, Date.valueOf(oDesempenho.getDataGeracao()));
+            ps.setDate(6, new java.sql.Date(oDesempenho.getDataGeracao().getTime()));
             ps.setString(7, oDesempenho.getTipo().name());
             ps.setString(8, oDesempenho.getTextoResumo());
             
@@ -133,11 +133,8 @@ public class DesempenhoDAO {
                     desempenhoRS.setMediaCalorias(rs.getDouble("mediacalorias"));
                     desempenhoRS.setMediaTreino(rs.getDouble("mediatreinos"));
                     desempenhoRS.setIndiceDesempenho(rs.getDouble("indicedesempenho"));         
-                    desempenhoRS.setDataGeracao(rs.getDate("data").toLocalDate());
+                    desempenhoRS.setDataGeracao(rs.getDate("data"));
                     desempenhoRS.setTipo(TipoRelatorio.valueOf(rs.getString("tipo")));
-                    desempenhoRS.setTextoResumo(rs.getString("textoresumo"));
-                    desempenhoRS.setDataGeracao(rs.getDate("data").toLocalDate());
-                    desempenhoRS.setTipo(TipoRelatorio.valueOf("tipo"));
                     desempenhoRS.setTextoResumo(rs.getString("textoresumo"));
                     
                     Usuario usuario = new Usuario();

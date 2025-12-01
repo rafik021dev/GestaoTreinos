@@ -17,10 +17,10 @@ import gestaotreinos.model.entity.Usuario;
  */
 public class ViewRelatorio extends javax.swing.JFrame {
     Desempenho desAtual;
-    int idUsuario = usuario.getIdUsuario();
+    //int idUsuario = usuario.getIdUsuario();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRelatorio.class.getName());
 
-    private static Usuario usuario;
+    private Usuario usuario;
     
     /**
      * Creates new form ViewRelatorio
@@ -190,7 +190,7 @@ public class ViewRelatorio extends javax.swing.JFrame {
           
        DesempenhoController dCont = new DesempenhoController();
        
-       desAtual = dCont.gerarRelatorioSemanal(idUsuario);
+       desAtual = dCont.gerarRelatorioSemanal(usuario.getIdUsuario());
        if(this.desAtual != null){
        
        pgbTreino.setMaximum(7);
@@ -265,15 +265,15 @@ public class ViewRelatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_cbObjetivoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ViewRegistros oViewRegistros = new ViewRegistros(usuario);
-        oViewRegistros.setVisible(true);
+        ViewPrincipal oViewPrincipal = new ViewPrincipal(usuario);
+        oViewPrincipal.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void main(String args[]) {
         /* Set the Nimbus look and feel */    
 
        /* Set the Nimbus look and feel */
@@ -298,9 +298,6 @@ public class ViewRelatorio extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ViewRelatorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio(usuario).setVisible(true));
 
         /* Create and display the form */
 

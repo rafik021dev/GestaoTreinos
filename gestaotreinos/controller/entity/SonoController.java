@@ -14,6 +14,7 @@ import gestaotreinos.model.entity.Sono;
 import gestaotreinos.model.dao.ConexaoBD;
 import gestaotreinos.model.dao.SonoDAO;
 import gestaotreinos.model.entity.Alerta;
+import java.util.Date;
 
 public class SonoController {
 
@@ -27,11 +28,12 @@ public class SonoController {
     public String salvarSono(String dataTexto, String horasTexto, String qualidadeTexto, int idUsuario) {
         try {
             
-            DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate data = LocalDate.parse(dataTexto, formatar);
             double horas = Double.parseDouble(horasTexto.replace(",", "."));
             QualidadeSono qualidade = QualidadeSono.valueOf(qualidadeTexto.toUpperCase());
 
+            java.text.SimpleDateFormat formatar = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            Date data = formatar.parse(dataTexto);
+       
             Usuario usuario = new Usuario();
             usuario.setIdUsuario(idUsuario);
 
