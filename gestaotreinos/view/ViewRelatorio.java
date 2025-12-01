@@ -17,7 +17,7 @@ import gestaotreinos.model.entity.Usuario;
  */
 public class ViewRelatorio extends javax.swing.JFrame {
     Desempenho desAtual;
-    //int idUsuario = usuario.getIdUsuario();
+        private int idUsuario;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewRelatorio.class.getName());
 
     private Usuario usuario;
@@ -28,6 +28,7 @@ public class ViewRelatorio extends javax.swing.JFrame {
     public ViewRelatorio(Usuario usuario) {
         initComponents();
         this.usuario = usuario;
+        this.idUsuario = usuario.getIdUsuario();
     }
 
     /**

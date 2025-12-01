@@ -141,8 +141,8 @@ public class ViewRegistrarTreino extends javax.swing.JFrame {
     }//GEN-LAST:event_sTipoTreinoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       ViewRegistros oViewRegistros = new ViewRegistros(usuario);   
-        oViewRegistros.setVisible(true);
+       ViewPrincipal oViewPrincipal = new ViewPrincipal(usuario);   
+        oViewPrincipal.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
     
