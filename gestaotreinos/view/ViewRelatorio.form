@@ -140,11 +140,13 @@
     <Component class="javax.swing.JProgressBar" name="pgbSono">
       <Properties>
         <Property name="maximum" type="int" value="8"/>
+        <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JProgressBar" name="pgbNota">
       <Properties>
         <Property name="maximum" type="int" value="10"/>
+        <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -194,6 +196,7 @@
     <Component class="javax.swing.JProgressBar" name="pgbTreino">
       <Properties>
         <Property name="maximum" type="int" value="7"/>
+        <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -232,6 +235,7 @@
     <Component class="javax.swing.JProgressBar" name="pgbCal">
       <Properties>
         <Property name="maximum" type="int" value="8"/>
+        <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
     </Component>
   </SubComponents>

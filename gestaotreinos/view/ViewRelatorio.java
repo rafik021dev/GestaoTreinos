@@ -53,8 +53,10 @@ public class ViewRelatorio extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pgbSono.setMaximum(8);
+        pgbSono.setStringPainted(true);
 
         pgbNota.setMaximum(10);
+        pgbNota.setStringPainted(true);
 
         jLabel1.setText("Treino");
 
@@ -71,6 +73,7 @@ public class ViewRelatorio extends javax.swing.JFrame {
         jLabel3.setText("objetivo:");
 
         pgbTreino.setMaximum(7);
+        pgbTreino.setStringPainted(true);
 
         jLabel4.setText("Nota");
 
@@ -84,6 +87,7 @@ public class ViewRelatorio extends javax.swing.JFrame {
         jLabel5.setText("Alerta");
 
         pgbCal.setMaximum(8);
+        pgbCal.setStringPainted(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,12 +190,12 @@ public class ViewRelatorio extends javax.swing.JFrame {
        
        pgbTreino.setMaximum(7);
        pgbTreino.setValue((int) desAtual.getMediaTreino());
-       pgbTreino.setString((int) desAtual.getMediaTreino() + " / 7 Dias");
+       pgbTreino.setString((int) desAtual.getMediaTreino() + " / 7 Treinos");
        definirCor(pgbTreino, (int) desAtual.getMediaTreino(), 3, 5); 
        
        pgbSono.setMaximum(12);
        pgbSono.setValue((int) desAtual.getMediaSono());
-       pgbSono.setString((int) desAtual.getMediaSono() + " / 8 horas" );
+       pgbSono.setString((int) desAtual.getMediaSono() + " /h por dia" );
        definirCor(pgbSono, (int) desAtual.getMediaSono(), 6, 8); 
        
        pgbNota.setMaximum(10);
@@ -263,26 +267,19 @@ public class ViewRelatorio extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        /* Set the Nimbus look and feel */    
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            // MÁGICA: Usa o visual nativo do seu Windows (Windows 10 ou 11)
+            // Fica muito mais bonito que o "Classic" e aceita as cores na barra!
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            // Se der erro, usa o padrão do Java
+            System.err.println("Não foi possível aplicar o tema do sistema.");
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
-    }
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(() -> new ViewRelatorio().setVisible(true));
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGerarAnalise;
