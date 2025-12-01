@@ -133,20 +133,24 @@ public class DesempenhoController {
             }
             
             Desempenho des = new Desempenho();
-            Usuario u = new Usuario();
-            u.setIdUsuario(idUsuario);
-            des.setUsuario(u);          
+            gestaotreinos.model.dao.UsuarioDAO usuarioDAO = new gestaotreinos.model.dao.UsuarioDAO(conn);
+            Usuario usuario = usuarioDAO.buscarPorId(idUsuario);
+           
+            if (usuario == null) {
+                return null; 
+            }
+            des.setUsuario(usuario);
+          
             des.setDataGeracao(hoje);
             des.setTipo(TipoRelatorio.SEMANAL);
             des.setMediaTreino(qtdTreinos);
             des.setMediaSono(mediaSono);
             des.setMediaCalorias(mediaCalorias);
-            des.setIndiceDesempenho(notaF);
+            des.setIndiceDesempenho(notaF); 
             des.setTextoResumo(texto.toString());
 
             DesempenhoDAO dao = new DesempenhoDAO(conn);
             dao.inserirDesempenho(des);
-
             return des;
 
         } catch (SQLException e) {
