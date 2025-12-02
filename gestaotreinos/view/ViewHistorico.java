@@ -116,6 +116,7 @@ public class ViewHistorico extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void limparTabela() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
