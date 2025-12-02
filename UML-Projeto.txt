@@ -77,7 +77,9 @@ Refeicao "1" *-- "1..*" Alimento
 Usuario "1" *-- "0..*" Alerta
 Treino"1" *-- "0..*"Exercicio
 
+Usuario "1" *-- "0..*" Desempenho
+
+Desempenho ..> Treino
+Desempenho ..> Refeicao
+Desempenho ..> Sono
 @enduml
-
-
-
