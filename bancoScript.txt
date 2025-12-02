@@ -104,3 +104,5 @@ DROP TABLE IF EXISTS relatorio;
 ALTER TABLE desempenho ADD COLUMN data DATE;
 ALTER TABLE desempenho ADD COLUMN tipo VARCHAR(20);
 ALTER TABLE desempenho ADD COLUMN textoResumo TEXT;
+
+ALTER TABLE alimento DROP COLUMN macronutriente
