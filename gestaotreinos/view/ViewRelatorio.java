@@ -218,38 +218,47 @@ public class ViewRelatorio extends javax.swing.JFrame {
        }
     } 
     
-       public void atualizarBarraCalorias(){
-            if(this.desAtual == null) {
-                return;
+    public void atualizarBarraCalorias(){
+        if(this.desAtual == null) {
+            return;
+        }
+    
+        double tmb = desAtual.getUsuario().calcularTMB();
+        double medConsumo = desAtual.getMediaCalorias();
+        String objetivo = cbObjetivo.getSelectedItem().toString();
+    
+        int maxCal;
+        double tmbExibida;
+    
+        if (objetivo.equals("Ganhar Massa")) {
+            tmbExibida = tmb * 1.5;
+        } else {
+            tmbExibida = tmb;
+        }
+        maxCal = (int) tmbExibida;
+    
+        pgbCal.setMaximum(maxCal);
+        pgbCal.setValue((int) medConsumo);
+    
+        pgbCal.setString(String.format("%.0f / %.0f", medConsumo, tmbExibida));
+    
+        if (objetivo.equals("Perder peso")) {
+            if (medConsumo > tmbExibida) {
+                pgbCal.setForeground(Color.RED);
+            } else if (medConsumo < (tmbExibida * 0.8)) {
+                pgbCal.setForeground(Color.RED);
+            } else {
+                pgbCal.setForeground(new Color(0, 153, 0));
             }
-
-            double tmb = desAtual.getUsuario().calcularTMB();
-            double medConsumo = desAtual.getMediaCalorias();
-            String objetivo = cbObjetivo.getSelectedItem().toString();
-
-            int maxCal = (int) (tmb * 1.5);
-            pgbCal.setMaximum(maxCal);
-            pgbCal.setValue((int) medConsumo);
-
-            pgbCal.setString(String.format("%.0f / %.0f", medConsumo, tmb));
-
-            if (objetivo.equals("Perder peso")) {
-                if (medConsumo > tmb) {
-                    pgbCal.setForeground(Color.RED);
-                } else if (medConsumo < (tmb * 0.5)) {
-                    pgbCal.setForeground(Color.RED);
-                } else {
-                    pgbCal.setForeground(new Color(0, 153, 0));
-                }
-            } else if (objetivo.equals("Ganhar Massa")) {
-                if (medConsumo < tmb) {
-                    pgbCal.setForeground(Color.ORANGE);
-                } else if (medConsumo > (tmb * 1.5)) {
-                    pgbCal.setForeground(Color.RED);
-                } else {
-                    pgbCal.setForeground(new Color(0, 153, 0));
-                }
+        } else if (objetivo.equals("Ganhar Massa")) {
+            if (medConsumo < tmbExibida) {
+                pgbCal.setForeground(Color.ORANGE);
+            } else if (medConsumo > (tmbExibida)) {
+                pgbCal.setForeground(new Color(0, 153, 0));
+            } else {
+                pgbCal.setForeground(Color.RED);
             }
+        }
     }//GEN-LAST:event_btnGerarAnaliseActionPerformed
     
     private void definirCor(javax.swing.JProgressBar barra, int valor, int minimo, int bom) {
