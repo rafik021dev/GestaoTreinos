@@ -119,14 +119,13 @@ public class TreinoDAO {
 	                ps.setInt(1, idUsuario);
 	                try (ResultSet rs = ps.executeQuery()) {
 	                    while (rs.next()) {
-                                Treino treinoRS = new Treino();
-                                treinoRS.setIdTreino(rs.getInt("idtreino"));
-                                treinoRS.setData(rs.getDate("data")); // CORRIGIDO
-                                treinoRS.setTipo(TipoTreino.valueOf(rs.getString("tipo")));
-                                List<Exercicio> exerciciosTreino = exercicioDAO.listarPorTreino(treinoRS.getIdTreino());
-                                treinoRS.setExercicios(exerciciosTreino);
-
-                                lista.add(treinoRS);
+                            Treino treinoRS = new Treino();
+                            treinoRS.setIdTreino(rs.getInt("idtreino"));
+                            treinoRS.setData(rs.getDate("data")); // CORRIGIDO
+                            treinoRS.setTipo(TipoTreino.valueOf(rs.getString("tipo")));
+                            List<Exercicio> exerciciosTreino = exercicioDAO.listarPorTreino(treinoRS.getIdTreino());
+                            treinoRS.setExercicios(exerciciosTreino);
+                            lista.add(treinoRS);
 }
 	                }
 	            }
@@ -147,5 +146,25 @@ public class TreinoDAO {
 	            }
 	            return 0;
 	        }
+
+			public int contarTreinosNaSemana(int idUsuario) throws SQLException {
+			    String sSql = "SELECT COUNT(*) AS total FROM treino WHERE idusuario = ? AND data >= ?";
+
+			    java.util.Calendar cal = java.util.Calendar.getInstance();
+			    cal.setTime(new java.util.Date());
+			    cal.add(java.util.Calendar.DAY_OF_YEAR, -6);
+			    java.sql.Date dataInicioSemana = new java.sql.Date(cal.getTimeInMillis());
+
+			    try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+			        ps.setInt(1, idUsuario);
+			        ps.setDate(2, dataInicioSemana);
+			        try (ResultSet rs = ps.executeQuery()) {
+			            if (rs.next()) {
+			                return rs.getInt("total");
+			            }
+			        }
+			    }
+			    return 0;
+			}
   }
 

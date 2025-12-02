@@ -154,4 +154,23 @@ public class AlimentoDAO {
 	        	return null;
 	        }	        
 	    }
+
+		public int calcularCaloriasDia(int idUsuario, java.util.Date data) throws SQLException {
+		    String sSql = "SELECT SUM(a.calorias) AS total " +
+		            	  "FROM alimento a " +
+		                  "JOIN refeicao r ON a.idrefeicao = r.idrefeicao " +
+		                  "WHERE r.idusuario = ? AND r.data = ?";
+		    java.sql.Date dataSql = new java.sql.Date(data.getTime());
+				
+		    try (PreparedStatement ps = conn.prepareStatement(sSql)) {
+		        ps.setInt(1, idUsuario);
+		        ps.setDate(2, dataSql);
+		        try (ResultSet rs = ps.executeQuery()) {
+		            if (rs.next()) {
+		                return rs.getInt("total");
+		            }
+		        }
+		    }
+		    return 0;
+		}
 }	    

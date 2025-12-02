@@ -145,22 +145,6 @@ public class ViewRegistrarAlimento extends javax.swing.JFrame {
         oViewRegistrarAlimento.setVisible(true);
         dispose();
         
-        /*
-        String sNomeAlimento = txtNomeAlimento.getText().trim();
-        Integer iCalorias = (Integer) txtCalorias.getValue();
-        Double dQuantidade = (Double) txtQuantidade.getValue();
-        
-        Alimento alimento = new Alimento(sNomeAlimento, dQuantidade, iCalorias);
-        AlimentoDAO alimentoDAO = new AlimentoDAO(ConexaoBD.conectaBD());
-        
-        boolean bSucesso = alimentoDAO.inserirAlimento(alimento, );
-        
-        if (bSucesso) {
-            JOptionPane.showMessageDialog(this, "Alimento Inserido com Sucesso!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro ao Inserir Alimento");
-        }
-        */
     }//GEN-LAST:event_btnAvancarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

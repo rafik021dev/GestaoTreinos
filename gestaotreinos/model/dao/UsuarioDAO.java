@@ -163,18 +163,18 @@ public class UsuarioDAO {
 	        try (PreparedStatement ps = conn.prepareStatement(sSql);
 	        		ResultSet rs = ps.executeQuery()) {
 	        			while(rs.next()) {
-	        				 Usuario usuarioRS = new Usuario();
-	  	                   usuarioRS.setIdUsuario(rs.getInt("idusuario"));
-	  	                   usuarioRS.setNome(rs.getString("nome"));
-	  	                   usuarioRS.setSexo(rs.getString("sexo").charAt(0));
-	  	                   usuarioRS.setIdade(rs.getInt("idade"));
-	  	                   usuarioRS.setPeso(rs.getDouble("peso"));
-	  	                   usuarioRS.setAltura(rs.getDouble("altura"));
-	  	                   usuarioRS.setMetaPeso(rs.getDouble("metapeso"));
-	  	                   usuarioRS.setEmail(rs.getString("email"));
-	  	                   usuarioRS.setSenha(rs.getString("senha"));	 
-	  	                   
-	  	                   lista.add(usuarioRS);
+	        				Usuario usuarioRS = new Usuario();
+	  	                   	usuarioRS.setIdUsuario(rs.getInt("idusuario"));
+	  	                    usuarioRS.setNome(rs.getString("nome"));
+	  	                    usuarioRS.setSexo(rs.getString("sexo").charAt(0));
+	  	                    usuarioRS.setIdade(rs.getInt("idade"));
+	  	                    usuarioRS.setPeso(rs.getDouble("peso"));
+	  	                    usuarioRS.setAltura(rs.getDouble("altura"));
+	  	                    usuarioRS.setMetaPeso(rs.getDouble("metapeso"));
+	  	                    usuarioRS.setEmail(rs.getString("email"));
+	  	                    usuarioRS.setSenha(rs.getString("senha"));	 
+	  	                    
+	  	                    lista.add(usuarioRS);
 	        			}
 	        }
 	        	return lista;
@@ -183,7 +183,7 @@ public class UsuarioDAO {
          * Método responsável por validar o Login do Usuário no Sistema
          * @param oUsuario
          * @return ResultSet ResSet
-	*/
+		 */
          
         public ResultSet autenticacaoUsuario(Usuario oUsuario) {
             conn = new ConexaoBD().conectaBD();
@@ -229,8 +229,7 @@ public class UsuarioDAO {
 
                     BigDecimal meta = rs.getBigDecimal("metapeso");
                     u.setMetaPeso(meta != null ? meta.doubleValue() : null);
-                    
-                    
+                                        
                     u.setEmail(rs.getString("email"));
                     u.setSenha(rs.getString("senha"));
                     return u;

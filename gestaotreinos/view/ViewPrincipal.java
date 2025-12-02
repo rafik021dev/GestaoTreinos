@@ -1,6 +1,10 @@
 package gestaotreinos.view;
 
+import gestaotreinos.model.dao.AlimentoDAO;
+import gestaotreinos.model.dao.ConexaoBD;
+import gestaotreinos.model.dao.TreinoDAO;
 import gestaotreinos.model.entity.Usuario;
+import java.sql.Connection;
 
 public class ViewPrincipal extends javax.swing.JFrame {
     
@@ -14,6 +18,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     public ViewPrincipal(Usuario usuario) {
         initComponents();
         this.usuario = usuario;
+        atualizarDashboard();
     }
 
     /**
@@ -40,8 +45,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         iQtdTreinos = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        iCalorias = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        jLabel8 = new javax.swing.JLabel();
+        dImc = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        dTmb = new javax.swing.JLabel();
 
         jButton4.setText("jButton4");
 
@@ -77,35 +86,20 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         iQtdTreinos.setText("qtd_treinos");
 
-        jLabel7.setText("cal_hoje");
+        iCalorias.setText("cal_hoje");
+
+        jLabel8.setText("IMC:");
+
+        dImc.setText("dImc");
+
+        jLabel10.setText("TMB:");
+
+        dTmb.setText("dTmb");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(sNomeUsuario))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(iQtdTreinos)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dPesoAtual))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)))
-                .addGap(33, 33, 33))
-            .addComponent(jSeparator2)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -118,13 +112,47 @@ public class ViewPrincipal extends javax.swing.JFrame {
                                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jButton5))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jSeparator1)
                                     .addComponent(jLabel1))))))
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sNomeUsuario))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(iQtdTreinos))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dImc)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dPesoAtual))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(iCalorias))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dTmb)))
+                .addGap(33, 33, 33))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,14 +170,20 @@ public class ViewPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(iQtdTreinos)
-                    .addComponent(jLabel7))
+                    .addComponent(iCalorias))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(dImc)
+                    .addComponent(jLabel10)
+                    .addComponent(dTmb))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
@@ -157,7 +191,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -186,7 +220,30 @@ public class ViewPrincipal extends javax.swing.JFrame {
        oViewRelatorio.setVisible(true);
        dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+private void atualizarDashboard() {
+    if (usuario != null) {
+        sNomeUsuario.setText(usuario.getNome());
+        dPesoAtual.setText(String.format("%.2f kg", usuario.getPeso()));
 
+        Connection conn = ConexaoBD.conectaBD(); 
+        
+        try {
+            TreinoDAO treinoDAO = new TreinoDAO(conn);
+            int qtdTreinos = treinoDAO.contarTreinosNaSemana(usuario.getIdUsuario());
+            iQtdTreinos.setText(String.valueOf(qtdTreinos));
+
+            AlimentoDAO alimentoDAO = new AlimentoDAO(conn);
+            int caloriasHoje = alimentoDAO.calcularCaloriasDia(usuario.getIdUsuario(), new java.util.Date());
+            iCalorias.setText(String.valueOf(caloriasHoje));
+        } catch (Exception e) {
+            iQtdTreinos.setText("?");
+            iCalorias.setText("?");
+        }
+
+        dImc.setText(String.format("%.2f", usuario.calcularIMC()));
+        dTmb.setText(String.format("%.2f", usuario.calcularTMB()));
+    }
+}
     /**
      * @param args the command line arguments
      */
@@ -195,7 +252,10 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel dImc;
     private javax.swing.JLabel dPesoAtual;
+    private javax.swing.JLabel dTmb;
+    private javax.swing.JLabel iCalorias;
     private javax.swing.JLabel iQtdTreinos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -203,12 +263,13 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel sNomeUsuario;

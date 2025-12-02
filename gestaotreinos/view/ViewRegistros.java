@@ -114,7 +114,6 @@ public class ViewRegistros extends javax.swing.JFrame {
 
     private void jBSonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSonoActionPerformed
         new ViewRegistrarSono(usuario).setVisible(true);   
-        //oViewRegistrarSono.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBSonoActionPerformed
 
