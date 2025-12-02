@@ -55,13 +55,6 @@ class Desempenho {
   + void : calcularMedias()
 }
 
-class Relatorio {
-  - int : idRelatorio
-  - Usuario : usuario
-  - tipoRelatorio : tipo
-  + void : gerarRelatorio()
-  
-}
 class Exercicio{
   - int : idExercicio
   - double : carga
@@ -83,16 +76,8 @@ Usuario "1" *-- "0..*" Sono
 Refeicao "1" *-- "1..*" Alimento
 Usuario "1" *-- "0..*" Alerta
 Treino"1" *-- "0..*"Exercicio
-Desempenho"1" --* "1"Relatorio
-Relatorio"0..*" o-- "1"Usuario
-
-Relatorio ..> Treino
-Relatorio ..> Sono
-Relatorio ..> Refeicao
-
-
-
 
 @enduml
+
 
 
